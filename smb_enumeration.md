@@ -1,9 +1,9 @@
-###SMB:
+### SMB:
   It's protocol for sharing files and resources. Runs on port 445 or on port 139
   
-#####nmap:
+##### nmap:
 
-#####smbmap
+##### smbmap
   -smbmap -H <victim_ip>
   -smbmap -H <victim_ip> -R
   -smbmap -H <victim_ip> -U anonymous -d <directory>
@@ -12,9 +12,9 @@
   ***R***: recursive, go through each directory and oyt the files
   ***U***: username
   
-####smbclinet
+#### smbclinet
   -smbclient \\\\<victim_ip>\\<directory>
   
-####working with smb
+#### working with smb
   -file upload
   ***smb:> get "filename"***
