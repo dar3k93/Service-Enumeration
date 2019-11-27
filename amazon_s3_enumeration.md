@@ -1,6 +1,6 @@
 ## amazon_s3
 
-*** Bucket is a logical unit of storage in Amazon Web Services (AWS) object storage service, Simple Storage Solution S3. 
+***Bucket is a logical unit of storage in Amazon Web Services (AWS) object storage service, Simple Storage Solution S3. 
 Buckets are used to store objects, which consist of data and metadata that describes the data.***
 
 ### awscli install
