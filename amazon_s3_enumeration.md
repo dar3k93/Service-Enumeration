@@ -36,4 +36,5 @@ Buckets are used to store objects, which consist of data and metadata that descr
 
 ### bucket list recursive
 - aws s3 ls s3://<victim_aws_bucket_name> . --recursive --no-sign-request
-in this case, aws return stack trace with file to which we have not got access
+
+***in this case, aws return stack trace with file to which we have not got access***
