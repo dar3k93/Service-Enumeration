@@ -19,6 +19,7 @@ sudo -l
 - ***LinuxExploitSuggester***: https://github.com/mzet-/linux-exploit-suggester
 - ***LinuxExploitSuggester2***: https://github.com/jondonas/linux-exploit-suggester-2
 - ***LinuxPrivChecker***: https://github.com/sleventyeleven/linuxprivchecker/blob/master/linuxprivchecker.py
+- ***LinuxSmartEnumeration***: https://github.com/diego-treitos/linux-smart-enumeration
 
 #### 6) Enumerate /var directory and uncommon files and directory names
 
