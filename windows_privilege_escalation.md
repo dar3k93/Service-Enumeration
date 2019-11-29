@@ -1,6 +1,6 @@
 #### Information Gathering
 - systeminfo ***OS info***
-- hostname ***host info**
+- hostname ***host info***
 - net users ***users info***
 - net user <user_name>
 - ipconfig /all ***network interfaces and routing table.***
