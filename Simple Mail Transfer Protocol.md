@@ -1,1 +1,0 @@
-## Simple Mail Transfer Protocol
