@@ -21,7 +21,7 @@ if len(sys.argv) != 2:
 s=socket.socket(socket.AF_INET,
 
 socket.SOCK_STREAM)
-connect=s.connect(('192.168.11.215',25))
+connect=s.connect(('[victim_ip]',25))
 banner=s.recv(1024)
 print(banner)
 s.send('VRFY'+sys.argv[1]+'\r\n')
