@@ -6,12 +6,11 @@ SMTP supports several important commands such as ***VRFY*** and ***EXPN***
 ***EXPN***: asks the server for the membership of mailing list
 
 #### EXAMPLE
-:~# nc -nv [victim_ip] [smtp_port]
+###### nc -nv [victim_ip] [smtp_port]
 - VRFY root
 - VRFY [some_user_name]
 
-exaple python VRFY automation script 
-
+###### example python VRFY automation script 
 ```python
 #!/usr/bin/python
 import socket
