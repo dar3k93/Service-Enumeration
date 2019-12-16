@@ -2,6 +2,8 @@
   It's protocol for sharing files and resources. Runs on port 445 or on port 139
   
 ##### nmap:
+- ls -la /usr/share/nmap/scripts/smb*
+- example: nmap -v -p 139, 445 --scrip=smb-os-discovery [victim_ip]
 
 ##### smbmap
   - smbmap -H <victim_ip>
