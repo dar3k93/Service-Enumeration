@@ -12,9 +12,11 @@ SNMP Managment Information Base (MIB) is a database contains info related to net
 - nmap -sU --open -p 161, [victim_ip] 
 
 #### Windows SNMP Enumeration Example
- - snmpwalk -c public v1 [victim_ip]
- - snmpget
- 
- // todo more examples
+- snmpwalk -c public [victim_ip] -v1
+- snmpwalk -c private [victim_ip] -v1
+- snmpwalk -c public [victim_ip] -v1 -0n | grep '1.3.6.1.2.1.1.5'
+- snmpset -v 1 -c public [victim_ip] .1.3.6.1.2.1.1.5 s HACKED
+- snmpwalk -c public [victim_ip] -v1 -0n | grep '1.3.6.1.2.1.1.5'
+
  
 
