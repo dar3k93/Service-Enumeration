@@ -5,10 +5,22 @@ SMTP supports several important commands such as ***VRFY*** and ***EXPN***
 ***VRFY***: verify an email address
 ***EXPN***: asks the server for the membership of mailing list
 
-#### EXAMPLE
 ###### nc -nv [victim_ip] [smtp_port]
 - VRFY root
 - VRFY [some_user_name]
+
+##### telnet <victim_ip> <port>
+ 
+##### Metasploit
+- auxiliary/scanner/smtp/smtp_enum
+  - set rhosts <victim_ip>
+  - run
+
+##### smtp-user-enum
+- perl smtp-user-enum -M VRFY -U user.txt -t <victim_ip>
+
+##### nmap enumeration
+- nmap –script smtp-enum-users.nse <victim_ip>
 
 ###### example python VRFY automation script 
 ```python
