@@ -40,6 +40,6 @@ x – Reverse Tuning Options (i.e., include all except specified)
 ```
 ###### only number 9 - SQL injection
 - nikto -Tuning 9 -h [victim_ip]6
-###### everything except number 9 - DOS
+###### everything except number 6 - DOS
 - nikto -Tuning x 6 -h [victim_ip]
 
