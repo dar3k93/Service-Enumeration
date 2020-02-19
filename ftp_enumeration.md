@@ -14,5 +14,7 @@ FTP protocol is used to transfer files from one machine to another machine
 - hydra -s [port] -C ./wordlists/ftp-default-userpass.txt -u -f [victim_ip] ftp
 
 ##### Windows dir change with ~1
+```
 cd /Docume~1/
 cd /Progra~1/
+```
