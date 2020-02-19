@@ -18,3 +18,4 @@ FTP protocol is used to transfer files from one machine to another machine
 cd /Docume~1/
 cd /Progra~1/
 ```
+#### FTP ADD FILE TO DO
