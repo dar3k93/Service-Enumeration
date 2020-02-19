@@ -10,8 +10,8 @@
 
 #### rpcclient
 - rpcclient -U "" -N [victim_ip]
-***-U "" - null session***
-***-N - no password***
+  -U "" - null session
+  -N - no password
 
 ##### smbmap
   - smbmap -H <victim_ip>
