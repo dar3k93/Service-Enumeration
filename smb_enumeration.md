@@ -17,7 +17,7 @@
 ##### smbmap
   - smbmap -H <victim_ip>
   - smbmap -H <victim_ip> -R
-  - smbmap -H <victim_ip> -U anonymous -d <directory>
+  - smbmap -H <victim_ip> -u anonymous -d <directory>
   
   ***H***: hostname
   ***R***: recursive, go through each directory and oyt the files
