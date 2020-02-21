@@ -18,5 +18,8 @@ SNMP Managment Information Base (MIB) is a database contains info related to net
 - snmpset -v 1 -c public [victim_ip] .1.3.6.1.2.1.1.5 s HACKED
 - snmpwalk -c public [victim_ip] -v1 -0n | grep '1.3.6.1.2.1.1.5'
 
+#### SNMP-CHECK
+- snmp-check -c public 10.11.1.x
+
  
 
