@@ -71,5 +71,8 @@ sleep 0.5 && echo ""
 ```
 usage: ./script.sh [victim_ip]
 
+### SMB 7.pl (usefull script)
+- https://github.com/offensive-security/exploitdb/blob/master/exploits/linux/remote/7.pl
+
 ### references
 - https://0xdf.gitlab.io/2018/12/02/pwk-notes-smb-enumeration-checklist-update1.html#nmap
