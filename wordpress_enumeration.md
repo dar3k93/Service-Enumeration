@@ -1,7 +1,15 @@
 ### wpscan 
 
+#### Scan
 - wpscan --url https://[target_ip]
-- wpscan -u http://[victim_ip] -eu
+#### Vulnerable Plugins
+- wpscan --url http://[victim_ip] --enumerate vp
+#### Vulnerable Themes
+- wpscan --url http://[victim_ip] --enumerate vt
+#### Enumerate Users
+- wpscan -u http://[victim_ip] --enumerate u
+#### Password Bruteforce
+- wpscan -u http://[victim_ip] --wordlist file.txt threads 50
 
 #### ReverseShell via thames
 
