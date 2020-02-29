@@ -8,6 +8,7 @@
 - nmap --script smb-enum-shares -p 139,445 [victim_ip]
 - nmap -p 445 -vv --script=smb-vuln-cve2009-3103.nse,smb-vuln-ms06-025.nse,smb-vuln-ms07-029.nse,smb-vuln-ms08-067.nse,smb-vuln-ms10-054.nse,smb-vuln-ms10-061.nse,smb-vuln-ms17-010.nse [victim_ip]
 - nmap -p 445 -vv --script=smb-enum-shares.nse,smb-enum-users.nse [victim_ip]
+- nmap -sV -p 139,445 --script=smb-vuln-* --script-args=unsafe=1 [victim_ip]
 
 #### rpcclient
 - rpcclient -U "" -N [victim_ip]
