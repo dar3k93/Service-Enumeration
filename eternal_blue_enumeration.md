@@ -22,3 +22,4 @@ nmap nse:
 - https://github.com/3ndG4me/AutoBlue-MS17-010
 - https://github.com/sailay1996/eternal-pulsar
 - https://gist.github.com/thel3l/993f8ed81a56e10525dd4812ad01ff2a
+- https://null-byte.wonderhowto.com/how-to/manually-exploit-eternalblue-windows-server-using-ms17-010-python-exploit-0195414/
