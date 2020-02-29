@@ -1,6 +1,7 @@
 ### wpscan 
 
-#### wpscan --url https://[target_ip]
+- wpscan --url https://[target_ip]
+- wpscan -u http://[victim_ip] -eu
 
 #### ReverseShell via thames
 
