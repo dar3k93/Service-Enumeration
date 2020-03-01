@@ -72,6 +72,20 @@ sleep 0.5 && echo ""
 ```
 usage: ./script.sh [victim_ip]
 
+#### Checklist
+- Enumerate hostname: nmblookup -A [victim_ip]
+- List shares
+  - smbmap -H [victim_ip]
+  - echo exit | smbclient -L \\\\[victim_ip]
+  - nmap --script smb-enum-shares -p 139,445 [victim_ip]
+- Check Null Sessions
+  - smbmap -H [victim_ip]
+  - rpcclient -U "" -N [victim_ip]
+  - smbclient \\\\[victim_ip]\\[share name]
+- Check for Vulnerabilities
+  - nmap --script smb-vuln* -p 139,445 [victim_ip]
+- Overall Scan: enum4linux -a [victim_ip]
+
 ### SMB 7.pl (usefull script)
 - https://github.com/offensive-security/exploitdb/blob/master/exploits/linux/remote/7.pl
 
