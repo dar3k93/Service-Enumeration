@@ -36,6 +36,8 @@
     - enum4linux -U -P [victim_ip]
   - All Enumeration:  
     - enum4linux -a [victim_ip]
+  - enum4linux -a  [victim_ip]
+  - enum4linux -u 'guest' -p '' -a  [victim_ip]
     
 #### msfconsole
   - setg rhosts 192.168.55.248
