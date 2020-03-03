@@ -21,5 +21,12 @@ SNMP Managment Information Base (MIB) is a database contains info related to net
 #### SNMP-CHECK
 - snmp-check -c public 10.11.1.x
 
+#### POP3
+- telnet [victim_ip] 110
+- USER user@[victim_ip]
+- PASS admin
+- list
+- retr 1
+
  
 
