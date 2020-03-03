@@ -16,11 +16,17 @@ and a name should be servername
 #### dig
 - dig axfr [victim_servername] @[victim_ip]
 
+#### firece 
+- firece -dns [victim_domain]
+
 #### modify hosts file
 - nano /etc/hosts
   ***syntax***
     [victim ip] [victim servername]
-    
+
+#### find email servers
+- host -t mx [victim_ip]
+
 #### use resolv.conf
 - nano /etc/resolv.conf
   ***syntax***
@@ -32,3 +38,8 @@ and a name should be servername
 
 ###### DNSEnum
 - dnsenum [victim_scan]
+
+#### zone transfer
+- host -l [victim_ip] ns1.[victim_ip]
+- dnsrecon -d [victim_scan] -t axfr
+
