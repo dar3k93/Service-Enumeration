@@ -10,3 +10,13 @@
 
 #### searchsploit
 - searchsploit drupal
+
+#### Droopscan
+
+#### nikto
+- nikto -h [victim-ip]
+
+#### commix
+- ***https://github.com/commixproject/commix***
+
+
