@@ -92,6 +92,35 @@ usage: ./script.sh [victim_ip]
   - nmap --script smb-vuln* -p 139,445 [victim_ip]
 - Overall Scan: enum4linux -a [victim_ip]
 
+#### Samba version checker 
+- (bash script)
+'''
+#!/bin/sh
+#Author: rewardone
+#Description:
+# Requires root or enough permissions to use tcpdump
+# Will listen for the first 7 packets of a null login
+# and grab the SMB Version
+#Notes:
+# Will sometimes not capture or will print multiple
+# lines. May need to run a second time for success.
+if [ -z $1 ]; then echo "Usage: ./smbver.sh RHOST {RPORT}" && exit; else rhost=$1; fi
+if [ ! -z $2 ]; then rport=$2; else rport=139; fi
+tcpdump -s0 -n -i tap0 src $rhost and port $rport -A -c 7 2>/dev/null | grep -i "samba\|s.a.m" | tr -d '.' | grep -oP 'UnixSamba.*[0-9a-z]' | tr -d '\n' & echo -n "$rhost: " &
+echo "exit" | smbclient -L $rhost 1>/dev/null 2>/dev/null
+echo "" && sleep .1
+'''
+- nmblookup -A [victim_ip]
+
+- enum4linux -a [victim_ip]
+
+### Null Session
+- null session and extract information
+- nbtscan -r [victim_ip]
+
+### Bruteforce
+- hydra -l administrator -P /usr/share/wordlists/rockyou.txt -t 1 [victim_ip] smb
+
 ### SMB 7.pl (usefull script)
 - https://github.com/offensive-security/exploitdb/blob/master/exploits/linux/remote/7.pl
 
