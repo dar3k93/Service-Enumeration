@@ -36,7 +36,8 @@
 ###### Docker Enumerate Usernames
 - docker run -it --rm wpscanteam/wpscan --url
 [victim_ip] --enumerate u
-
+###### Get data from config file
+cat [/target/wp/path/wp-config.php |grep -E "DB_USER|DB_PASS"
 ----------------------------------------------------------------------------------------------------------------------------------------
 ### ReverseShell via thames
 
