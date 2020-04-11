@@ -12,10 +12,10 @@
 
 #### rpcclient
 - rpcclient -U "" -N [victim_ip]
-- rpcclient -U '' [victim_ip]
+```
   -U "" - null session
   -N - no password
-  
+```
 #### NetBIOS Service
 - nbtscan -r [victim_ip]
 
