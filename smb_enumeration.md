@@ -32,6 +32,7 @@
   - smbclient -L [victim_ip]
   - smbclient \\\\[victim_ip]\\<directory>
   - smbclient -N -L \\\\\[victim_ip]
+  - smbclient //[victim_ip/"[victim_folder" -m NT1 --option="client min protocol=NT1"
   
 #### enum4linux
   - Share Enumeration:
@@ -63,10 +64,6 @@
   
   msfconsole -r smbscan.rc
 ```
-
-#### working with smb
-  - file upload
-  ***smb:> get "filename"***
   
 #### Manual Inspection
 ```
