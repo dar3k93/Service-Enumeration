@@ -55,3 +55,6 @@ x – Reverse Tuning Options (i.e., include all except specified)
 **another enum type tool like nikto but looks to be more advanced and prettier in output**
 - whatweb -v -a 4 http://[victim_ip]
 
+#### Good practice
+- create dict via https://tools.kali.org/password-attacks/cewl and use as dirb list scan
+
