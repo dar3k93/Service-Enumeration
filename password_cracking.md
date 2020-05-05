@@ -56,9 +56,9 @@ pwdump and fgdump inject a DLL containning the hash dumping code into the ***Loc
 - hyrda -L [user_file] -p [password] [victim_ip] ftp
 
 ##### Usefull flag
--vV : verbose mode
--e nsr : login as password or login as password in reversed order etc
--t : threads
+- -vV : verbose mode
+- -e nsr : login as password or login as password in reversed order etc
+- -t : threads
 ------------------------------------------------------------------------------------------------------------------------
 
 ### Password Hash Attack
