@@ -45,7 +45,7 @@ WCE can steal NTLM credentails from memory and dump clear text password
 #### SSH Brute force attack
 - hydra -l [user_name] -P [password_file.txt] [victim_ip] ssh
 
-### FTP Brute force attack
+#### FTP Brute force attack
 - hyrda -L [user_file] -p [password] [victim_ip] ftp
 
 ### Usefull flag
@@ -56,6 +56,7 @@ WCE can steal NTLM credentails from memory and dump clear text password
 ### Password Hash Attack
 #### Hash identifier
   ***- hash-identifier ***
+ usage: hash-identifier
 
 #### John the ripper
 
