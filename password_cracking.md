@@ -28,7 +28,7 @@ pwdump and fgdump inject a DLL containning the hash dumping code into the ***Loc
 ***- c:\> type 127.0.0.1.pwdump ***
 
 ### WCE
-WCE can steal NTLM credentails from memory and dump clear text password
+- WCE can steal NTLM credentails from memory and dump clear text password
 ***- c:\> WCE -w ***
 ------------------------------------------------------------------------------------------------------------------------
 
@@ -36,6 +36,7 @@ WCE can steal NTLM credentails from memory and dump clear text password
 
 #### cewl
 - cewl <victim_www_url> -d [num] -m [num] -w [file.txt]
+------------------------------------------------------------------------------------------------------------------------  
   
 ### Password Cracking
 
@@ -58,6 +59,7 @@ WCE can steal NTLM credentails from memory and dump clear text password
 -vV : verbose mode
 -e nsr : login as password or login as password in reversed order etc
 -t : threads
+------------------------------------------------------------------------------------------------------------------------
 
 ### Password Hash Attack
 
@@ -75,6 +77,7 @@ WCE can steal NTLM credentails from memory and dump clear text password
 
 #### SHA512
 - john --format=raw-sha512 --wordlist=rockyou.txt [hash.file]
+------------------------------------------------------------------------------------------------------------------------
 
 ### Pass the hash
 
