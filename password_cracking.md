@@ -1,6 +1,6 @@
 ## Password file generator
 
-### crunch
+### crunch: is a wordlist generator where you can specify a standard character set or a character set you specify.
 ##### crunch 6 6 1234567890ABCDE -o <file.txt>
   - ***6*** min length
   - ***6*** max length
@@ -56,7 +56,7 @@ WCE can steal NTLM credentails from memory and dump clear text password
 ### Password Hash Attack
 #### Hash identifier
   ***- hash-identifier ***
- usage: hash-identifier
+ - usage: hash-identifier
 
 #### John the ripper
 
