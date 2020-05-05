@@ -55,11 +55,25 @@ WCE can steal NTLM credentails from memory and dump clear text password
 -e nsr : login as password or login as password in reversed order etc
 -t : threads
 
-### Password Hash Attack
-#### Hash identifier
-  ***- hash-identifier ***
+## Password Hash Attack
+
+### Hash identifier
  - usage: hash-identifier
 
-#### John the ripper
+### John the ripper
+
+#### MD5
+- john --format=raw-md5 --wordlist=rockyou.txt [hash.file]
+
+#### SHA1
+- john --format=raw-sha1 --wordlist=rockyou.txt [hash.file]
+
+#### SHA224
+- john --format=raw-sha224 --wordlist=rockyou.txt [hash.file]
+
+#### SHA512
+- john --format=raw-sha512 --wordlist=rockyou.txt [hash.file]
 
 ### Pass the hash
+
+# //TODO!
