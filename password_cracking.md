@@ -1,6 +1,6 @@
-## Password file generator
+### Password file generator
 
-### crunch: 
+#### crunch: 
 - is a wordlist generator where you can specify a standard character set or a character set you specify.
 
 ##### crunch 6 6 1234567890ABCDE -o <file.txt>
@@ -9,16 +9,18 @@
   - ***1234567890ABCDE*** charset
   - ***o*** seve result in file
  
- #### crunch 4 4 -f /usr/share/crunch/charset.lst mixalpha
+##### crunch 4 4 -f /usr/share/crunch/charset.lst mixalpha
   - ***f*** dictionary path
   
- #### special chars
+##### special chars
   - @ lower case alpha char
   - , upper case alpha char
   - % numeric charset
   - ^ special char include space
-  
-### pwdump fgdump
+------------------------------------------------------------------------------------------------------------------------
+### Windows password 
+
+#### pwdump fgdump
 MS Windows store hased user password in the ***Security account manager (SAM)***
 pwdump and fgdump inject a DLL containning the hash dumping code into the ***Local Security Authority Subsystem (LSASS)***
 
@@ -28,12 +30,14 @@ pwdump and fgdump inject a DLL containning the hash dumping code into the ***Loc
 ### WCE
 WCE can steal NTLM credentails from memory and dump clear text password
 ***- c:\> WCE -w ***
+------------------------------------------------------------------------------------------------------------------------
 
 ### Password Profiling
-##### cewl
-  ***cewl <victim_www_url> -d [num] -m [num] -w [file.txt]***
+
+#### cewl
+- cewl <victim_www_url> -d [num] -m [num] -w [file.txt]
   
-### Online password attacks
+### Password Cracking
 
 #### HTTP Brute force attack
 - medusa -h [url] -u [user_name] -p [password_file.txt] -M http
@@ -50,7 +54,7 @@ WCE can steal NTLM credentails from memory and dump clear text password
 #### FTP Brute force attack
 - hyrda -L [user_file] -p [password] [victim_ip] ftp
 
-### Usefull flag
+##### Usefull flag
 -vV : verbose mode
 -e nsr : login as password or login as password in reversed order etc
 -t : threads
@@ -59,21 +63,19 @@ WCE can steal NTLM credentails from memory and dump clear text password
 
 #### Hash identifier
  - usage: hash-identifier
-
-#### John the ripper
-
-##### MD5
+ 
+#### MD5
 - john --format=raw-md5 --wordlist=rockyou.txt [hash.file]
 
-##### SHA1
+#### SHA1
 - john --format=raw-sha1 --wordlist=rockyou.txt [hash.file]
 
-##### SHA224
+#### SHA224
 - john --format=raw-sha224 --wordlist=rockyou.txt [hash.file]
 
-##### SHA512
+#### SHA512
 - john --format=raw-sha512 --wordlist=rockyou.txt [hash.file]
 
-#### Pass the hash
+### Pass the hash
 
 # //TODO!
