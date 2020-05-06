@@ -47,8 +47,20 @@
   - Editor
   - 404.php
   - paste php reverse shell
-- run nc -lnvp [ip]
+- run nc -lnvp [port]
 
 - Open /wp-content/themes/twentyfiftee(change for your thames name)/404.php
+
+----------------------------------------------------------------------------------------------------------------------------------------
+### ReverseShell via plugins
+
+- Log_in
+- Side menu
+- Plugins
+  - Add New
+  - Add Plugin Browse
+  - search file for example in /wp-content location
+- run nc -lnvp [port]
+
 
 
