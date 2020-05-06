@@ -16,7 +16,7 @@
 #### Username Bruteforce
 - wprscan --url http://[victim_ip] -U wordlist.txt 
 #### All Plugins
-- wpscan --url http://[victim_ip] --enumerate p
+- wpscan --url http://[victim_ip] --enumerate ap
 #### All Themes
 - wpscan --url http://[victim_ip] --enumerate vt
 #### Database Exports
@@ -37,7 +37,7 @@
 - docker run -it --rm wpscanteam/wpscan --url
 [victim_ip] --enumerate u
 ###### Get data from config file
-cat [/target/wp/path/wp-config.php |grep -E "DB_USER|DB_PASS"
+- cat [/target/wp/path/wp-config.php |grep -E "DB_USER|DB_PASS"
 ----------------------------------------------------------------------------------------------------------------------------------------
 ### ReverseShell via thames
 
