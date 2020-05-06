@@ -29,11 +29,13 @@
   ***U***: username
   
 #### smbclinet
+```
   - smbclient -L [victim_ip]
-  - smbclient \\\\[victim_ip]\\<directory>
+  - smbclient \\\\[victim_ip]\\[sharename]
   - smbclient -N -L \\\\\[victim_ip]
-  - smbclient //[victim_ip/"[victim_folder" -m NT1 --option="client min protocol=NT1"
-  
+  - smbclient //[victim_ip/"[victim_folder]" -m NT1 --option="client min protocol=NT1"
+ ```
+ 
 #### enum4linux
   - Share Enumeration:
     - enum4linux-S [victim_ip]
