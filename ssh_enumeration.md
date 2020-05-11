@@ -16,5 +16,7 @@ hydra -v -V -L user.txt -P /usr/share/wordlists/rockyou.txt -t 16 [victim_ip] ss
 ##### searchsploit
 python /usr/share/exploitdb/exploits/linux/remote/40136.py -U /usr/share/wordlists/metasploit/unix_users.txt [victim_ip]
 
+### usefull flag: -e nsr
+
 ##### ssh CVE (CVE-2008-0166)
 - https://github.com/g0tmi1k/debian-ssh
