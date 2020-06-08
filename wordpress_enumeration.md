@@ -7,6 +7,7 @@
 - wpscan --url https://[target_ip]
 #### Vulnerable Plugins
 - wpscan --url http://[victim_ip] --enumerate vp
+- wpscan --url http://[victim_ip] --enumerate vp --plugins-detection aggressive
 #### Vulnerable Themes
 - wpscan --url http://[victim_ip] --enumerate vt
 #### Enumerate Users
