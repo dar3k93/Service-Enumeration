@@ -19,3 +19,8 @@
 ```
 nmap -sV --script=nfs-showmount [victim_ip]
 ```
+
+##### /etc/exports misconfiguration
+```
+- to prevent add no_root_squash
+```
