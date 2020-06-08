@@ -15,3 +15,7 @@
   - read file
 - cd /tmp/nfs
 
+##### nmap 
+```
+nmap -sV --script=nfs-showmount [victim_ip]
+```
