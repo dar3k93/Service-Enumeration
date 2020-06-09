@@ -1,7 +1,7 @@
 
 ### Port knockd configure file
 - /etc/knocked.conf
-squence value its sequence of ports someone must access to open or close port.
+**squence** value its sequence of ports someone must access to open or close port.
 
 #### example port koncking bash script
 ```
