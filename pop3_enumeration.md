@@ -4,3 +4,4 @@ telnet [victim_ip] [pop3_port]
 > PASS userpass
 > RETR 1 or 2.. etc
 ```
+- dictionary: /usr/share/wordlist/fasttrack.txt
