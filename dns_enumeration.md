@@ -20,9 +20,9 @@ and a name should be servername
 - dig axfr [victim_servername] @[victim_ip]
 ```
 
-#### firece 
+#### fierce 
 ```
-- firece -dns [victim_domain]
+- fierce -dns [victim_domain]
 ```
 
 #### modify hosts file
