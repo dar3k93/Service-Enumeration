@@ -1,8 +1,9 @@
-### nmap
-- nmap -sV -script realvnc-auth-bypass.nse [victim_ip] -p 5900
+### nmap scan with nse script
+```
+nmap -sV -script realvnc-auth-bypass.nse [victim_ip] -p 5900
+```
 
-##### exploit
-- https://www.exploit-db.com/exploits/36932
-
-##### exploitation
-- python 36932.py 
+##### Authentication Bypass exploit (version RealVNC 4.1.0/4.1.1)
+```
+https://www.exploit-db.com/exploits/36932
+```
