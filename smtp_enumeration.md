@@ -1,13 +1,11 @@
-## Simple Mail Transfer Protocol
 
-#### mail servers can also be used to gather information about a host or network
-SMTP supports several important commands such as ***VRFY*** and ***EXPN***
-***VRFY***: verify an email address
-***EXPN***: asks the server for the membership of mailing list
+
 
 ###### nc -nv [victim_ip] [smtp_port]
 - VRFY root
 - VRFY [some_user_name]
+***VRFY***: verify an email address
+***EXPN***: asks the server for the membership of mailing list
 
 ##### telnet <victim_ip> <port>
  
