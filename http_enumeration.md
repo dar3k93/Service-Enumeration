@@ -19,7 +19,7 @@
 - proxy chain
   -  gobuster -o gobuster.txt -e -u http://10.11.1.x/ -w ~/wordlist/shortlist.txt
   
-
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ##### Nikto scan
 - nikto -h [victim_ip]
 - nikto -Display V -h [victim_ip]
@@ -49,11 +49,11 @@ nikto -Tuning 9 -h [victim_ip]6
 ```
 nikto -Tuning x 6 -h [victim_ip]
 ```
-
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #### WhatWeb
 **Another enum type tool like nikto but looks to be more advanced and prettier in output**
 - whatweb -v -a 4 http://[victim_ip]
-
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #### Cewl
 - create dict via https://tools.kali.org/password-attacks/cewl and use as dirb list scan
 
