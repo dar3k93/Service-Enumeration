@@ -1,7 +1,7 @@
 
 
 
-### nc -nv [victim_ip] [smtp_port]
+##### nc -nv [victim_ip] [smtp_port]
 - VRFY root
 - VRFY [some_user_name]
 ***VRFY***: verify an email address
@@ -14,7 +14,7 @@
   - set rhosts <victim_ip>
   - run
 
-### telnet
+##### telnet
 '''
 >telnet [victim_ip] 25
 >EHLO root
