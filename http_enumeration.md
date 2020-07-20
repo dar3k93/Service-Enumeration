@@ -40,21 +40,20 @@ b – Software Identification
 c – Remote Source Inclusion
 x – Reverse Tuning Options (i.e., include all except specified)
 ```
-###### only number 9 - SQL injection
-- nikto -Tuning 9 -h [victim_ip]6
-###### everything except number 6 - DOS
-- nikto -Tuning x 6 -h [victim_ip]
+###### Only number 9 - SQL injection
+```
+nikto -Tuning 9 -h [victim_ip]6
+```
 
-##### Nmap scan
-- Windows Machine
-  - nmap -oN http.nmap –script "http and not http-brute and not http–brute and not http-slowloris and not http-rfi-spider and not http-sql-injectionand not http-form" –script-args= -d -sV –version-intensity 9 -Pn -vv -p 80 [victim_ip]
-- Unix Machine
-  - nmap -oN http.nmap –script “http and not http-brute and not http-slowloris and not http-rfi-spider and not http-sql-injection and not http-form and not http-iis*” –script-args= -d -sV -Pn -T3 -vv -p [victim_ip]
-  
+###### Everything except number 6 - DOS
+```
+nikto -Tuning x 6 -h [victim_ip]
+```
+
 #### WhatWeb
-**another enum type tool like nikto but looks to be more advanced and prettier in output**
+**Another enum type tool like nikto but looks to be more advanced and prettier in output**
 - whatweb -v -a 4 http://[victim_ip]
 
-#### Good practice
+#### Cewl
 - create dict via https://tools.kali.org/password-attacks/cewl and use as dirb list scan
 
