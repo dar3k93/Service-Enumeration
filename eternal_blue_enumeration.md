@@ -23,6 +23,8 @@ nmap use with nse script:
 - run
 ```
 
+### Download mysmb.py for eternalblue scripts
+
 ### Usefull tools for eternalblue
 - https://github.com/worawit/MS17-010
 - https://github.com/3ndG4me/AutoBlue-MS17-010
