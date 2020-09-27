@@ -1,5 +1,10 @@
 ### DNS
 
+#### Identifying DNS Server
+```
+nmap -sC -sV -p 53 [victim_ip]
+```
+
 #### Interacting with a DNS Server
 ```
 - host -t ns [victim_domain]
@@ -10,18 +15,20 @@
 #### nslookup
 ```
 - nslookup
-- SERVER [victim_ip]
-- 127.0.0.1
-and a name should be servername
+> SERVER [victim_ip]
+> 127.0.0.1
+variable name should be servername
 ````
 
-#### dig
+#### conduct z zone transfer with dig tool
 ```
 - dig axfr [victim_servername] @[victim_ip]
+example: dig axfr cronos.htb @10.10.10.13
 ```
 
-#### fierce 
+#### fierce Domain DNS scanner
 ```
+flag dns:  The domain you would like scanned.
 - fierce -dns [victim_domain]
 ```
 
@@ -31,6 +38,8 @@ and a name should be servername
   ***syntax***
     [victim ip] [victim servername]
 ```
+
+#### modify resolv.conf file
 
 #### Search for email servers
 ```
