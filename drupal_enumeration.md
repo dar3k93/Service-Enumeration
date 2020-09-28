@@ -7,11 +7,11 @@
 
 #### Droopscan
 ```
--TODO
+droopscan scan drupal -u [target_url]
 ```
 
 #### commix
 ```
-- https://github.com/commixproject/commix***
+- https://github.com/commixproject/commix
 ```
 
