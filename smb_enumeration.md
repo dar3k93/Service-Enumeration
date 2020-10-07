@@ -32,8 +32,14 @@
 ```
   - smbclient \\\\[victim_ip]\\[sharename]
   - smbclient -N -L \\\\\[victim_ip]
-  - smbclient //[victim_ip/"[victim_folder]" -m NT1 --option="client min protocol=NT1"
+  - smbclient -N -L //[victim_ip]/directory
+  - smbclient //[victim_ip]/"[victim_folder]" -m NT1 --option="client min protocol=NT1"
  ```
+ 
+ #### smbclinet upload file
+```
+smbclient -N //<victim_ip>/<folder> -c 'put cmd.php cmd.php'
+```
  
 #### enum4linux
   - Share Enumeration:
