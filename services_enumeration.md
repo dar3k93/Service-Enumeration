@@ -201,7 +201,7 @@ finger [username]@[ip]
 --------------------------------------------------------------------------------------------------------------------------------
 # HTTP 
 
-## namp: nmap -p- --min-rate 10000 -oA scans/nmap-alltcp 10.10.10.10
+## namp: nmap -p- --min-rate 10000 10.10.10.10
 
 ##### Directory scanning
 - dir mode
