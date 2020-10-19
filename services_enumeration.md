@@ -1,7 +1,7 @@
-[Amazon_S3](#Amazon_S3)
-[DNS](#DNS)
+- [Amazon_S3](# Amazon_S3)
+- [DNS](# DNS)
 --------------------------------------------------------------------------------------------------------------------------------
-#Amazon_S3
+# Amazon_S3
 
 ***Bucket is a logical unit of storage in Amazon Web Services (AWS) object storage service, Simple Storage Solution S3. 
 Buckets are used to store objects, which consist of data and metadata that describes the data.***
@@ -45,7 +45,7 @@ Buckets are used to store objects, which consist of data and metadata that descr
 
 ***in this case, aws return stack trace with file to which we have not got access***
 --------------------------------------------------------------------------------------------------------------------------------
-#DNS
+# DNS
 
 #### Identifying DNS Server
 ```
