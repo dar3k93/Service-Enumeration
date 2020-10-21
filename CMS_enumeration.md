@@ -73,3 +73,21 @@ nmap --script http-wordpress-enum --script-args type="themes" <target>
 [victim_ip] --enumerate u
 ###### Get data from config file
 - cat [/target/wp/path/wp-config.php |grep -E "DB_USER|DB_PASS"
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Drupal
+
+#### Drupal version enumerate
+```
+- [victim_ip]/CHANGELOG.txt
+```
+
+#### Droopscan
+```
+droopscan scan drupal -u [target_url]
+```
+
+#### commix
+```
+- https://github.com/commixproject/commix
