@@ -1,17 +1,22 @@
 - [Password_generator](#Password_generator)
   - [Crunch](#Crunch)
- -[Windows](#Windows)
+- [Windows](#Windows)
   - [pwdump](#pwdump)
   - [WCE](#WCE)
- -[Password_cracking](#Cracking)
+- [Password_cracking](#Cracking)
   - [HTTP](#HTTP)
   - [RDP](#RDP)
   - [SNMP](#SNMP)
   - [SSH](#SSH)
   - [FTP](#FTP)
   - [POP3](#POP3)
- -[Password Hash](#Hash)
+- [Password Hash](#Hash)
+  - [Hash_identifier](#identifier)
   - [MD5](#MD5)
+  - [SHA1](#SHA1)
+  - [SHA256](#SHA256)
+  - [SHA512](#SHA512)
+- [Pass the hash](#Pass_the_hash)
  
 ## Password generator
 ### Crunch: 
@@ -90,7 +95,7 @@ pwdump and fgdump inject a DLL containning the hash dumping code into the ***Loc
 - john --format=raw-sha1 --wordlist=rockyou.txt [hash.file]
 
 #### SHA224
-- john --format=raw-sha224 --wordlist=rockyou.txt [hash.file]
+- john --format=raw-sha256 --wordlist=rockyou.txt [hash.file]
 
 #### SHA512
 - john --format=raw-sha512 --wordlist=rockyou.txt [hash.file]
