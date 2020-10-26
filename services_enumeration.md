@@ -73,7 +73,12 @@ nmap -sC -sV -p 53 [victim_ip]
 - host -t ns [victim_domain]
 - host -t mx [victim_domain]
 ```
-###### By default every configured domain should provide at least the DNS and mail servers responsible for the domain
+
+#### DNS lookup
+# TODO
+
+#### Reverse DNS lookup
+# TODO
 
 #### nslookup
 ```
@@ -128,7 +133,14 @@ flag dns:  The domain you would like scanned.
 ```
 
 #### zone transfer
-Zone file is a file on server contains entries for different Resource Records(RR). These records can provide us a bunch of information about the domain.
+Zone file is a file on server contains entries for different Resource Records(RR). These records can provide us a bunch of information about the domain. Each zone file must start with a Start of Authority (SOA) record containing an authoritative nameserver for the domain (for e.g. ns1.google.com for google.com ) and an email address of someone responsible for the management of the nameserver.
+Types of Resource Records:
+NS Recors: use the given authoritative nameserver
+MX Recors: tells us which server is responsible for receiving mails sent to that domain name
+TXT Records: consists of arbitrarily human readable text in a record
+CNAME Records: Gives an alias of one name to another.
+A Records: Give us IP-address for a particular domain
+
 ```
 - host -l [victim_ip] ns1.[victim_ip]
 - dnsrecon -d [victim_scan] -t axfr
