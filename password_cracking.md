@@ -1,15 +1,17 @@
 - [Password_generator](#Password_generator)
   - [Crunch](#Crunch)
- - [Windows](#Windows)
+ -[Windows](#Windows)
   - [pwdump](#pwdump)
   - [WCE](#WCE)
- - [Password_cracking](#Cracking)
+ -[Password_cracking](#Cracking)
   - [HTTP](#HTTP)
   - [RDP](#RDP)
   - [SNMP](#SNMP)
   - [SSH](#SSH)
   - [FTP](#FTP)
   - [POP3](#POP3)
+ -[Password Hash](#Hash)
+  - [MD5](#MD5)
  
 ## Password generator
 ### Crunch: 
@@ -76,7 +78,7 @@ pwdump and fgdump inject a DLL containning the hash dumping code into the ***Loc
 - -t : threads
 ------------------------------------------------------------------------------------------------------------------------
 
-### Password Hash Attack
+### Hash 
 
 #### Hash identifier
  - usage: hash-identifier
