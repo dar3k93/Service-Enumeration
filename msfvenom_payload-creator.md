@@ -2,6 +2,8 @@
 
 - [Binaries](#Binaries)
     - [Linux](#Linux)
+    - [Windows](#Windows)
+    - [Mac](#Mac)
 - [Scripting](#Scripting)
 - [Shellcode](#Shellcode)
 - [Web](#Web)
