@@ -1,13 +1,13 @@
 # MSFvenom payload creator
 
 - [Binaries](#Binaries)
-    - [Linux](##Linux)
+    - [Linux](#Linux)
 - [Scripting](#Scripting)
 - [Shellcode](#Shellcode)
 - [Web](#Web)
 
 - [Handlers](#Handlers)
-- [Tools](##Tools)
+- [Tools](#Tools)
 
 # Binaries
 - ## Linux
