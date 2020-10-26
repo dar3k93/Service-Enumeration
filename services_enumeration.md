@@ -1,6 +1,6 @@
 - [Amazon_S3](#Amazon_S3)
 - [DNS](#DNS)
-- [FTP](#FTP)
+- [FTP/TFTP](#FTP)
 - [Finger](#Finger)
 - [HTTP](#HTTP)
 - [SQL](#SQL)
@@ -17,7 +17,7 @@
 - [VNC](#VNC)
 - [Webdav](#Webdav)
 --------------------------------------------------------------------------------------------------------------------------------
-# Amazon_S3
+## Amazon_S3
 
 ***Bucket is a logical unit of storage in Amazon Web Services (AWS) object storage service, Simple Storage Solution S3. 
 Buckets are used to store objects, which consist of data and metadata that describes the data.***
@@ -61,7 +61,7 @@ Buckets are used to store objects, which consist of data and metadata that descr
 
 ***in this case, aws return stack trace with file to which we have not got access***
 --------------------------------------------------------------------------------------------------------------------------------
-# DNS
+## DNS
 
 #### Identifying DNS Server
 ```
@@ -132,7 +132,7 @@ flag dns:  The domain you would like scanned.
 - dnsenum [victim_scan]
 ```
 
-#### zone transfer
+#### Zone transfer
 Zone file is a file on server contains entries for different Resource Records(RR). These records can provide us a bunch of information about the domain. Each zone file must start with a Start of Authority (SOA) record containing an authoritative nameserver for the domain (for e.g. ns1.google.com for google.com ) and an email address of someone responsible for the management of the nameserver.
 Types of Resource Records:
 NS Recors: use the given authoritative nameserver
@@ -146,27 +146,20 @@ A Records: Give us IP-address for a particular domain
 - dnsrecon -d [victim_scan] -t axfr
 ```
 --------------------------------------------------------------------------------------------------------------------------------
-# FTP:
+## FTP:
 
-##### nmap:
+#### nmap ftp scan:
 - nmap -p 21 -sV [victim_ip]
 - nmap -sV -sC [victim_ip] -p 21
 - namp --script=ftp-anon,ftp-bounce,ftp-libopie,ftp-proftpd-backdoor,ftp-vsftpd-backdoor,ftp-vuln-cve2010-4221,tftp-enum,ftp-default,ftp-user-enum -p [victim_ip]
+- nmap –top-ports 1000 -vv -Pn -b anonymous:password@[victim_ip:21] 127.0.0.1
 
-##### nmap tftp:
+##### nmap tftp scan:
 - nmap -sU -p 69 --script tftp-enum.nse [victim_ip]
-
-##### Connect to a FTP server
-- nc -nv [victim_ip] [port]
+- nmap -oN tftp.nmap -v -sU -sV -T2 –script tftp* -p 69 [victim_ip]
 
 ##### metasploit tftp
 - use auxiliary/scanner/tftp/tftpbrute
-
-##### Download attemps
-- ftp> GET boot.ini
-- ftp> get boot.ini
-- ftp> mget boot.ini
-- ftp> get boot.ini file_name
 
 ##### Upload attemps
 - ftp> put shell.php shell.jpg
@@ -179,44 +172,21 @@ A Records: Give us IP-address for a particular domain
 - dir ../
 - ls ../
 
-##### Brute force
-- medusa -h [victim_ip] -u user -P passwords.txt -M ftp 
-- hydra -s [port] -C ./wordlists/ftp-default-userpass.txt -u -f [victim_ip] ftp
-
-#### TFTP
-- $ tftp [victim_ip]
-- tftp> ls
-- tftp> verbose
-- tftp> put shell.php
-
 ##### Windows dir change with ~1
 - cd /Docume~1/
 - cd /Progra~1/
-
-##### FTP Bounce Scan
-nmap –top-ports 1000 -vv -Pn -b anonymous:password@[victim_ip:21] 127.0.0.1
-
-##### TFTP (udp:69)
-nmap -oN tftp.nmap -v -sU -sV -T2 –script tftp* -p 69 [victim_ip]
 --------------------------------------------------------------------------------------------------------------------------------
-# Finger
+## Finger
 
 ### user enumeration usefull script
-
 - https://github.com/Kan1shka9/Finger-User-Enumeration
-script useage:
-```
-./finger_enum_user.sh <filename.txt>
-```
 
 #### finger comandline 
 ```
 finger [username]@[ip]
 ```
 --------------------------------------------------------------------------------------------------------------------------------
-# HTTP 
-
-## namp: nmap -p- --min-rate 10000 10.10.10.10
+## HTTP 
 
 ##### Directory scanning
 - dir mode
@@ -274,7 +244,7 @@ nikto -Tuning x 6 -h [victim_ip]
 #### Cewl
 - create dict via https://tools.kali.org/password-attacks/cewl and use as dirb list scan
 --------------------------------------------------------------------------------------------------------------------------------
-# SQL
+## SQL
 
 #### nmap 
 - nmap -sV -Pn -vv --script=mysql-audit,mysql-databases,mysql-dump-hashes,mysql-empty-password,mysql-enum,mysql-info,mysql-query,mysql-users,mysql-variables,mysql-vuln-cve2012-2122 [victim_ip] -p 3306
