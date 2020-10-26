@@ -11,7 +11,7 @@
   - [FTP](#FTP)
   - [POP3](#POP3)
 - [Password Hash](#Hash)
-  - [Hash_identifier](#identifier)
+  - [Hash_identifier](#Hash_identifier)
   - [MD5](#MD5)
   - [SHA1](#SHA1)
   - [SHA256](#SHA256)
