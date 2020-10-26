@@ -1,7 +1,13 @@
+- [port scan](#nmap)
 - [heartbleed](#heartbleed)
 - [vuln](#vuln)
 - [smb](#smb)
 - [shellshock](#shellshock)
+
+### nmap port scan
+```
+nmap -p- --min-rate 10000 10.10.10.10
+```
 
 ### heartbleed
 ```
