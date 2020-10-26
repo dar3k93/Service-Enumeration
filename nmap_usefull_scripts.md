@@ -6,7 +6,7 @@
 
 ### nmap port scan
 ```
-nmap -p- --min-rate 10000 10.10.10.10
+nmap -p- --min-rate 10000 [victim_ip]
 ```
 
 ### heartbleed
