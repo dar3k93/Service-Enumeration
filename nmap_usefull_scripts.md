@@ -1,3 +1,8 @@
+- [heartbleed](#heartbleed)
+- [vuln](#vuln)
+- [smb](#smb)
+- [shellshock](#shellshock)
+
 ### heartbleed
 ```
 nmap -p [victim_port] --script ssl-heartbleed [victim_ip]
