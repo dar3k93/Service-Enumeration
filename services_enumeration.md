@@ -128,6 +128,7 @@ flag dns:  The domain you would like scanned.
 ```
 
 #### zone transfer
+Zone file is a file on server contains entries for different Resource Records(RR). These records can provide us a bunch of information about the domain.
 ```
 - host -l [victim_ip] ns1.[victim_ip]
 - dnsrecon -d [victim_scan] -t axfr
