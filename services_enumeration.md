@@ -179,7 +179,7 @@ A Records: Give us IP-address for a particular domain
 ## Finger
 
 ### user enumeration usefull script
-- https://github.com/Kan1shka9/Finger-User-Enumeration
+- https://raw.githubusercontent.com/pentestmonkey/finger-user-enum/master/finger-user-enum.pl
 
 #### finger comandline 
 ```
