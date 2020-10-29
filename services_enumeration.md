@@ -90,8 +90,7 @@ variable name should be servername
 
 #### conduct z zone transfer with dig tool
 ```
-- dig axfr [victim_servername] @[victim_ip]
-example: dig axfr cronos.htb @10.10.10.13
+- dig axfr [victim_servername] @victim-ip
 ```
 
 #### fierce Domain DNS scanner
