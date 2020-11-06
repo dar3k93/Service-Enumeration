@@ -12,7 +12,7 @@
 - [FTP/TFTP](#FTP/TFTP)
   - [nmap ftp scan](#nmap_ftp_scan)
   - [metasploit tftp](#metasploit_tftp)
-  - [Upload_attemps](#Upload attemps)
+  - [Upload_attemps](#Upload_attemps)
   - [FTP path traversal](path_traversal)
   - [Windows dir change](#Windows_dir_change_with_~1)
 - [Finger](#Finger)
