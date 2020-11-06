@@ -1,10 +1,14 @@
 - [Amazon_S3](#Amazon_S3)
 - [DNS](#DNS)
   - [Interacting with a DNS Server](#Interacting_with_a_DNS_Server)
+  - [DNS lookup](#DNS_lookup)
+  - [Reverse DNS lookup](#Reverse_DNS_lookup)
+  - [nslookup](#nslookup)
   - [Zone transfer with dig](Dig_zone_transfer)
   - [Fierce Domain scanner](#fierce)
   - [DNSrecon](#DNSrecon)
   - [DNSEnum](#DNSEnum)
+  - [Zone_transfer_description](#Zone_transfer_description)
 - [FTP/TFTP](#FTP)
 - [Finger](#Finger)
 - [HTTP](#HTTP)
@@ -66,77 +70,48 @@ Buckets are used to store objects, which consist of data and metadata that descr
 
 ***in this case, aws return stack trace with file to which we have not got access***
 --------------------------------------------------------------------------------------------------------------------------------
-## DNS
+# DNS
 
-#### Identifying DNS Server
-```
-nmap -sC -sV -p 53 [victim_ip]
-```
-
-#### Interacting with a DNS Server
+## Interacting with a DNS Server
 ```
 - host -t ns [victim_domain]
 - host -t mx [victim_domain]
 ```
 
-#### DNS lookup
+## DNS_lookup
 # TODO
 
-#### Reverse DNS lookup
+## Reverse_DNS_lookup
 # TODO
 
-#### nslookup
+## nslookup
 ```
-- nslookup
-> SERVER [victim_ip]
-> 127.0.0.1
-variable name should be servername
+nslookup
+  SERVER [victim_ip]
+  [victim_ip]
 ````
 
-#### conduct z zone transfer with dig tool
+## Dig_zone_transfer
 ```
-- dig axfr [victim_servername] @victim-ip
-```
-
-#### fierce Domain DNS scanner
-```
-flag dns:  The domain you would like scanned.
-- fierce -dns [victim_domain]
+dig axfr [victim_servername] @victim-ip
 ```
 
-#### modify hosts file
+## fierce
 ```
-- nano /etc/hosts
-  ***syntax***
-    [victim ip] [victim servername]
+fierce -dns [victim_domain]
 ```
 
-#### modify resolv.conf file
-
-#### Search for email servers
+## DNSrecon
 ```
-- host -t mx [victim_ip]
+dnsrecon -d [victim_scan] -t axfr
 ```
 
-#### use resolv.conf
+## DNSEnum
 ```
-- nano /etc/resolv.conf
-  ***syntax***
-    nameserver <victim_ip>
+dnsenum [victim_scan]
 ```
 
-#### DNS enumeration (autoscan)
-###### DNSrecon
-```
- - dnsrecon -d [victim_scan] -t axfr
-```
-
-###### DNSEnum
-```
-- dnsenum [victim_scan]
-```
-
-#### Zone transfer
+## Zone_transfer_description
 Zone file is a file on server contains entries for different Resource Records(RR). These records can provide us a bunch of information about the domain. Each zone file must start with a Start of Authority (SOA) record containing an authoritative nameserver for the domain (for e.g. ns1.google.com for google.com ) and an email address of someone responsible for the management of the nameserver.
 Types of Resource Records:
 NS Recors: use the given authoritative nameserver
@@ -145,10 +120,6 @@ TXT Records: consists of arbitrarily human readable text in a record
 CNAME Records: Gives an alias of one name to another.
 A Records: Give us IP-address for a particular domain
 
-```
-- host -l [victim_ip] ns1.[victim_ip]
-- dnsrecon -d [victim_scan] -t axfr
-```
 --------------------------------------------------------------------------------------------------------------------------------
 ## FTP:
 
