@@ -16,6 +16,9 @@
   - [FTP path traversal](path_traversal)
   - [Windows dir change](#Windows_dir_change_with_~1)
 - [Finger](#Finger)
+  - [enumeration script](#enumeration_script)
+  - [finger comandline](#finger_comandline)
+  - []()
 - [HTTP](#HTTP)
 - [SQL](#SQL)
 - [ORACLE](#Oracle)
@@ -137,29 +140,35 @@ A Records: Give us IP-address for a particular domain
 - nmap -oN tftp.nmap -v -sU -sV -T2 –script tftp* -p 69 [victim_ip]
 
 ## metasploit_tftp
-- use auxiliary/scanner/tftp/tftpbrute
-
+```
+use auxiliary/scanner/tftp/tftpbrute
+```
 ## Upload_attemps
-- ftp> put shell.php shell.jpg
-- ftp> PUT shell.php shell.jpg
-- ftp> send 
-    (local-file) shell.php
-    (remote-file) shell.jpg
-    
+```
+ftp> put shell.php shell.jpg
+ftp> PUT shell.php shell.jpg
+ftp> send 
+  (local-file) shell.php
+  (remote-file) shell.jpg
+```
 ## path_traversal
-- dir ../
-- ls ../
+```
+dir ../
+ls ../
+```
 
 ## Windows_dir_change_with_~1
-- cd /Docume~1/
-- cd /Progra~1/
+```
+cd /Docume~1/
+cd /Progra~1/
+```
 --------------------------------------------------------------------------------------------------------------------------------
 # Finger
 
-## user enumeration usefull script
+## enumeration_script
 - https://raw.githubusercontent.com/pentestmonkey/finger-user-enum/master/finger-user-enum.pl
 
-## finger comandline 
+## finger_comandline 
 ```
 finger [username]@[ip]
 ```
