@@ -34,7 +34,7 @@
 - [VNC](#VNC)
   - [VNC nmap scan](#VNC_nmap)
   - [VNC exploit](#VNC_exploit)
-  - [MSF VNC auth none](#MSF_VNC_auth_none
+  - [MSF VNC auth none](#MSF_VNC_auth_none)
   - [MSF VNC password attack](#MSF_VNC_password_attack)
   - [MSFVenom VNC payload](#MSFVenom_VNC_payload)
   - [VNC post exploitation](#VNC_post_exploitation)
@@ -723,7 +723,7 @@ ssh -i id_rsa redis@<victim_ip>
 # VNC
 Gaphical desktop sharing system that uses the Remote Frame Buffer protocol (RFB) to remotely control another computer. It transmits the keyboard and mouse events from one computer to another. 
 
-## VNC_nmap_scan
+## VNC_nmap
 ```
 nmap -sV --script realvnc-auth-bypass.nse [victim_ip] -p 5900
 
