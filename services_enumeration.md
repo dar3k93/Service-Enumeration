@@ -26,7 +26,7 @@
   - [WhatWeb](#WhatWeb)
   - [Cewl](#Cewl)
 - [SQL](#SQL)
-  - [sql nmap scan](#sql_nmap_scan
+  - [sql nmap scan](#sql_nmap_scan)
   - [sql metasploit](#sql_metasploit)
   - [mysql commands](#mysql_commands)
   - [mssql server config file](#mssql_server_config_file)
@@ -38,7 +38,7 @@
   - [nmap scan](#nmap_scan)
 - [SSH](#SSH)
   - [SSH metasploit enum](#SSH_metasploit_enum)
-  - [SSH bruteforce(#SSH_bruteforce)
+  - [SSH bruteforce](#SSH_bruteforce)
   - [SSH CVE 1](#SSH_CVE_1)
   - [SSH CVE 2](#SSH_CVE_2)
 - [RDP](#RDP)
