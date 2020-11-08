@@ -68,7 +68,7 @@
   - [smbmap](#smbmap)
     - [smb_file_upload](#smb_file_upload)
   - [enum4linux](#enum4linux)
-  - [eternal blue](#eternal blue)
+  - [eternal blue](#eternal_blue)
     - [nmap script for eternal blue testing](#mmap_script)
     - [metasploit modules for eternal blue testing](#eternal_blue_metasploit)
     - [others tools for eternal blue testing](#tools_for_eternalblue)
