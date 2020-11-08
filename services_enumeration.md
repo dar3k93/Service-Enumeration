@@ -25,7 +25,12 @@
   - [Nikto scan](#Nikto_scan)
   - [WhatWeb](#WhatWeb)
   - [Cewl](#Cewl)
-- [SQL](#SQL)
+  - [nmap](#nmap)
+    - [heartbleed](#heartbleed)
+    - [vuln](#vuln)
+    - [smb](#smb)
+    - [shellshock](#shellshock)
+ - [SQL](#SQL)
   - [sql nmap scan](#sql_nmap_scan)
   - [sql metasploit](#sql_metasploit)
   - [mysql commands](#mysql_commands)
@@ -297,6 +302,22 @@ whatweb -v -a 4 http://[victim_ip]
 create dict via https://tools.kali.org/password-attacks/cewl and use as dirb list scan
 ```
 
+## nmap
+
+### nmap_port_scan
+```
+nmap -p- --min-rate 10000 [victim_ip]
+```
+
+### heartbleed
+```
+nmap -p [victim_port] --script ssl-heartbleed [victim_ip]
+```
+
+### vuln
+```
+nmap -p [victim_port] --script vuln [victim_ip]
+```
 --------------------------------------------------------------------------------------------------------------------------------
 ## SQL
 
@@ -554,7 +575,8 @@ telnet [victim_ip] [pop3_port]
 # SMB:
   It's protocol for sharing files and resources. Runs on port 445 or on port 139
   
-## :
+## smb_nmap
+
 - nmap -v -p 139,445 --script=smb-os-discovery [victim_ip]
 - nmap -v -sSVC -p 139,445 --script discovery [victim_ip]
 - nmap --script smb-enum-shares -p 139,445 [victim_ip]
