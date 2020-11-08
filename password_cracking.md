@@ -17,8 +17,14 @@
   - [SHA256](#SHA256)
   - [SHA512](#SHA512)
 - [Pass the hash](#Pass_the_hash)
+- [SSH key cracking](#SSH key cracking)
+  - [Cracking encrypted private key](#Cracking_encrypted_private_key)
+    - [ssh2john](#ssh2john)
+    - [john ](#john)
+    - [tools](#tools)
  
-## Password generator
+## Password generato
+
 ### Crunch: 
   - is a wordlist generator where you can specify a standard character set or a character set you specify.
 
@@ -104,3 +110,20 @@ pwdump and fgdump inject a DLL containning the hash dumping code into the ***Loc
 ### Pass the hash
 
 # //TODO!
+------------------------------------------------------------------------------------------------------------------------
+
+# SSH Key cracking
+
+## Cracking_encrypted_private_key
+
+### ssh2john
+```
+ssh2john.py encrypted_private_key > private_key.john
+```
+### john
+```
+john private_key.john --wordlist=/usr/share/wordlists/rockyou.txt
+```
+
+### tools
+- https://github.com/openwall/john/blob/bleeding-jumbo/run/ssh2john.py
