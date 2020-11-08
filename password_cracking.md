@@ -17,7 +17,7 @@
   - [SHA256](#SHA256)
   - [SHA512](#SHA512)
 - [Pass the hash](#Pass_the_hash)
-- [SSH key cracking](#SSH key cracking)
+- [SSH key cracking](#SSH_key_cracking)
   - [Cracking encrypted private key](#Cracking_encrypted_private_key)
     - [ssh2john](#ssh2john)
     - [john ](#john)
