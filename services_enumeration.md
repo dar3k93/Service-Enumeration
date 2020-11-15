@@ -586,7 +586,7 @@ telnet [victim_ip] [pop3_port]
 ```
 - dictionary: /usr/share/wordlist/fasttrack.txt
 -------------------------------------------------------------------------------------------------------------------------------------
-# SMB:
+# SMB
   It's protocol for sharing files and resources. Runs on port 445 or on port 139
   
 ## smb_nmap
