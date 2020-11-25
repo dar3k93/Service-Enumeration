@@ -359,7 +359,16 @@ user=sa
 
 root@kali:~/dirsearch# sqsh -S someserver -U sa -P PASS -D DB_NAME
 ```
---------------------------------------------------------------------------------------------------------------------------------
+## mysqldump
+
+binary: mysqldump
+```
+mysqldump --user=<user_name> --password=<user_password> --host=localhost <database name>
+
+for example:
+mysqldump --user=theseus --password=iamkingtheseus --host=localhost Magic
+```
+-------------------------------------------------------------------------------------------------------------------------------
 # Oracle
 
 ## Service on port 1521 
