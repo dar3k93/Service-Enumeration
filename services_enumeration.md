@@ -108,7 +108,7 @@
 - [Shell Shock](#Shellshock)
   - [Shellshock manual_exploitation](#manual_exploitation)
   - [Shellshock SSH exploitaion](#exploitaion_SSH)
-  - [Shellshock with nmap script](nmap_script)
+  - [Shellshock with nmap script](#nmap_script)
   - [Shellshock_via_smb](#smb)
   - [Shellshock tool](#Shellshock_tool)
 --------------------------------------------------------------------------------------------------------------------------------
