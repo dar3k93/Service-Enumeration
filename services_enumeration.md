@@ -1,9 +1,14 @@
 - [Amazon_S3](#Amazon_S3)
 - [DNS](#DNS)
-  - [Interacting with a DNS Server](#Interacting_with_a_DNS_Server)
-  - [DNS lookup](#DNS_lookup)
-  - [Reverse DNS lookup](#Reverse_DNS_lookup)
-  - [nslookup](#nslookup)
+  - [Interacting with a DNS Server](#Interacting-with-a-DNS_Server)
+    - [How to find the A record of а domain](#How-to-find-the-A-record-of-а-domain)
+    - [How to check the NS records of a domain](#How-to-check-the-NS-records-of-a-domain)
+    - [How to query the SOA record of a domain](How-to-query-the-SOA-record-of-a-domain)
+    - [How to find the MX records of a domain](How-to-find-the-MX-records-of-a-domain)
+    - [How to find all of the available DNS records of a domain.](How-to-find-all-of-the-available-DNS-records-of-a-domain)
+    - [How to check the using of a specific DNS Server](How-to-check-the-using-of-a-specific-DNS-Server)
+    - [How to check the Reverse DNS Lookup](How-to-check-the-Reverse-DNS-Lookup)
+  - [Nslookup](#nslookup)
   - [Zone transfer with dig](Dig_zone_transfer)
   - [Fierce Domain scanner](#fierce)
   - [DNSrecon](#DNSrecon)
@@ -157,19 +162,53 @@ Buckets are used to store objects, which consist of data and metadata that descr
 --------------------------------------------------------------------------------------------------------------------------------
 # DNS
 
-### Interacting with a DNS Server
+## Interacting with a DNS Server
 ```
 - host -t ns [victim_domain]
 - host -t mx [victim_domain]
 ```
 
-### DNS_lookup
-## TODO
-
 ### Reverse_DNS_lookup
 ## TODO
 
-### nslookup
+## nslookup
+
+### How to find the A record of а domain
+You can see how many A records are there and see the IP Addresses of each one. 
+```
+nslookup [victim_address]
+```
+### How to check the NS records of a domain
+You can see which is the authoritative server for a specific domain
+```
+nslookup -type=ns [victim_address]
+```
+### How to query the SOA record of a domain
+You can see the start of authority and get information about the zone. 
+```
+nslookup -type=soa 
+```
+### How to find the MX records of a domain
+You can see if all the mail servers are working well. 
+```
+nslookup -query=mx [victim_address]
+```
+### How to find all of the available DNS records of a domain.
+You can see all the available DNS records.
+```
+nslookup -type=any [victim_address]
+```
+
+### How to check the using of a specific DNS Server
+You can review a particular DNS server
+```
+nslookup example.com [ns1.victim_address]
+```
+### How to check the Reverse DNS Lookup.
+How verify if an IP address is related to a specific domain
+```
+nslookup 10.20.30.40
+```
 ```
 nslookup
   SERVER [victim_ip]
