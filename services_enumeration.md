@@ -8,12 +8,9 @@
     - [How to find all of the available DNS records of a domain.](#How-to-find-all-of-the-available-DNS-records-of-a-domain)
     - [How to check the using of a specific DNS Server](#How-to-check-the-using-of-a-specific-DNS-Server)
     - [How to check the Reverse DNS Lookup](#How-to-check-the-Reverse-DNS-Lookup)
-  - [Nslookup](#nslookup)
-  - [Zone transfer with dig](Dig_zone_transfer)
-  - [Fierce Domain scanner](#fierce)
-  - [DNSrecon](#DNSrecon)
-  - [DNSEnum](#DNSEnum)
-  - [Zone_transfer_description](#Zone_transfer_description)
+  - [Zone transfer with dig](#Check-Zone-transfer-with-dig )
+  - [Automatic scan DNSrecon](#Automatic-scan-DNSrecon)
+  - [Automatic scan DNSenum](#Automatic-scan-DNSenum)
 - [FTP/TFTP](#FTP/TFTP)
   - [nmap ftp scan](#nmap_ftp_scan)
   - [metasploit tftp](#metasploit_tftp)
@@ -168,11 +165,6 @@ Buckets are used to store objects, which consist of data and metadata that descr
 - host -t mx [victim_domain]
 ```
 
-### Reverse_DNS_lookup
-## TODO
-
-## nslookup
-
 ### How to find the A record of а domain
 You can see how many A records are there and see the IP Addresses of each one. 
 ```
@@ -215,22 +207,17 @@ nslookup
   [victim_ip]
 ````
 
-### Dig_zone_transfer
+## Check Zone transfer with dig 
 ```
 dig axfr [victim_servername] @victim-ip
 ```
 
-### fierce
-```
-fierce -dns [victim_domain]
-```
-
-### DNSrecon
+## Automatic scan DNSrecon
 ```
 dnsrecon -d [victim_scan] -t axfr
 ```
 
-### DNSEnum
+##  Automatic scan DNSenum
 ```
 dnsenum [victim_scan]
 ```
