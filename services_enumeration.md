@@ -3,11 +3,11 @@
   - [Interacting with a DNS Server](#Interacting-with-a-DNS_Server)
     - [How to find the A record of а domain](#How-to-find-the-A-record-of-а-domain)
     - [How to check the NS records of a domain](#How-to-check-the-NS-records-of-a-domain)
-    - [How to query the SOA record of a domain](How-to-query-the-SOA-record-of-a-domain)
-    - [How to find the MX records of a domain](How-to-find-the-MX-records-of-a-domain)
-    - [How to find all of the available DNS records of a domain.](How-to-find-all-of-the-available-DNS-records-of-a-domain)
-    - [How to check the using of a specific DNS Server](How-to-check-the-using-of-a-specific-DNS-Server)
-    - [How to check the Reverse DNS Lookup](How-to-check-the-Reverse-DNS-Lookup)
+    - [How to query the SOA record of a domain](#How-to-query-the-SOA-record-of-a-domain)
+    - [How to find the MX records of a domain](#How-to-find-the-MX-records-of-a-domain)
+    - [How to find all of the available DNS records of a domain.](#How-to-find-all-of-the-available-DNS-records-of-a-domain)
+    - [How to check the using of a specific DNS Server](#How-to-check-the-using-of-a-specific-DNS-Server)
+    - [How to check the Reverse DNS Lookup](#How-to-check-the-Reverse-DNS-Lookup)
   - [Nslookup](#nslookup)
   - [Zone transfer with dig](Dig_zone_transfer)
   - [Fierce Domain scanner](#fierce)
@@ -193,18 +193,18 @@ You can see if all the mail servers are working well.
 ```
 nslookup -query=mx [victim_address]
 ```
-### How to find all of the available DNS records of a domain.
+### How to find all of the available DNS records of a domain
 You can see all the available DNS records.
 ```
 nslookup -type=any [victim_address]
 ```
 
 ### How to check the using of a specific DNS Server
-You can review a particular DNS server
+You can review a particular DNS server.
 ```
 nslookup example.com [ns1.victim_address]
 ```
-### How to check the Reverse DNS Lookup.
+### How to check the Reverse DNS Lookup
 How verify if an IP address is related to a specific domain
 ```
 nslookup 10.20.30.40
