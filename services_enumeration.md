@@ -115,7 +115,7 @@
   - [Shellshock tool](#Shellshock_tool)
 - [Apache Tomcat](#Apache-Tomcat)
   - [Get tomcat-users.xml](#Get-tomcat-users.xml)
-  - [Upload war file via command line](#Upload-war-file-via-command-line)
+  - [Upload war file via command line](#Upload-war-file-via-commandline)
 --------------------------------------------------------------------------------------------------------------------------------
 ## Amazon_S3
 
