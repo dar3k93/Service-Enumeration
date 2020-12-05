@@ -114,7 +114,7 @@
   - [Shellshock_via_smb](#smb)
   - [Shellshock tool](#Shellshock_tool)
 - [Apache Tomcat](#Apache-Tomcat)
-  - [Get tomcat-users.xml](#Get-tomcat-users.xml)
+  - [Get tomcat-users.xml](#Get-tomcat-users)
   - [Upload war file via command line](#Upload-war-file-via-commandline)
 --------------------------------------------------------------------------------------------------------------------------------
 ## Amazon_S3
@@ -969,7 +969,7 @@ python shocker.py -H [victim_ip]  --command "/bin/cat /etc/passwd" -c /cgi-bin/s
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Apache Tomcat
 
-## Get tomcat-users.xml
+## Get tomcat-users
 - /usr/share/tomcat9/etc/tomcat-users.xml
 - 
 
