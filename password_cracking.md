@@ -102,7 +102,7 @@ pwdump and fgdump inject a DLL containning the hash dumping code into the ***Loc
 #### SHA1
 - john --format=raw-sha1 --wordlist=rockyou.txt [hash.file]
 
-#### SHA224
+#### SHA256
 - john --format=raw-sha256 --wordlist=rockyou.txt [hash.file]
 
 #### SHA512
