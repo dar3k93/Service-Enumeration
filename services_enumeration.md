@@ -118,9 +118,9 @@
   - [Upload war file via command line](#Upload-war-file-via-commandline)
 - [Active Directory](#Active-Directory)
   - [Kerberos](#Kerberos)
-    - [Kerberoasting](#Kerberoasting)
-    - [ASREPRoast](#ASREPRoast)
     - [Kerberos brute force](#Kerberos-brute-force)
+    - [ASREPRoast](#ASREPRoast)
+    - [Kerberoasting](#Kerberoasting)
     - [Pass the key](Pass-the-key)
 --------------------------------------------------------------------------------------------------------------------------------
 ## Amazon_S3
