@@ -110,12 +110,12 @@ pwdump and fgdump inject a DLL containning the hash dumping code into the ***Loc
 #### SHA512
 - john --format=raw-sha512 --wordlist=rockyou.txt [hash.file]
 
-### TGSs 
+### krb5tgs 
 - hashcat -m 13100 --force -a 0 hashes.file passwords.txt 
 
 - john --format=krb5tgs --wordlist=passwords.txt hashes.file
 
-#### AS_REP
+#### AS REP
 - john --wordlist=passwords_kerb.txt hashes.file
 
 - hashcat -m 18200 --force -a 0 hashes.file passwords.txt
