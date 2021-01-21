@@ -1,9 +1,9 @@
-- [Password_generator](#Password_generator)
+- [Password generator](#Password-generator)
 - [Windows](#Windows)
 - [Password cracking](#Password-cracking)
-- [Password Hash cracking](#Password-Hash-cracking)
+- [Password Hash cracking](#Password-hash-cracking)
 - [Pass the hash](#Pass-the-hash)
-- [SSH key cracking](#SSH_key_cracking)
+- [SSH key cracking](#SSH-key-cracking)
 - [tools](#tools)
  
 # Password generator
@@ -76,7 +76,7 @@ Usefull flag
 - -t : threads
 ```
 ------------------------------------------------------------------------------------------------------------------------
-# Password Hash cracking
+# Password hash cracking
 
 - Hash identifier
 ```
@@ -118,7 +118,7 @@ hashcat -m 18200 --force -a 0 hashes.file passwords.txt
 # //TODO!
 ------------------------------------------------------------------------------------------------------------------------
 
-# SSH_Key_cracking
+# SSH key cracking
 
 - Cracking_encrypted_private_key
 
