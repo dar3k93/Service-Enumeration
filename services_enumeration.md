@@ -995,6 +995,7 @@ curl -u '<username>':'<userpassword>' http://<victim_ip>:8080/rev_shell
 # Active Directory
 
 ## Kerberos
+Protocol for authentication and authorization in a computer network with the use of a key distribution center
 
 ### Kerberos brute force
 
