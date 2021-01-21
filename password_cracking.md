@@ -1,7 +1,7 @@
 - [Password generator](#Password-generator)
 - [Windows](#Windows)
 - [Password cracking](#Password-cracking)
-- [Password Hash cracking](#Password-hash-cracking)
+- [Password hash cracking](#Password-hash-cracking)
 - [Pass the hash](#Pass-the-hash)
 - [SSH key cracking](#SSH-key-cracking)
 - [tools](#tools)
