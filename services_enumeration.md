@@ -416,6 +416,8 @@ mysqldump --user=theseus --password=iamkingtheseus --host=localhost Magic
 -------------------------------------------------------------------------------------------------------------------------------
 # Oracle 
 
+tool: https://github.com/quentinhardy/odat
+
 ## SIDs enumeration
 
 - Identify SIDs via odat.py tool
