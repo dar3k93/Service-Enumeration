@@ -150,7 +150,7 @@ Protocols based on FTP:
 - SCP(Secure Copy):
 - TFTP(Trivial File Transfer Protocol):
 
-## nmap FTP scan:
+### nmap FTP scan:
 - nmap -p 21 -sV [victim_ip]
 - nmap -sV -sC [victim_ip] -p 21
 - namp --script=ftp-anon,ftp-bounce,ftp-libopie,ftp-proftpd-backdoor,ftp-vsftpd-backdoor,ftp-vuln-cve2010-4221,tftp-enum,ftp-default,ftp-user-enum -p [victim_ip]
@@ -162,7 +162,7 @@ Protocols based on FTP:
 ```
 use auxiliary/scanner/tftp/tftpbrute
 ```
-## FTP upload and donwload file
+### FTP upload and donwload file
 
 - Download file from FTP
 ```
@@ -178,13 +178,13 @@ ftp> put file_name
 ftp> binary
 ```
 
-## FTP path_traversal
+### FTP path_traversal
 ```
 dir ../
 ls ../
 ```
 
-## FTP change directory on Windows server
+### FTP change directory on Windows server
 ```
 cd /Docume~1/
 cd /Progra~1/
