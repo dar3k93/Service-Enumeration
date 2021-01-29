@@ -142,7 +142,13 @@ A Records: Give us IP-address for a particular domain
 --------------------------------------------------------------------------------------------------------------------------------
 # FTP/TFTP
 
-Standard network protocol used for the transfer of computer files from a server to a client on a computer network. FTP is built on a client-server model architecture using separate control and data connections between the client and the server
+Standard network protocol used for the transfer of computer files from a server to a client on a computer network. FTP is built on a client-server model architecture using separate control and data connections between the client and the server.
+
+Protocols based on FTP:
+- FTPS(FTP over SSL):
+- SFTP(SSH File Transfer Protocol):
+- SCP(Secure Copy):
+- TFTP(Trivial File Transfer Protocol):
 
 ## nmap FTP scan:
 - nmap -p 21 -sV [victim_ip]
