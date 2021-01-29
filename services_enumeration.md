@@ -1,6 +1,6 @@
 - [Amazon_S3](#Amazon_S3)
 - [DNS](#DNS)
-- [FTP/TFTP](#FTP/TFTP)
+- [FTP](#FTP)
 - [Finger](#Finger)
 - [HTTP](#HTTP)
 - [SQL](#SQL)
@@ -140,7 +140,7 @@ CNAME Records: Gives an alias of one name to another.
 A Records: Give us IP-address for a particular domain
 
 --------------------------------------------------------------------------------------------------------------------------------
-# FTP/TFTP
+# FTP
 
 Standard network protocol used for the transfer of computer files from a server to a client on a computer network. FTP is built on a client-server model architecture using separate control and data connections between the client and the server.
 
