@@ -65,6 +65,8 @@ Buckets are used to store objects, which consist of data and metadata that descr
 - aws s3 cp s3://<victim_aws_bucket_name> . --recursive --no-sign-request
 
 --------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------
 # DNS
 
 ## Interacting with a DNS Server
@@ -140,6 +142,8 @@ CNAME Records: Gives an alias of one name to another.
 A Records: Give us IP-address for a particular domain
 
 --------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------
 # FTP
 
 Standard network protocol used for the transfer of computer files from a server to a client on a computer network. FTP is built on a client-server model architecture using separate control and data connections between the client and the server.
@@ -190,18 +194,23 @@ cd /Docume~1/
 cd /Progra~1/
 ```
 --------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------
 # Finger
+Name/Finger protocol and the Finger user information protocol are simple network protocols for the exchange of human-oriented status and user information.
 
-## finger user enumeration from commandline 
+### finger user enumeration from commandline 
 ```
 finger [username]@[ip]
 
 finger "|/bin/ls -a /@[victim_ip]"
 ```
 
-### finger enumeration script
+#### finger enumeration script
 - https://raw.githubusercontent.com/pentestmonkey/finger-user-enum/master/finger-user-enum.pl
 
+--------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------
 # HTTP 
 
