@@ -138,7 +138,7 @@ msf> exploit
 
 # SSH key cracking
 
-### Cracking encrypted private key
+#### Cracking encrypted private key
 - Tool: ssh2john.py
 ```
 ssh2john.py encrypted-private-key > private-key.john
@@ -149,7 +149,7 @@ ssh2john.py encrypted-private-key > private-key.john
 john --wordlist=/usr/share/wordlists/rockyou.txt private-key.john
 ```
 
-### Unencrypted copy of the key
+#### Unencrypted copy of the key
 - Tool: openssl
 ```
 openssl rsa -in encrypted-private-key -out id_rsa
@@ -160,7 +160,7 @@ openssl rsa -in encrypted-private-key -out id_rsa
 chmod 600 id_rsa
 ```
 
-### Login with id_rsa
+#### Login with id_rsa
 ```
 ssh -i id_rsa user-name@<ip>
 ```
