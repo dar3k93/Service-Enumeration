@@ -554,7 +554,7 @@ telnet [victim_ip] [pop3_port]
 # SMB
   It's protocol for sharing files and resources. Runs on port 445 or on port 139
   
-## smb_nmap
+#### smb_nmap
 
 - nmap -v -p 139,445 --script=smb-os-discovery [victim_ip]
 - nmap -v -sSVC -p 139,445 --script discovery [victim_ip]
@@ -563,32 +563,29 @@ telnet [victim_ip] [pop3_port]
 - nmap -p 445 -vv --script=smb-enum-shares.nse,smb-enum-users.nse [victim_ip]
 - nmap -sV -p 139,445 --script=smb-vuln-* --script-args=unsafe=1 [victim_ip]
 
-## rpcclient
+#### rpcclient
 - rpcclient -U "" -N [victim_ip]
 ```
   -U "" - null session
   -N - no password
 ```
-## NetBIOS_Service
+#### NetBIOS_Service
 - nbtscan -r [victim_ip]
 
-## smbmap
+#### smbmap
   - smbmap -H <victim_ip>
   - smbmap -H <victim_ip> -R
-  - smbmap -H <victim_ip> -u anonymous -d <directory>
-  
-  ***H***: hostname
-  ***R***: recursive, go through each directory and oyt the files
-  ***U***: username
+  - smbmap -H <victim_ip> -u login -p password
+  - smbmap -H <victim_ip> -u anonymous -d directory
   
 ## smbclinet
-```
   - smbclient \\\\[victim_ip]\\[sharename]
   - smbclient -N -L \\\\\[victim_ip]
   - smbclient -N -L //[victim_ip]/directory
   - smbclient //[victim_ip]/"[victim_folder]" -m NT1 --option="client min protocol=NT1"
   - smbclient -L <victim_ip> -U user_name
- ```
+  - smbclient //<victim_ip/<resources> -U "user_login"
+  - smbclient -U 'user%password' //<victim_ip>/resources
  
  ### smb password change
 ```
