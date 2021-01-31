@@ -138,16 +138,33 @@ msf> exploit
 
 # SSH key cracking
 
-- Cracking_encrypted_private_key
+### Cracking encrypted private key
+- Tool: ssh2john.py
+```
+ssh2john.py encrypted-private-key > private-key.john
+```
 
-- ssh2john
+- Tool: john
 ```
-ssh2john.py encrypted_private_key > private_key.john
+john --wordlist=/usr/share/wordlists/rockyou.txt private-key.john
 ```
-- john
+
+### Unencrypted copy of the key
+- Tool: openssl
 ```
-john private_key.john --wordlist=/usr/share/wordlists/rockyou.txt
+openssl rsa -in encrypted-private-key -out id_rsa
 ```
+
+- Tool: chmod
+```
+chmod 600 id_rsa
+```
+
+### Login with id_rsa
+```
+ssh -i id_rsa user-name@<ip>
+```
+
 ------------------------------------------------------------------------------------------------------------------------
 # tools
 - https://github.com/openwall/john/blob/bleeding-jumbo/run/ssh2john.py
