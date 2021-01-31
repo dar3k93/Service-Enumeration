@@ -4,7 +4,7 @@
 - [Password hash cracking](#Password-hash-cracking)
 - [Pass the hash](#Pass-the-hash)
 - [SSH key cracking](#SSH-key-cracking)
-- [tools](#tools)
+- [Usefull tools](#Tools)
  
 # Password generator
 
@@ -166,5 +166,6 @@ ssh -i id_rsa user-name@<ip>
 ```
 
 ------------------------------------------------------------------------------------------------------------------------
-# tools
+# Tools
+#### ssh2john
 - https://github.com/openwall/john/blob/bleeding-jumbo/run/ssh2john.py
