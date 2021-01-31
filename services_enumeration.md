@@ -622,8 +622,8 @@ crackmapexec smb <victim_ip>
 
 #### psexec
 - Tool:
-  https://github.com/SecureAuthCorp/impacket/blob/master/examples/psexec.py
-
+  - https://github.com/SecureAuthCorp/impacket/blob/master/examples/psexec.py
+  - https://github.com/skalkoto/winexe
 #### eternal_blue_metasploit
 ```
 example one:
