@@ -426,6 +426,7 @@ mount -t nfs [ip]:/home/vulnix /tmp/nfs -nolock
 ## nmap_scan 
 ```
 nmap -sV --script=nfs-showmount [victim_ip]
+nmap -p [victim_port] --script=nfs-ls,nfs-statfs,nfs-showmount [victim_ip]
 ```
 
 --------------------------------------------------------------------------------------------------------------------------------------
