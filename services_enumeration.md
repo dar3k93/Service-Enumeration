@@ -174,13 +174,12 @@ Protocols based on FTP:
 ```
 use auxiliary/scanner/tftp/tftpbrute
 ```
-### FTP upload and donwload file
+### FTP upload and download file
 
 - Download file from FTP
 ```
 ftp> get file_name
 ```
-
 - Upload file to ftp
 ```
 ftp> put file_name
@@ -188,6 +187,10 @@ ftp> put file_name
 - In same case we need to turn on binary mode:
 ```
 ftp> binary
+```
+- FTP anonymous account:
+```
+anonnymous:anonymous
 ```
 
 ### FTP path_traversal
