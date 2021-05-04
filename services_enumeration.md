@@ -563,6 +563,41 @@ nmap -sU --open -p 161, [victim_ip]
 
 # SMTP
 
+- Waht is SMTP
+It is utilised to handle the sending of emails. In order to support email services, a protocol pair is required, comprising of SMTP and POP/IMAP
+
+The SMTP server performs three basic functions:
+  - It verifies who is sending emails through the SMTP server.
+  - It sends the outgoing mail
+  - If the outgoing mail can't be delivered it sends the message back to the sender
+
+- POP and IMAP
+POP, or "Post Office Protocol" and IMAP, "Internet Message Access Protocol" are both email protocols who are responsible for the transfer of email between a client and a mail server. The main differences is in POP's more simplistic approach of downloading the inbox from the mail server, to the client. Where IMAP will synchronise the current inbox, with new mail on the server, downloading anything new.
+
+- How does SMTP works
+1) Mail user client connect to SMTP server. Thats initiates the SMTP handshake. This connection works over the SMTP port(usually 26)
+2) The client submit sender and recipient email address, the body of the email and any attachments, to server.
+3) The SMTP server check whether the domain name of the recipient and the sender is the same
+4) The SMTP server of the sender will make a connection to the recipient's SMTP server before relaying the email. If the recipient's server cant be accessed, or is not-available-the Email gets put into an SMTP queue
+5) Then, the recipient's SMTP server will verify the incoming email. It does this by checking if the domain and user name have been recognised
+6) The E-Mail will then show up in the recipient's inbox
+
+## SMTP Enumeration
+
+- fingerprint SMTP
+```
+metasploit: smtp_version
+```
+
+- Enumerating Users from SMTP
+The SMTP service has two internal commands that allow the enumeration of users: VRFY (confirming the names of valid users) and EXPN (which reveals the actual address of user’s aliases and lists of e-mail (mailing lists))
+```
+metasploit: smtp_enum
+nonmetasploit: smtp-user-enum
+```
+
+
+
 --------------------------------------------------------------------------------------------------------------------------------
 
 ## Netcat
