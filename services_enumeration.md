@@ -10,7 +10,7 @@
 - [RDP](#RDP)
 - [RPC](#RPC)
 - [SNMP](#SNMP)
-- [SNMP](#SNMP)
+- [SMTP](#SMTP)
 - [POP3](POP3)
 - [SMB](#SMB)
 - [Redis](#Redis)
