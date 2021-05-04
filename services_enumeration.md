@@ -415,23 +415,45 @@ python3 odat.py externaltable -s <victim_ip> -p 1521 -U "scott" -P "tiger" -d XE
 - The Network File System (NFS) is a client/server application that lets a computer user view and optionally store and update files on a remote computer as though they were on the user's own computer. The NFS protocol is one of several distributed file system standards for network-attached storage (NAS).
 
 
-## Basic_command
-- showmount [ip]
-
-## Create_temp_folder
+- Install basic  tools
 ```
-mkdir /tmp/nfs
-```
-## mount
-```
-mount -t nfs [ip]:/home/vulnix /tmp/nfs -nolock
+sudo apt install nfs-common
 ```
 
-## nmap_scan 
+- List the NFS shares
+```
+usr/sbin/showmount -e [IP]
+```
+
+- Mounting NFS shares
+```
+mkdir /tmp/mount
+sudo mount -t nfs IP:share /tmp/mount/ -nolock
+
+-nolock	Specifies not to use NLM locking
+```
+
+- nmap_scan 
 ```
 nmap -sV --script=nfs-showmount [victim_ip]
 nmap -p [victim_port] --script=nfs-ls,nfs-statfs,nfs-showmount [victim_ip]
 ```
+
+## Exploiting NFS
+If machine has an NFS share you might be able to use that to escalate privilege.
+
+- What is root_squash
+By default, on NFS shares- Root Squashing is enabled, and prevents anyone connecting to the NFS share from having root access to the NFS volume. Remote root users are assigned a user “nfsnobody” when connected, which has the least local privileges. Not what we want. However, if this is turned off, it can allow the creation of SUID bit files, allowing a remote user root access to the connected system.
+
+- Exploit NFS pathway
+1)  NFS Access
+2)  Gain Low Privilege Shell
+3)  Upload Bash Executable to the NFS share
+4)  Set SUID permissions Through NFS Due To Misconfigured Root Squash
+5)  Login through SSH
+6)  Execute SUID Bit Bash Executable
+7)  ROOT
+
 
 --------------------------------------------------------------------------------------------------------------------------------------
 
