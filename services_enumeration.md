@@ -688,8 +688,8 @@ telnet [victim_ip] [pop3_port]
 # SMB
 
 --------------------------------------------------------------------------------------------------------------------------------
-
-It's protocol for sharing files and resources. Runs on port 445 or on port 139
+SMB - Server message protocl - is's protocol for sharing files and resources, printers.. on a network.
+Servers make file systems and other resources (printers, named pipes, APIs) available to clients on the network.
   
 #### smb_nmap
 
