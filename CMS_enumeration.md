@@ -36,6 +36,10 @@ nmap --script http-wordpress-enum --script-args type="themes" <target>
 #### update wpscan 
 - wpscan update
 
+#### Enumerating for installed themes
+- Check Network tab for themes 
+
+
 #### Scan
 - wpscan --url https://[target_ip]
 #### Vulnerable Plugins
@@ -46,6 +50,8 @@ nmap --script http-wordpress-enum --script-args type="themes" <target>
 - wpscan --url http://[victim_ip] --enumerate vt
 #### Enumerate Users
 - wpscan --url http://[victim_ip] --enumerate u
+#### Enumerate thames
+- wpscan --url http://[victim_ip] --enumerate t 
 #### Password Bruteforce
 - wpscan --url http://[victim_ip] --passwords wordlist.txt --usernames xyz threads 50
 #### Username Bruteforce
