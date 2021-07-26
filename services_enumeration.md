@@ -122,6 +122,13 @@ nslookup 10.20.30.40
 nslookup
   SERVER [victim_ip]
   [victim_ip]
+  
+nslookup 
+> server 10.10.10.13
+Default server: 10.10.10.13
+Address: 10.10.10.13#53
+> 10.10.10.13
+13.10.10.10.in-addr.arpa	name = ns1.cronos.htb.  
 ````
 
 ## Check Zone transfer with dig 
