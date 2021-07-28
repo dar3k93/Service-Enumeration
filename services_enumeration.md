@@ -259,6 +259,20 @@ Is an application-layer protocol for transmitting hypermedia documents, such as 
   -  gobuster -o gobuster.txt -e -u http://10.11.1.x/ -w ~/wordlist/shortlist.txt
 
 #### Subdomain searching
+- Sublist3r
+[https://github.com/aboul3la/Sublist3r](https://github.com/aboul3la/Sublist3r)
+```
+sublist3r -d <target_domain>
+```
+
+- Crt.sh
+[https://github.com/tdubs/crt.sh](https://github.com/tdubs/crt.sh)
+```
+crt.sh <target_domain>
+```
+
+- httprobe
+[https://github.com/tomnomnom/httprobe](https://github.com/tomnomnom/httprobe)
 
 #### Nikto scanner
 
