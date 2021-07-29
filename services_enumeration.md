@@ -271,8 +271,17 @@ sublist3r -d <target_domain>
 crt.sh <target_domain>
 ```
 
+- Asset Finder
+[https://github.com/tomnomnom/assetfinder](https://github.com/tomnomnom/assetfinder)
+```
+assetfinder <target_domain>
+```
+
 - httprobe
 [https://github.com/tomnomnom/httprobe](https://github.com/tomnomnom/httprobe)
+
+- Amass
+[https://github.com/OWASP/Amass](#https://github.com/OWASP/Amass)
 
 #### Nikto scanner
 
