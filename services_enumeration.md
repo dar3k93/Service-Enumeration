@@ -200,7 +200,7 @@ File that tells your machine which DNS server to use to resolve domain names.
 # FTP
 
 --------------------------------------------------------------------------------------------------------------------------------
-
+## What is FTP
 Standard network protocol used for the transfer of computer files from a server to a client on a computer network. FTP is built on a client-server model architecture using separate control and data connections between the client and the server.
 
 Protocols based on FTP:
@@ -208,6 +208,19 @@ Protocols based on FTP:
 - SFTP(SSH File Transfer Protocol):
 - SCP(Secure Copy):
 - TFTP(Trivial File Transfer Protocol):
+
+## How does FTP work
+A typical FTP session operates using two channels:
+- a command (sometimes called the control) channel
+- a data channel
+
+Command channel is used for transmitting commands 
+Data channel is used for transferring data
+
+## Active vs Passive
+FTP server may support either Active or Passive connections, or both
+- In a Passive FTP connection, the server opens a port and listens (passively) and the client connects to it. 
+- In an Active FTP connection, the client opens a port and listens. The server is required to actively connect to it. 
 
 ### nmap FTP scan:
 - nmap -p 21 -sV [victim_ip]
@@ -234,10 +247,6 @@ ftp> put file_name
 - In same case we need to turn on binary mode:
 ```
 ftp> binary
-```
-- FTP anonymous account:
-```
-anonnymous:anonymous
 ```
 
 ### FTP path_traversal
