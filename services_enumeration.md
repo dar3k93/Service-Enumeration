@@ -75,61 +75,99 @@ Buckets are used to store objects, which consist of data and metadata that descr
 # DNS
 
 --------------------------------------------------------------------------------------------------------------------------------
+## What is DNS
 
-## Interacting with a DNS Server
+DNS(Domain Name System) translate requests for names into IP addresses, controlling which server an end user will reach when they type a domain name into their web browser.
+
+## Domain Hierarchy
+
+- Top-Level Domain (TLD)
+A TLD is the most righthand part of a domain name. For example the TLD for mydomain.com is .com. 
+
+- Second-Level Domain (SLD)
+Is the part of the domain name that is located right before a Top Level Domain.
+Using the previous example, the mydomain is a Second-Level Domain.
+
+- Subdomain
+A subdomain sits on the left-hand side of the Second-Level Domain using a period to separate. For example in the name
+admin.mydomain.com the admin part is the subdomain. There is no limit to the number of subdomains you can create for your domain name.
+
+## Record types
+
+- A Record
+These records resolve to IPv4 addresses, for exmaple 10.10.8.1
+
+- AAAA Record
+These records resolve to IPv6 addresses, for example 2606:4700:20::681a:be5
+
+- CNAME Record
+It is a registration in DNS system which showing a place whare you can find your web page. With CNAME record you can connect some other domain with your app.
+
+- MX Record
+These records resolve to the address of the servers that handle the email for the domain you are querying
+
+- TXT Record
+TXT records are free text fields where any text-based data can be stored.
+
+## Making a requests
+1) When you request a domain name, your computer first checks its local cache to see if you've previously looked up the address recently; if not, a request to your Recursive DNS Server will be made.
+2) A Recursive DNS Server is usually provided by your ISP, but you can also choose your own. This server also has a local cache of recently looked up domain names. If a result is found locally, this is sent back to your computer, and your request ends here (this is common for popular and heavily requested services such as Google, Facebook, Twitter). If the request cannot be found locally, a journey begins to find the correct answer, starting with the internet's root DNS servers.
+3) The root servers act as the DNS backbone of the internet; their job is to redirect you to the correct Top Level Domain Server, depending on your request. If, for example, you request mydomain.com, the root server will recognise the Top Level Domain of .com and refer you to the correct TLD server that deals with .com addresses.
+4) The TLD server holds records for where to find the authoritative server to answer the DNS request. The authoritative server is often also known as the nameserver for the domain. For example, the name server for mydomain.com is kip.ns.cloudflare.com and uma.ns.cloudflare.com. You'll often find multiple nameservers for a domain name to act as a backup in case one goes down.
+5) An authoritative DNS server is the server that is responsible for storing the DNS records for a particular domain name and where any updates to your domain name DNS records would be made. Depending on the record type, the DNS record is then sent back to the Recursive DNS Server, where a local copy will be cached for future requests and then relayed back to the original client that made the request. DNS records all come with a TTL (Time To Live) value. This value is a number represented in seconds that the response should be saved for locally until you have to look it up again. Caching saves on having to make a DNS request every time you communicate with a server.
+
+### Identifying DNS server
+```
+nmap -sC -sV -p 53 192.168.x.0/24
+```
+
+### Gathering information using nslooup
+- Reverse DNS
+```
+nslookup
+  SERVER [victim_ip]
+  [victim_ip] or [localhost] or [127.0.0.1]
+```
+
+- How to find the A record of а domain
+You can see how many A records are there and see the IP Addresses of each one. 
+```
+nslookup [victim_address]
+```
+- How to check the NS records of a domain
+You can see which is the authoritative server for a specific domain
+```
+nslookup -type=ns [victim_address]
+```
+- How to query the SOA record of a domain
+You can see the start of authority and get information about the zone. 
+```
+nslookup -type=soa 
+```
+-  How to find the MX records of a domain
+You can see if all the mail servers are working well. 
+```
+nslookup -query=mx [victim_address]
+```
+-  How to find all of the available DNS records of a domain
+You can see all the available DNS records.
+```
+nslookup -type=any [victim_address]
+```
+-  How to check the using of a specific DNS Server
+You can review a particular DNS server.
+```
+nslookup example.com [ns1.victim_address]
+```
+
+## Interacting with a DNS Server using Host tool
 ```
 - host -t ns [victim_domain]
 - host -t mx [victim_domain]
 ```
 
-### How to find the A record of а domain
-You can see how many A records are there and see the IP Addresses of each one. 
-```
-nslookup [victim_address]
-```
-### How to check the NS records of a domain
-You can see which is the authoritative server for a specific domain
-```
-nslookup -type=ns [victim_address]
-```
-### How to query the SOA record of a domain
-You can see the start of authority and get information about the zone. 
-```
-nslookup -type=soa 
-```
-### How to find the MX records of a domain
-You can see if all the mail servers are working well. 
-```
-nslookup -query=mx [victim_address]
-```
-### How to find all of the available DNS records of a domain
-You can see all the available DNS records.
-```
-nslookup -type=any [victim_address]
-```
-
-### How to check the using of a specific DNS Server
-You can review a particular DNS server.
-```
-nslookup example.com [ns1.victim_address]
-```
-### How to check the Reverse DNS Lookup
-How verify if an IP address is related to a specific domain
-```
-nslookup 10.20.30.40
-```
-```
-nslookup
-  SERVER [victim_ip]
-  [victim_ip]
-  
-nslookup 
-> server 10.10.10.13
-Default server: 10.10.10.13
-Address: 10.10.10.13#53
-> 10.10.10.13
-13.10.10.10.in-addr.arpa	name = ns1.cronos.htb.  
-````
+### Zone transfer description
+Zone file is a file on server contains entries for different Resource Records(RR). These records can provide us a bunch of information about the domain. Each zone file must start with a Start of Authority (SOA) record containing an authoritative nameserver for the domain (for e.g. ns1.google.com for google.com ) and an email address of someone responsible for the management of the nameserver.
 
 ## Check Zone transfer with dig 
 ```
@@ -146,15 +184,17 @@ dnsrecon -d [victim_scan] -t axfr
 dnsenum [victim_scan]
 ```
 
-### Zone transfer description
-Zone file is a file on server contains entries for different Resource Records(RR). These records can provide us a bunch of information about the domain. Each zone file must start with a Start of Authority (SOA) record containing an authoritative nameserver for the domain (for e.g. ns1.google.com for google.com ) and an email address of someone responsible for the management of the nameserver.
-Types of Resource Records:
-- NS Recors: use the given authoritative nameserver.
-- MX Recors: tells us which server is responsible for receiving mails sent to that domain name.
-- TXT Records: consists of arbitrarily human readable text in a record.
-- CNAME Records: Gives an alias of one name to another.
-- A Records: Give us IP-address for a particular domain.
+### Modifying the hosts file
+Within this file, you can map domain names and sub-domains to IP addresses. This file instructs your system to resolve to a specific IP address given the respective domain or sub-domain.
+```
+/etc/hosts
+```
 
+### Modifying the resolv.conf file
+File that tells your machine which DNS server to use to resolve domain names.
+```
+/etc/resolve.conf
+```
 --------------------------------------------------------------------------------------------------------------------------------
 
 # FTP
