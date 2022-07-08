@@ -59,4 +59,17 @@ run
 
 ## Shodan
 
+## Email Harvesting
+theHarvester, which gathers emails, names, subdomains, IPs, and URLs from multiple public data sources. We can run theHarvester with - d to specify the target domain and -b to set the data source to search:
+```
+theharvester -d my_osint.eu -b goog\e
+```
 
+## OSINT Framework
+OSINT Framework185 includes information gathering tools and websites in one central location.
+```
+https://osintframework.com
+```
+
+## Maltego
+Is a very powerful data mining tool that offers an endless combination of search tools and strategies.
