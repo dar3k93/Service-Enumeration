@@ -15,6 +15,7 @@
 - [SMB](#SMB)
 - [Redis](#Redis)
 - [VNC](#VNC)
+- [NetBIOS](#NetBIOS)
 - [Webdav](#Webdav)
 - [noSQL](#noSQL)
 - [Port knocking](#Port_knocking)
@@ -103,6 +104,12 @@ These records resolve to IPv4 addresses, for exmaple 10.10.8.1
 - AAAA Record
 These records resolve to IPv6 addresses, for example 2606:4700:20::681a:be5
 
+- NS Record
+Nameserver records contain the name of the authoritative servers hosting the DNS records for a domain.
+
+- PTR
+Pointer Records are used in reverse lookup zones and are used to find the records associated with an IP address.
+
 - CNAME Record
 It is a registration in DNS system which showing a place whare you can find your web page. With CNAME record you can connect some other domain with your app.
 
@@ -168,37 +175,82 @@ You can review a particular DNS server.
 nslookup example.com [ns1.victim_address]
 ```
 
-## Interacting with a DNS Server using Host tool
+### Forward Lookup Brute Force
+- Create list  of possible hostnames:
 ```
-- host -t ns [victim_domain]
-- host -t mx [victim_domain]
+www
+ftp
+mail
+owa
+proxy
+router
+```
+- Bash one-liner
+```
+for ip in $(cat list.txt ); do host $ip.victim.com; done
 ```
 
-### Zone transfer description
+### Reverse Lookup Brute Force
+- Bash one-liner
+```
+for ip in $ (seq 58 108) ; do host 38.108.193.$ip; done I grep -v "not found"
+```
+
+### Interacting with a DNS Server using Host tool
+```
+host -t ns [victim_domain]
+host -t mx [victim_domain]
+host -t txt [victim_domain]
+```
+
+## Zone transfer description
 Zone file is a file on server contains entries for different Resource Records(RR). These records can provide us a bunch of information about the domain. Each zone file must start with a Start of Authority (SOA) record containing an authoritative nameserver for the domain (for e.g. ns1.google.com for google.com ) and an email address of someone responsible for the management of the nameserver.
 
-## Check Zone transfer with dig 
+### Perform zone transfer with host tool
+```
+host -1 <victim_domain_name> <victim dns server address>
+```
+
+### Check Zone transfer with dig 
 ```
 dig axfr [victim_servername] @victim-ip
 ```
 
-## Automatic scan DNSrecon
+### Automatic scan DNSrecon
 ```
 dnsrecon -d [victim_scan] -t axfr
 ```
 
-##  Automatic scan DNSenum
+###  Automatic scan DNSenum
 ```
 dnsenum [victim_scan]
 ```
 
-### Modifying the hosts file
+### Automate the process with bash script
+```
+#!/bin/bash
+# $1 is the first argument given after the bash script
+
+if [ -z "$1" ] ; then
+ echo ti(*] Simple Zone transfer script"
+ echo t1 [ *] Usage : $0 <domain name> 11
+ exit 0
+fi
+
+# if argument was given, identify the DNS servers for the domain
+for server in $(host -t ns $1 I cut -d II t1 -f4); do
+ # For each of these servers, attempt a zone transfer
+ host -l $1 $server lgrep "has address"
+done
+```
+
+## Modifying the hosts file
 Within this file, you can map domain names and sub-domains to IP addresses. This file instructs your system to resolve to a specific IP address given the respective domain or sub-domain.
 ```
 /etc/hosts
 ```
 
-### Modifying the resolv.conf file
+## Modifying the resolv.conf file
 File that tells your machine which DNS server to use to resolve domain names.
 ```
 /etc/resolve.conf
@@ -547,10 +599,26 @@ sudo mount -t nfs IP:share /tmp/mount/ -nolock
 -nolock	Specifies not to use NLM locking
 ```
 
-- nmap_scan 
+### nmap scan 
+- Port scanning
+```
+nmap -v -p 111 10.11.1.1-254
+```
+
+- NFS enumeration
 ```
 nmap -sV --script=nfs-showmount [victim_ip]
 nmap -p [victim_port] --script=nfs-ls,nfs-statfs,nfs-showmount [victim_ip]
+```
+
+### Nmap NSE script
+- Enumerate NSE script for NFS service
+```
+ls -1 /usr/share/nmap/scripts/nfs*
+```
+- Use NSE scripts using wildcard
+```
+nmap -p 111 --script nfs* 10.11.1.12
 ```
 
 ## Exploiting NFS
@@ -678,6 +746,22 @@ nmap -sU --open -p 161, [victim_ip]
 #### SNMP-CHECK
 - snmp-check -c public 10.11.1.x
 
+### onesixtyone brute force
+- Create community strings
+```
+echo public > community
+echo private>> community
+echo manager >> community
+```
+- Create ip address list with bash
+```
+for ip in $(seq 1 2S4); do echo 18.ll.1.$ip; done > ips
+```
+- onesixtyone scan
+```
+onesixtyone - c community -i ips
+```
+
 -------------------------------------------------------------------------------------------------------------------------------------
 
 # SMTP
@@ -717,7 +801,34 @@ metasploit: smtp_enum
 nonmetasploit: smtp-user-enum
 ```
 
+### SMTP user enumeration
+```
+#!/usr/bin/python
+import socket
+import sys
 
+if len(sys.argv) != 2:
+  print("Usage: vrfy.py <username>")
+  sys.exit((;))
+
+# Create a Socket
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+# Connect to the Server
+connect= s.connect(( 11e.11.1.211 1 ,25))
+
+# Receive the banner
+banner= s.recv(l024)
+print(banner)
+
+# VRFY a user
+s.send('VRFY ' + sys.argv[l] + '\r\n')
+result= s.recv(l024)
+print(result)
+
+# Close the socket
+s.close()
+```
 
 --------------------------------------------------------------------------------------------------------------------------------
 
@@ -848,7 +959,6 @@ using NetBIOS over TCP/IP queries.
 nmblookup -A <ip>
 ```
 
-
 #### rpcclient
 - rpcclient -U "" -N [victim_ip]
 ```
@@ -881,7 +991,7 @@ scan NetBIOS name servers open on a local or remote TCP/IP network
 - nbtscan -r [victim_ip]
 
  
- ### smb password change
+ ### SMB password change
 ```
 smbpasswd -r <victim_ip -U <user_name>
 ```
